@@ -1,0 +1,204 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   Smiles By Jiveh design tokens, measured from the original WordPress site:
+   Playfair Display headings, Open Sans text, muted teal buttons, sand
+   secondary buttons, a cream top bar and light grey pages with white
+   rounded cards.
+   ========================================================================== */
+
+@theme {
+  --color-ink: #0c0c0c;
+  --color-heading: #0c0c0c;
+  --color-hero: #414141;
+  --color-body: #0c0c0c;
+  --color-muted: #505050;
+  --color-nav: #3e3e3e;
+
+  --color-teal: #81a5ac;
+  --color-teal-hi: #6f969e;
+  --color-teal-deep: #4d7179;
+  --color-sand: #d2c7aa;
+  --color-sand-hi: #c6b994;
+  --color-cream: #f1eedd;
+  --color-blue: #3558a0;
+  --color-navy: #162144;
+
+  --color-page: #f3f4f6;
+  --color-pill: #f3f4f6;
+  --color-mint: #f4fbfb;
+  --color-icon: #f7fafd;
+  --color-footer: #f9f9f9;
+  --color-band: #c5d4d7;
+  --color-line: #e5e7eb;
+  --color-field: #ebebeb;
+
+  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
+  --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 20px;
+  --radius-btn: 8px;
+  --shadow-card: 0 10px 20px 0 rgb(0 0 0 / 0.1);
+  --shadow-header: 0 10px 20px 0 rgb(44 62 80 / 0.05);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  body {
+    background: var(--color-page);
+    color: var(--color-body);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--color-heading);
+  }
+  p {
+    text-wrap: pretty;
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-blue);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  ::selection {
+    background: var(--color-teal);
+    color: #fff;
+  }
+}
+
+@layer components {
+  /* 1296px content width on desktop (as the old site), 20px side gutters on phones. */
+  .container-x {
+    width: min(1296px, calc(100% - 40px));
+    margin-inline: auto;
+  }
+
+  /* Small rounded label with a blue dot ("Dedicated to Your Best Smile"). */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 100px;
+    background: var(--color-pill);
+    padding: 2px 14px;
+    font-size: 0.875rem;
+    line-height: 1.65;
+    letter-spacing: 0.02em;
+    color: var(--color-ink);
+  }
+  .pill::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-blue);
+    flex: none;
+  }
+  .pill.on-white {
+    background: #fff;
+  }
+
+  /* White rounded card used for every section on inner pages. */
+  .card {
+    background: #fff;
+    border-radius: var(--radius-card);
+  }
+
+  .prose-site p,
+  .prose-site ul,
+  .prose-site ol {
+    margin-bottom: 1.5rem;
+  }
+  .prose-site > :last-child {
+    margin-bottom: 0;
+  }
+  .prose-site ul {
+    list-style: disc;
+    padding-left: 1.6rem;
+  }
+  .prose-site ol {
+    list-style: decimal;
+    padding-left: 1.6rem;
+  }
+  .prose-site li + li {
+    margin-top: 0.25rem;
+  }
+  .prose-site h4 {
+    margin: 1.75rem 0 0.75rem;
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+  .prose-site a {
+    color: var(--color-blue);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .prose-site strong {
+    font-weight: 700;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Scroll reveal (fade in / fade up / fade from the side, like the old site).
+   Content stays visible without JavaScript: elements are only hidden once
+   lib/reveal-script.ts has set <html data-reveal-ready>.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal-ready] [data-reveal] {
+    opacity: 0;
+    transition:
+      opacity 0.9s var(--ease-out-expo),
+      transform 0.9s var(--ease-out-expo);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+  [data-reveal-ready] [data-reveal="up"] {
+    transform: translateY(40px);
+  }
+  [data-reveal-ready] [data-reveal="left"] {
+    transform: translateX(-40px);
+  }
+  [data-reveal-ready] [data-reveal="right"] {
+    transform: translateX(40px);
+  }
+  [data-reveal-ready] [data-reveal][data-in] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Hide scrollbars on sliders while keeping them scrollable. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
