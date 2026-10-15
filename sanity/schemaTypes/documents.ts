@@ -188,6 +188,7 @@ export const homePage = defineType({
       defineField({ name: "images", type: "array", of: [defineArrayMember({ type: "altImage" })] }),
     ]),
     section("testimonials", "Reviews heading", [s("eyebrow", "Small label"), s("heading")]),
+    section("contact", "Contact Us (form)", [s("eyebrow", "Small label"), s("heading"), s("lead", "Bold line"), t("text"), t("formNote", "Note under the form")]),
     section("ctaBand", "Call to action band", [s("heading"), t("text"), ctas(), img("image", "Background")]),
     seoField,
   ],
@@ -283,6 +284,14 @@ export const appointmentPage = defineType({
   fields: [
     defineField({ name: "heading", type: "string", group: "content" }),
     defineField({ name: "text", type: "text", rows: 2, group: "content" }),
+    defineField({
+      name: "ghlFormId",
+      title: "GoHighLevel form ID",
+      type: "string",
+      group: "content",
+      description:
+        "The GoHighLevel form shown on the page (Sites > Forms > Integrate: the ID in the embed code). Requests go straight into GoHighLevel. Type off to show the website's own form instead (sent through the GHL_WEBHOOK_URL webhook).",
+    }),
     defineField({ name: "formNote", title: "Note under the form", type: "text", rows: 2, group: "content" }),
     defineField({ name: "contactHeading", type: "string", group: "content" }),
     defineField({ name: "contactText", type: "text", rows: 2, group: "content", description: "Phone, email, address and hours come from Site settings." }),

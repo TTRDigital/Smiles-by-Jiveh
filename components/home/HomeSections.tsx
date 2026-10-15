@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { HomeContent } from "@/lib/types";
+import { Mail, Phone } from "lucide-react";
+import type { HomeContent, SiteSettings } from "@/lib/types";
+import { ContactForm } from "@/components/forms/ContactForm";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Pill } from "@/components/ui/Pill";
@@ -186,6 +188,40 @@ export function HomeCtaBand({ band }: { band: HomeContent["ctaBand"] }) {
               {c.label}
             </Button>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function HomeContact({ contact, settings }: { contact: HomeContent["contact"]; settings: SiteSettings }) {
+  return (
+    <section id="contact" aria-label={contact.heading} className="bg-white py-[60px] md:py-[75px]">
+      <div className="container-x grid items-center gap-12 lg:grid-cols-2 lg:gap-[150px]">
+        <div className="lg:p-2.5">
+          <Pill>{contact.eyebrow}</Pill>
+          <h2 className="mt-4 text-[30px] leading-[1.2] md:text-[45px]">{contact.heading}</h2>
+          <span aria-hidden="true" className="mt-5 block h-[2px] w-1/5 bg-teal" />
+          {contact.lead ? <p className="mt-5 text-base font-bold">{contact.lead}</p> : null}
+          {contact.text ? <p className="mt-4 text-[15px] leading-[1.75] md:text-base">{contact.text}</p> : null}
+          <div className="mt-7 grid gap-3">
+            <a href={settings.phoneHref} data-track="click_to_call" className="flex items-center gap-4 hover:text-teal-deep">
+              <span className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-teal text-white">
+                <Phone className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
+              </span>
+              {settings.phone}
+            </a>
+            <a href={`mailto:${settings.email}`} className="flex items-center gap-4 hover:text-teal-deep">
+              <span className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-full bg-teal text-white">
+                <Mail className="h-5 w-5" strokeWidth={1.75} aria-hidden="true" />
+              </span>
+              {settings.email}
+            </a>
+          </div>
+        </div>
+        <div className="lg:p-2.5">
+          <ContactForm phone={settings.phone} phoneHref={settings.phoneHref} practice={settings.name} />
+          {contact.formNote ? <p className="mt-5 text-[15px] italic text-[#555]">{contact.formNote}</p> : null}
         </div>
       </div>
     </section>

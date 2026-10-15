@@ -7,7 +7,7 @@
 #   SG_FTP_SERVER    FTP host from SiteGround Site Tools > Site > FTP Accounts
 #   SG_FTP_USERNAME  FTP account whose folder is the site's public_html
 #   SG_FTP_PASSWORD
-#   GHL_WEBHOOK_URL  GoHighLevel inbound webhook for the appointment form
+#   GHL_WEBHOOK_URL  GoHighLevel inbound webhook for the home page Contact Us form
 #                    (until it is set, requests are accepted but not sent)
 # Repository variables (optional, same page > Variables):
 #   NEXT_PUBLIC_GHL_CHAT_WIDGET_ID  GoHighLevel chat widget ID (chat hidden until set)

@@ -91,6 +91,13 @@ export const fallbackHome: HomeContent = {
     images: [images.compare1, images.compare2, images.compare3, images.compare4],
   },
   testimonials: { eyebrow: "Testimonials", heading: "What Our Patients Say About Their Experience" },
+  contact: {
+    eyebrow: "We Can’t Wait To Meet You!",
+    heading: "Contact Us",
+    lead: "Your healthiest, most confident smile begins here.",
+    text: "Whether you’re interested in cosmetic dentistry, smile rehabilitation, preventive care, or simply finding a dental home that truly listens, we invite you to experience dentistry designed around you.",
+    formNote: "New patients: once you submit this form, we’ll send you a personal link to complete your new patient forms.",
+  },
   ctaBand: {
     heading: "Your healthiest, most confident smile begins here.",
     text: "Whether you’re interested in cosmetic dentistry, smile rehabilitation, preventive care, or simply finding a dental home that truly listens, we invite you to experience dentistry designed around you.",
@@ -268,6 +275,8 @@ export const fallbackInsurance: InsuranceContent = {
 export const fallbackAppointment: AppointmentContent = {
   heading: "Book An Appointment",
   text: "Our team will get back to you within 24 hours to arrange the best time for you.",
+  // "Smiles by Jiveh Main Form" in GoHighLevel, embedded on the old WordPress page.
+  ghlFormId: "o5N2Cg1KTnReA0wS8Jh2",
   formNote: "New patients: once you submit this form, we’ll send you a personal link to complete your new patient forms.",
   contactHeading: "Contact Info",
   contactText: "Don’t hesitate to reach out, we’ll answer all questions.",

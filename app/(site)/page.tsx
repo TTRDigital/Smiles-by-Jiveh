@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getHome, getSiteSettings, getTestimonials } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
-import { HomeAbout, HomeBeforeAfter, HomeCtaBand, HomeDoctor, HomeHero, HomeIntro, HomeServices } from "@/components/home/HomeSections";
+import { HomeAbout, HomeBeforeAfter, HomeContact, HomeCtaBand, HomeDoctor, HomeHero, HomeIntro, HomeServices } from "@/components/home/HomeSections";
 import { Pill } from "@/components/ui/Pill";
 import { ReviewsWidget } from "@/components/sections/Reviews";
 
@@ -38,6 +38,7 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+      <HomeContact contact={home.contact} settings={settings} />
       <HomeCtaBand band={home.ctaBand} />
     </>
   );

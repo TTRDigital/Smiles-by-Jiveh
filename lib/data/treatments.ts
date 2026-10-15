@@ -1007,7 +1007,7 @@ export const fallbackTreatments: Treatment[] = [
           {
             heading: "What Will My New Smile Look Like?",
             body: rich(
-              "Some call Digital Smile Design. One of the most exciting parts of your smile makeover is that you can preview your new smile before treatment even begins. Using advanced digital photography, facial analysis, and smile design technology, Dr. Jiveh creates a customized digital preview that shows how your new smile can complement your facial features and enhance your overall appearance.",
+              "Some call it Digital Smile Design. One of the most exciting parts of your smile makeover is that you can preview your new smile before treatment even begins. Using advanced digital photography, facial analysis, and smile design technology, Dr. Jiveh creates a customized digital preview that shows how your new smile can complement your facial features and enhance your overall appearance.",
               "This digital design becomes the blueprint for your smile transformation. It allows you to provide feedback, make refinements, and feel confident in the direction of your treatment before any porcelain veneers, composite bonding, or restorations are created.",
               "Once your design is finalized, we partner with one of the nation’s premier cosmetic dental laboratories to meticulously handcraft your new smile. Every restoration is fabricated to closely match the approved digital design, combining artistic craftsmanship with exceptional precision to create a smile that looks natural, feels comfortable, and is uniquely yours.",
             ),

@@ -131,6 +131,7 @@ export const getHome = cache(async (): Promise<HomeContent> => {
       doctor{ eyebrow, heading, text, highlights, cta${CTA}, "image": image${IMG} },
       beforeAfter{ eyebrow, heading, "images": images[]${IMG} },
       testimonials{ eyebrow, heading },
+      contact{ eyebrow, heading, lead, text, formNote },
       ctaBand{ heading, text, ctas[]${CTA}, "image": image${IMG} },
       ${SEO}
     }`,
@@ -185,7 +186,7 @@ export const getInsurance = cache(async (): Promise<InsuranceContent> => {
 });
 
 export const getAppointment = cache(async (): Promise<AppointmentContent> => {
-  const cms = await sanityFetch<Partial<AppointmentContent>>(`*[_id == "appointmentPage"][0]{ heading, text, formNote, contactHeading, contactText, ${SEO} }`, {}, [
+  const cms = await sanityFetch<Partial<AppointmentContent>>(`*[_id == "appointmentPage"][0]{ heading, text, ghlFormId, formNote, contactHeading, contactText, ${SEO} }`, {}, [
     "appointmentPage",
   ]);
   return merge(fallbackAppointment, cms);

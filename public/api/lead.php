@@ -1,8 +1,11 @@
 <?php
 /*
- * Appointment form handler for SiteGround (the static site has no Node server).
- * Validates the request like the form does, filters spam and posts it to the
- * practice's GoHighLevel inbound webhook as flat JSON.
+ * Form handler for SiteGround (the static site has no Node server). Takes
+ * the home page "Contact Us" form ("form": "contact") and the site's own
+ * appointment form (used only when the GoHighLevel form embed on
+ * /appointment/ is switched off). Validates the request like the form does,
+ * filters spam and posts it to the practice's GoHighLevel inbound webhook as
+ * flat JSON.
  *
  * The webhook URL is NOT in this file. Until it is set, requests are accepted
  * (the visitor sees the thank-you message) but not sent anywhere. Set it with
@@ -68,7 +71,10 @@ $services = [
     'All on 4 Teeth in a Day', 'Reconstructive Dentistry', 'Full Mouth Reconstruction', 'Worn Teeth Rehabilitation',
 ];
 
+$form = ($in['form'] ?? '') === 'contact' ? 'contact' : 'appointment';
+
 $lead = [
+    'name' => text($in, 'name', 120),
     'first_name' => text($in, 'first_name', 80),
     'last_name' => text($in, 'last_name', 80),
     'phone' => text($in, 'phone', 40),
@@ -84,7 +90,9 @@ if (strlen(preg_replace('/\D/', '', $lead['phone'])) < 10) $errors['phone'] = 'P
 if (!filter_var($lead['email'], FILTER_VALIDATE_EMAIL)) $errors['email'] = 'Please enter a valid email address.';
 if ($lead['service'] !== '' && !in_array($lead['service'], $services, true)) $lead['service'] = '';
 if ($lead['preferred_time'] !== '' && !preg_match('/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/', $lead['preferred_time'])) $lead['preferred_time'] = '';
-if (($in['consent'] ?? false) !== true) $errors['consent'] = 'Please agree so we can contact you.';
+// The appointment form asks for consent; on the contact form text-message consent is optional.
+if ($form === 'appointment' && ($in['consent'] ?? false) !== true) $errors['consent'] = 'Please agree so we can contact you.';
+$smsConsent = $form === 'appointment' ? true : (($in['sms_consent'] ?? false) === true);
 if ($errors) {
     reply(422, ['ok' => false, 'error' => 'Please check the form.', 'fields' => $errors]);
 }
@@ -127,13 +135,20 @@ if (strlen($digits) === 10) $phone = '+1' . $digits;
 elseif (strlen($digits) === 11 && $digits[0] === '1') $phone = '+' . $digits;
 else $phone = (str_starts_with($lead['phone'], '+') ? '+' : '') . $digits;
 
+if ($form === 'contact') {
+    $parts = preg_split('/\s+/', $lead['name'], 2);
+    $lead['first_name'] = $parts[0] ?? '';
+    $lead['last_name'] = $parts[1] ?? '';
+}
 $name = trim($lead['first_name'] . ' ' . $lead['last_name']);
-$tags = ['website-appointment-request'];
+$tags = [$form === 'contact' ? 'website-contact-form' : 'website-appointment-request'];
+if ($smsConsent) $tags[] = 'sms-consent';
 if ($lead['service'] !== '') $tags[] = 'service-' . trim(preg_replace('/[^a-z0-9]+/', '-', strtolower($lead['service'])), '-');
 if ($spamCheck !== 'ok') $tags[] = 'suspected-spam';
 
 $payload = [
-    'source' => 'Website appointment form',
+    'source' => $form === 'contact' ? 'Website contact form' : 'Website appointment form',
+    'form' => $form,
     'submitted_at' => gmdate('c'),
     'name' => $name,
     'first_name' => $lead['first_name'],
@@ -144,7 +159,8 @@ $payload = [
     'preferred_date_time' => $lead['preferred_time'],
     'service' => $lead['service'],
     'comments' => $lead['message'],
-    'consent' => true,
+    'consent' => $smsConsent,
+    'sms_consent' => $smsConsent,
     'consent_text' => text($in, 'consent_text', 600),
     'tags' => $tags,
     'spam_check' => $spamCheck,

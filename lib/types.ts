@@ -120,6 +120,8 @@ export type HomeContent = {
   doctor: { eyebrow?: string; heading: string; text: Rich; highlights: string[]; cta?: Cta; image: Img };
   beforeAfter: { eyebrow?: string; heading: string; images: Img[] };
   testimonials: { eyebrow?: string; heading: string };
+  /** "Contact Us" section with the short contact form (between the reviews and the closing band). */
+  contact: { eyebrow?: string; heading: string; lead?: string; text?: string; formNote?: string };
   ctaBand: { heading: string; text?: string; ctas: Cta[]; image?: Img };
   seo: Seo;
 };
@@ -160,6 +162,8 @@ export type InsuranceContent = {
 export type AppointmentContent = {
   heading: string;
   text?: string;
+  /** GoHighLevel form shown on the page (the old site's form). "off" shows the site's own form instead. */
+  ghlFormId?: string;
   formNote?: string;
   contactHeading: string;
   contactText?: string;
