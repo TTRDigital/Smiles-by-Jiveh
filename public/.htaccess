@@ -47,7 +47,14 @@ ErrorDocument 404 /404.html
   Header always set X-Content-Type-Options "nosniff"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), geolocation=(), browsing-topics=()"
-  Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+  # No includeSubDomains: other subdomains (mail, GoHighLevel links) are not ours to force.
+  Header always set Strict-Transport-Security "max-age=31536000"
+
+  # Any address other than the real one (a preview subdomain, the SiteGround
+  # temporary domain) is kept out of Google, so it never competes with the live site.
+  <If "%{HTTP_HOST} !~ /^(www\.)?smilesbyjiveh\.com$/i">
+    Header always set X-Robots-Tag "noindex, nofollow"
+  </If>
 
   # Strict CSP for the site. Third parties: Google tag / Tag Manager, the
   # YouTube hero video, Google Maps, the Elfsight Google reviews widget, Sanity

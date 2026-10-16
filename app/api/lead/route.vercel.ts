@@ -3,7 +3,7 @@
  * as public/api/lead.php, which SiteGround uses: keep the two in sync.
  * The webhook comes from the GHL_WEBHOOK_URL environment variable (Vercel >
  * Project > Settings > Environment Variables). Until it is set, requests are
- * accepted but not sent anywhere.
+ * refused with 503 and the form asks the visitor to call.
  */
 import { MIN_FILL_MS, serviceOptions } from "@/lib/lead-options";
 
@@ -69,8 +69,8 @@ export async function POST(request: Request) {
 
   const webhook = (process.env.GHL_WEBHOOK_URL ?? "").trim().replace(/^["']|["']$/g, "");
   if (!webhook.startsWith("https://")) {
-    console.warn("[lead] GHL_WEBHOOK_URL is not set (or not https): request accepted but NOT sent.");
-    return reply(200, { ok: true, delivered: false });
+    console.warn("[lead] GHL_WEBHOOK_URL is not set (or not https): request refused.");
+    return reply(503, { ok: false, error: "The form is not connected yet. Please call us instead." });
   }
 
   // E.164 for US numbers.

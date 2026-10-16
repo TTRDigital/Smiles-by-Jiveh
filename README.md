@@ -3,7 +3,7 @@
 Next.js 16 (App Router, static export) + Sanity Studio embedded at `/cms`, Tailwind CSS v4, hosted on **SiteGround** as plain files. Rebuilt from the WordPress/Elementor site at smilesbyjiveh.com by TTR Digital Marketing: same pages, same URLs, same text and photos, same look.
 
 - **Content:** everything is editable in `/cms`. Until Sanity has content (or a field is left empty), the site shows the built-in content from `lib/data`, so it never breaks.
-- **Forms:** `/appointment/` embeds the practice's GoHighLevel form ("Smiles by Jiveh Main Form", `o5N2Cg1KTnReA0wS8Jh2`), exactly as the WordPress page did, so those requests go straight into GoHighLevel. The home page "Contact Us" form posts to `/api/lead.php` (PHP on SiteGround), which forwards it to a GoHighLevel inbound webhook.
+- **Forms:** `/appointment/` embeds the practice's GoHighLevel form ("Smiles by Jiveh Main Form", `o5N2Cg1KTnReA0wS8Jh2`), exactly as the WordPress page did, so those requests go straight into GoHighLevel. The home page "Contact Us" form posts to `/api/lead.php` (PHP on SiteGround), which forwards it to a GoHighLevel inbound webhook. Until the webhook is set, that form shows an error asking the visitor to call (it never shows a false "thank you").
 - **Reviews:** the same Elfsight Google reviews widget as the old site (ID in Site settings). Clear the ID to show the reviews stored in `/cms` instead.
 
 ## Pages (URLs unchanged from WordPress)
@@ -35,8 +35,27 @@ Automatic deploys (`.github/workflows/deploy-siteground.yml`) build and upload o
 |---|---|
 | `SG_FTP_SERVER` | FTP host (Site Tools > Site > FTP Accounts > Manage > FTP credentials) |
 | `SG_FTP_USERNAME` / `SG_FTP_PASSWORD` | an FTP account whose folder is `smilesbyjiveh.com/public_html` |
-| `GHL_WEBHOOK_URL` (secret) | GoHighLevel inbound webhook for the home page Contact Us form. Until it is set, messages are accepted but not sent anywhere. The workflow writes it to `api/lead-config.php`, which `.htaccess` never serves. |
+| `GHL_WEBHOOK_URL` (secret) | GoHighLevel inbound webhook for the home page Contact Us form. Until it is set, the form asks visitors to call instead. The workflow writes it to `api/lead-config.php`, which `.htaccess` never serves. |
 | `NEXT_PUBLIC_GHL_CHAT_WIDGET_ID` (variable) | GoHighLevel chat widget ID. The chat stays hidden until it is set. |
+
+### Preview on SiteGround first, then go live
+
+The site does not need Sanity to go live: with the CMS empty it shows the built-in content (the old site's text and photos). Any address other than `smilesbyjiveh.com` (the preview subdomain, Vercel) sends `X-Robots-Tag: noindex`, so previews never compete with the live site in Google.
+
+**1. Preview (WordPress stays live, nothing changes for visitors)**
+1. Site Tools > Domain > Subdomains: create `new.smilesbyjiveh.com` (DNS is at SiteGround, so it works at once). Site Tools > Security > SSL Manager: get a Let's Encrypt certificate for it.
+2. Site Tools > Site > FTP Accounts: create an account whose folder is the subdomain's `public_html` (shown when you create it, e.g. `new.smilesbyjiveh.com/public_html`). Under Manage > FTP credentials, note the host.
+3. GitHub > Settings > Secrets and variables > Actions: add `SG_FTP_SERVER`, `SG_FTP_USERNAME`, `SG_FTP_PASSWORD` (and `GHL_WEBHOOK_URL` when you have it).
+4. Actions > "Deploy to SiteGround" > Run workflow (branch `claude/relaxed-einstein-6hs0h7`). About 3 minutes. Then check https://new.smilesbyjiveh.com: pages, the appointment form, the Contact Us form (a test lead should appear in GoHighLevel).
+
+**2. Go live (switch smilesbyjiveh.com to the new site)**
+1. Site Tools > Security > Backups > Create backup (the rollback point: restoring it brings WordPress back as it was).
+2. Site Tools > Site > FTP Accounts: create an account whose folder is `smilesbyjiveh.com/public_html` and put its username/password in the `SG_FTP_USERNAME` / `SG_FTP_PASSWORD` secrets (the host stays the same).
+3. Run the workflow again. It uploads the new site into `public_html` next to the WordPress files and replaces WordPress's `.htaccess`; `index.html` is served before WordPress's `index.php`, so the new site takes over at once. WordPress files stay on disk (old `/wp-content/uploads/` image links keep working); `/wp-admin` and `/wp-login.php` answer 410.
+4. Site Tools > Speed > Caching: flush the Dynamic Cache. Check https://smilesbyjiveh.com, then `/appoinment/` (should land on `/appointment/`) and `/wp-admin` (410).
+5. Google Search Console: submit `https://smilesbyjiveh.com/sitemap.xml`. Delete the preview subdomain (or leave it: it is noindex).
+
+Every push to `main` or the development branch deploys again, and so does each Sanity publish once the webhook below is set.
 
 **Publish → live:** in sanity.io/manage > API > Webhooks, add a webhook: URL `https://api.github.com/repos/TTRDigital/Smiles-by-Jiveh/dispatches`, method POST, triggers create/update/delete, projection `{"event_type": "sanity-publish"}`, headers `Authorization: Bearer <GitHub fine-grained token with Contents: read and write on this repo>` and `Accept: application/vnd.github+json`. Each publish then rebuilds and uploads the site (about 3 minutes).
 
@@ -52,7 +71,7 @@ Vercel has no PHP and ignores `.htaccess`, so Vercel builds (the `VERCEL` variab
 - `/cms` inner URLs render on demand;
 - redirects (`/appoinment/`, and `/api/lead.php` to the Vercel handler) are in `vercel.json`.
 
-In Vercel > Project > Settings > Environment Variables, set `GHL_WEBHOOK_URL` (and `NEXT_PUBLIC_GHL_CHAT_WIDGET_ID` for the chat), then redeploy. Without them, the form accepts messages but does not send them and the chat stays hidden.
+In Vercel > Project > Settings > Environment Variables, set `GHL_WEBHOOK_URL` (and `NEXT_PUBLIC_GHL_CHAT_WIDGET_ID` for the chat), then redeploy. Without them, the form asks visitors to call and the chat stays hidden. Every Vercel page sends `X-Robots-Tag: noindex` (`vercel.json`).
 
 ## Editing in /cms
 

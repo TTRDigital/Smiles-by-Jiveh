@@ -1,9 +1,36 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "redirects": [
-    { "source": "/appoinment", "destination": "/appointment/", "statusCode": 301 },
-    { "source": "/appoinment/", "destination": "/appointment/", "statusCode": 301 },
-    { "source": "/api/lead.php", "destination": "/api/lead/", "statusCode": 308 },
-    { "source": "/api/lead-config.php", "destination": "/", "statusCode": 301 }
+    {
+      "source": "/appoinment",
+      "destination": "/appointment/",
+      "statusCode": 301
+    },
+    {
+      "source": "/appoinment/",
+      "destination": "/appointment/",
+      "statusCode": 301
+    },
+    {
+      "source": "/api/lead.php",
+      "destination": "/api/lead/",
+      "statusCode": 308
+    },
+    {
+      "source": "/api/lead-config.php",
+      "destination": "/",
+      "statusCode": 301
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    }
   ]
 }

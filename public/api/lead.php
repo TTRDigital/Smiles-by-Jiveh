@@ -7,8 +7,9 @@
  * filters spam and posts it to the practice's GoHighLevel inbound webhook as
  * flat JSON.
  *
- * The webhook URL is NOT in this file. Until it is set, requests are accepted
- * (the visitor sees the thank-you message) but not sent anywhere. Set it with
+ * The webhook URL is NOT in this file. Until it is set, requests are refused
+ * with 503 and the visitor is asked to call (a message is never lost while
+ * the visitor thinks it was sent). Set it with
  * lead-config.php next to public_html or in this folder (blocked from the web
  * by .htaccess) returning ['webhook_url' => 'https://...']. The deploy
  * workflow writes it from the GHL_WEBHOOK_URL GitHub secret.
@@ -118,15 +119,15 @@ foreach ([dirname(__DIR__, 2) . '/lead-config.php', __DIR__ . '/lead-config.php'
 }
 $webhook = trim((string) ($config['webhook_url'] ?? getenv('GHL_WEBHOOK_URL') ?: ''), " \t\n\r\0\x0B\"'");
 if ($webhook === '') {
-    // Not configured yet: accept the request so the visitor is not stuck, but say so in the error log.
-    error_log('[lead] No GoHighLevel webhook configured: appointment request accepted but NOT sent.');
-    reply(200, ['ok' => true, 'delivered' => false]);
+    // Not configured yet: refuse, so the form tells the visitor to call instead of showing a false "thank you".
+    error_log('[lead] No GoHighLevel webhook configured: request refused. Set GHL_WEBHOOK_URL.');
+    reply(503, ['ok' => false, 'error' => 'The form is not connected yet. Please call us instead.']);
 }
 // https only (plain http allowed for a local test receiver).
 $whHost = strtolower((string) parse_url($webhook, PHP_URL_HOST));
 if (!preg_match('#^https://#', $webhook) && !in_array($whHost, ['127.0.0.1', 'localhost'], true)) {
-    error_log('[lead] GHL webhook URL is not https: request accepted but NOT sent. Check lead-config.php.');
-    reply(200, ['ok' => true, 'delivered' => false]);
+    error_log('[lead] GHL webhook URL is not https: request refused. Check lead-config.php.');
+    reply(503, ['ok' => false, 'error' => 'The form is not connected yet. Please call us instead.']);
 }
 
 /** E.164 for US numbers. */
