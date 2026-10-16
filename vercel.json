@@ -1,8 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "trailingSlash": true,
   "redirects": [
-    { "source": "/appoinment", "destination": "/appointment/", "permanent": true },
-    { "source": "/appoinment/", "destination": "/appointment/", "permanent": true }
+    { "source": "/appoinment", "destination": "/appointment/", "statusCode": 301 },
+    { "source": "/appoinment/", "destination": "/appointment/", "statusCode": 301 },
+    { "source": "/api/lead.php", "destination": "/api/lead/", "statusCode": 308 },
+    { "source": "/api/lead-config.php", "destination": "/", "statusCode": 301 }
   ]
 }

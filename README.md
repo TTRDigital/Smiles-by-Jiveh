@@ -44,6 +44,16 @@ Also turn on Site Tools > Security > SSL Manager (Let's Encrypt) and HTTPS Enfor
 
 **Google:** the old site's Google tag (Site Kit, `GT-TBVN7SPV`) and Tag Manager (`GTM-KW9CW8P7`) are built in (`lib/integrations.ts`); `NEXT_PUBLIC_GA_ID` / `NEXT_PUBLIC_GTM_ID` override them, `off` disables one. After going live, disconnect Site Kit's WordPress plugin only once the new site is serving.
 
+## Vercel preview (smiles-by-jiveh.vercel.app)
+
+Vercel has no PHP and ignores `.htaccess`, so Vercel builds (the `VERCEL` variable is set) run as a normal Next.js app instead of the static export (`next.config.ts`):
+
+- the Contact Us form posts to `app/api/lead/route.vercel.ts`, the same handler as `lead.php` (keep the two in sync);
+- `/cms` inner URLs render on demand;
+- redirects (`/appoinment/`, and `/api/lead.php` to the Vercel handler) are in `vercel.json`.
+
+In Vercel > Project > Settings > Environment Variables, set `GHL_WEBHOOK_URL` (and `NEXT_PUBLIC_GHL_CHAT_WIDGET_ID` for the chat), then redeploy. Without them, the form accepts messages but does not send them and the chat stays hidden.
+
 ## Editing in /cms
 
 - **Settings > Site settings:** phone, email, address, hours, menus, footer columns, reviews widget, header button.

@@ -21,8 +21,13 @@ export function PageHero({ hero }: { hero: PageHeroContent }) {
     ) : imgs.length > 1 ? (
       <Slider label={`${hero.eyebrow ?? hero.heading} photos`} arrows="plain" className={cls}>
         {imgs.map((img, i) => (
-          <div key={img.src} className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-card)] bg-white">
-            <Image src={img.src} alt={img.alt} fill priority={i === 0} sizes="(min-width: 1024px) 640px, 100vw" className="object-cover" />
+          // The slider takes the shape of its first photo; other photos fit inside it uncropped.
+          <div
+            key={img.src}
+            className="relative w-full overflow-hidden rounded-[var(--radius-card)] bg-white"
+            style={{ aspectRatio: imgs[0].width && imgs[0].height ? `${imgs[0].width} / ${imgs[0].height}` : "4 / 5" }}
+          >
+            <Image src={img.src} alt={img.alt} fill priority={i === 0} sizes="(min-width: 1024px) 640px, 100vw" className={i === 0 ? "object-cover" : "object-contain"} />
           </div>
         ))}
       </Slider>

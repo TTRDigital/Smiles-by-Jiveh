@@ -77,7 +77,7 @@ export function AppointmentForm({ phone, phoneHref, practice }: { phone: string;
     const consentText = formRef.current?.querySelector(`#${CSS.escape(`${uid}-consent-text`)}`)?.textContent ?? "";
 
     try {
-      const res = await fetch("/api/lead.php", {
+      const res = await fetch(process.env.NEXT_PUBLIC_LEAD_ENDPOINT ?? "/api/lead.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

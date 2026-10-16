@@ -31,7 +31,7 @@ export function Process({ data, showCtas = true }: { data: SharedSections["proce
       <ol className="mt-8 grid gap-10 md:grid-cols-3 md:gap-5">
         {data.steps.map((s, i) => (
           <li key={s.title} className="flex flex-col items-center px-2.5 text-center">
-            <span className="flex h-[86px] w-[86px] items-center justify-center rounded-full border-4 border-white bg-teal text-[26px] font-semibold text-white shadow-[0_0_0_4px_var(--color-teal)]">
+            <span className="flex h-[66px] w-[66px] items-center justify-center rounded-full border-[3px] border-white bg-teal text-[22px] md:h-[86px] md:w-[86px] md:border-4 md:text-[26px] font-semibold text-white shadow-[0_0_0_4px_var(--color-teal)]">
               {String(i + 1).padStart(2, "0")}
             </span>
             <h3 className="mt-7 text-base leading-[1.35] text-black md:text-lg">{s.title}</h3>
