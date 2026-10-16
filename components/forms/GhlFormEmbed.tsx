@@ -7,7 +7,7 @@ import { useEffect } from "react";
  * page did: the form's iframe plus GoHighLevel's form_embed.js, which sizes
  * the iframe to the form. Submissions go straight into GoHighLevel.
  */
-export function GhlFormEmbed({ formId, title = "Smiles by Jiveh Main Form" }: { formId: string; title?: string }) {
+export function GhlFormEmbed({ formId, title = "Smiles by Jiveh Main Form", height = 523 }: { formId: string; title?: string; height?: number }) {
   useEffect(() => {
     if (document.querySelector("script[data-ghl-form-embed]")) return;
     const s = document.createElement("script");
@@ -30,10 +30,12 @@ export function GhlFormEmbed({ formId, title = "Smiles by Jiveh Main Form" }: { 
       data-deactivation-type="neverDeactivate"
       data-deactivation-value=""
       data-form-name={title}
-      data-height="1536"
+      data-height={String(height)}
       data-layout-iframe-id={`inline-${formId}`}
       data-form-id={formId}
-      className="block min-h-[860px] w-full rounded-lg border-0"
+      // GoHighLevel's embed code; form_embed.js then grows the iframe to the form's height.
+      style={{ width: "100%", height, border: "none", borderRadius: 8 }}
+      className="block"
     />
   );
 }

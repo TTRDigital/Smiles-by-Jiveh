@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Mail, Phone } from "lucide-react";
 import type { HomeContent, SiteSettings } from "@/lib/types";
 import { ContactForm } from "@/components/forms/ContactForm";
+import { GhlFormEmbed } from "@/components/forms/GhlFormEmbed";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Pill } from "@/components/ui/Pill";
@@ -195,6 +196,7 @@ export function HomeCtaBand({ band }: { band: HomeContent["ctaBand"] }) {
 }
 
 export function HomeContact({ contact, settings }: { contact: HomeContent["contact"]; settings: SiteSettings }) {
+  const ghl = contact.ghlFormId && contact.ghlFormId.toLowerCase() !== "off" ? contact.ghlFormId.trim() : "";
   return (
     <section id="contact" aria-label={contact.heading} className="bg-white py-[60px] md:py-[75px]">
       <div className="container-x grid items-center gap-12 lg:grid-cols-2 lg:gap-[150px]">
@@ -220,7 +222,7 @@ export function HomeContact({ contact, settings }: { contact: HomeContent["conta
           </div>
         </div>
         <div className="lg:p-2.5">
-          <ContactForm phone={settings.phone} phoneHref={settings.phoneHref} practice={settings.name} />
+          {ghl ? <GhlFormEmbed formId={ghl} /> : <ContactForm phone={settings.phone} phoneHref={settings.phoneHref} practice={settings.name} />}
           {contact.formNote ? <p className="mt-5 text-[15px] italic text-[#555]">{contact.formNote}</p> : null}
         </div>
       </div>

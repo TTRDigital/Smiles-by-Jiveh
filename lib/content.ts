@@ -131,7 +131,7 @@ export const getHome = cache(async (): Promise<HomeContent> => {
       doctor{ eyebrow, heading, text, highlights, cta${CTA}, "image": image${IMG} },
       beforeAfter{ eyebrow, heading, "images": images[]${IMG} },
       testimonials{ eyebrow, heading },
-      contact{ eyebrow, heading, lead, text, formNote },
+      contact{ eyebrow, heading, lead, text, ghlFormId, formNote },
       ctaBand{ heading, text, ctas[]${CTA}, "image": image${IMG} },
       ${SEO}
     }`,

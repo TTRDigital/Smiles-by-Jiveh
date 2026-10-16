@@ -188,7 +188,7 @@ export const homePage = defineType({
       defineField({ name: "images", type: "array", of: [defineArrayMember({ type: "altImage" })] }),
     ]),
     section("testimonials", "Reviews heading", [s("eyebrow", "Small label"), s("heading")]),
-    section("contact", "Contact Us (form)", [s("eyebrow", "Small label"), s("heading"), s("lead", "Bold line"), t("text"), t("formNote", "Note under the form")]),
+    section("contact", "Contact Us (form)", [s("eyebrow", "Small label"), s("heading"), s("lead", "Bold line"), t("text"), s("ghlFormId", "GoHighLevel form ID (type off for the website's own short form)"), t("formNote", "Note under the form")]),
     section("ctaBand", "Call to action band", [s("heading"), t("text"), ctas(), img("image", "Background")]),
     seoField,
   ],

@@ -7,8 +7,8 @@
 #   SG_FTP_SERVER    FTP host from SiteGround Site Tools > Site > FTP Accounts
 #   SG_FTP_USERNAME  FTP account whose folder is the site's public_html
 #   SG_FTP_PASSWORD
-#   GHL_WEBHOOK_URL  GoHighLevel inbound webhook for the home page Contact Us form
-#                    (until it is set, the form asks visitors to call instead)
+#   GHL_WEBHOOK_URL  Optional. GoHighLevel inbound webhook for the website's own form,
+#                    used only when a page's GHL form ID is "off" in /cms
 # Repository variables (optional, same page > Variables):
 #   NEXT_PUBLIC_GHL_CHAT_WIDGET_ID  GoHighLevel chat widget ID (chat hidden until set)
 name: Deploy to SiteGround
@@ -57,10 +57,6 @@ jobs:
           path: out/
           include-hidden-files: true
           retention-days: 14
-
-      - name: Warn when the Contact Us form is not connected
-        if: env.GHL_WEBHOOK_URL == ''
-        run: echo "::warning::GHL_WEBHOOK_URL secret is not set, so the home page Contact Us form asks visitors to call instead of sending."
 
       - name: Write form settings
         if: env.GHL_WEBHOOK_URL != ''

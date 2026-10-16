@@ -3,14 +3,14 @@
 Next.js 16 (App Router, static export) + Sanity Studio embedded at `/cms`, Tailwind CSS v4, hosted on **SiteGround** as plain files. Rebuilt from the WordPress/Elementor site at smilesbyjiveh.com by TTR Digital Marketing: same pages, same URLs, same text and photos, same look.
 
 - **Content:** everything is editable in `/cms`. Until Sanity has content (or a field is left empty), the site shows the built-in content from `lib/data`, so it never breaks.
-- **Forms:** `/appointment/` embeds the practice's GoHighLevel form ("Smiles by Jiveh Main Form", `o5N2Cg1KTnReA0wS8Jh2`), exactly as the WordPress page did, so those requests go straight into GoHighLevel. The home page "Contact Us" form posts to `/api/lead.php` (PHP on SiteGround), which forwards it to a GoHighLevel inbound webhook. Until the webhook is set, that form shows an error asking the visitor to call (it never shows a false "thank you").
+- **Forms:** `/appointment/` and the home page "Contact Us" section embed the practice's GoHighLevel form ("Smiles by Jiveh Main Form", `o5N2Cg1KTnReA0wS8Jh2`), so every request goes straight into GoHighLevel; nothing else to set up. Typing `off` as the form ID in `/cms` shows the website's own form instead, which posts to `/api/lead.php` (PHP on SiteGround) and on to a GoHighLevel inbound webhook (`GHL_WEBHOOK_URL`); without that webhook it asks the visitor to call (it never shows a false "thank you").
 - **Reviews:** the same Elfsight Google reviews widget as the old site (ID in Site settings). Clear the ID to show the reviews stored in `/cms` instead.
 
 ## Pages (URLs unchanged from WordPress)
 
 | URL | What |
 |---|---|
-| `/` | Home: video hero, intro cards, about, services slider, Dr. Jiveh, before/after, Google reviews, Contact Us form, call-to-action band |
+| `/` | Home: video hero, intro cards, about, services slider, Dr. Jiveh, before/after, Google reviews, Contact Us (GoHighLevel form), call-to-action band |
 | `/who-we-are/`, `/meet-dr-jiveh/`, `/insurance-payment-options/` | Practice pages |
 | `/appointment/` | GoHighLevel appointment form, contact info, map (`/appoinment/` redirects here, in `.htaccess` and `vercel.json`) |
 | 24 treatment pages, e.g. `/general-dentistry/`, `/dental-implants/` | One template (`app/(site)/[slug]`), content in `lib/data/treatments.ts` and Sanity "Treatment" documents |
@@ -35,7 +35,7 @@ Automatic deploys (`.github/workflows/deploy-siteground.yml`) build and upload o
 |---|---|
 | `SG_FTP_SERVER` | FTP host (Site Tools > Site > FTP Accounts > Manage > FTP credentials) |
 | `SG_FTP_USERNAME` / `SG_FTP_PASSWORD` | an FTP account whose folder is `smilesbyjiveh.com/public_html` |
-| `GHL_WEBHOOK_URL` (secret) | GoHighLevel inbound webhook for the home page Contact Us form. Until it is set, the form asks visitors to call instead. The workflow writes it to `api/lead-config.php`, which `.htaccess` never serves. |
+| `GHL_WEBHOOK_URL` (secret) | Optional: only used when a page's GoHighLevel form ID is set to `off` in `/cms` (the website's own form). Until it is set, that form asks visitors to call instead. The workflow writes it to `api/lead-config.php`, which `.htaccess` never serves. |
 | `NEXT_PUBLIC_GHL_CHAT_WIDGET_ID` (variable) | GoHighLevel chat widget ID. The chat stays hidden until it is set. |
 
 ### Preview on SiteGround first, then go live
@@ -45,8 +45,8 @@ The site does not need Sanity to go live: with the CMS empty it shows the built-
 **1. Preview (WordPress stays live, nothing changes for visitors)**
 1. Site Tools > Domain > Subdomains: create `new.smilesbyjiveh.com` (DNS is at SiteGround, so it works at once). Site Tools > Security > SSL Manager: get a Let's Encrypt certificate for it.
 2. Site Tools > Site > FTP Accounts: create an account whose folder is the subdomain's `public_html` (shown when you create it, e.g. `new.smilesbyjiveh.com/public_html`). Under Manage > FTP credentials, note the host.
-3. GitHub > Settings > Secrets and variables > Actions: add `SG_FTP_SERVER`, `SG_FTP_USERNAME`, `SG_FTP_PASSWORD` (and `GHL_WEBHOOK_URL` when you have it).
-4. Actions > "Deploy to SiteGround" > Run workflow (branch `claude/relaxed-einstein-6hs0h7`). About 3 minutes. Then check https://new.smilesbyjiveh.com: pages, the appointment form, the Contact Us form (a test lead should appear in GoHighLevel).
+3. GitHub > Settings > Secrets and variables > Actions: add `SG_FTP_SERVER`, `SG_FTP_USERNAME`, `SG_FTP_PASSWORD`.
+4. Actions > "Deploy to SiteGround" > Run workflow (branch `claude/relaxed-einstein-6hs0h7`). About 3 minutes. Then check https://new.smilesbyjiveh.com: pages, the GoHighLevel form on `/appointment/` and on the home page (a test entry should appear in GoHighLevel).
 
 **2. Go live (switch smilesbyjiveh.com to the new site)**
 1. Site Tools > Security > Backups > Create backup (the rollback point: restoring it brings WordPress back as it was).
@@ -67,17 +67,17 @@ Also turn on Site Tools > Security > SSL Manager (Let's Encrypt) and HTTPS Enfor
 
 Vercel has no PHP and ignores `.htaccess`, so Vercel builds (the `VERCEL` variable is set) run as a normal Next.js app instead of the static export (`next.config.ts`):
 
-- the Contact Us form posts to `app/api/lead/route.vercel.ts`, the same handler as `lead.php` (keep the two in sync);
+- the website's own form (when a GHL form ID is `off`) posts to `app/api/lead/route.vercel.ts`, the same handler as `lead.php` (keep the two in sync);
 - `/cms` inner URLs render on demand;
 - redirects (`/appoinment/`, and `/api/lead.php` to the Vercel handler) are in `vercel.json`.
 
-In Vercel > Project > Settings > Environment Variables, set `GHL_WEBHOOK_URL` (and `NEXT_PUBLIC_GHL_CHAT_WIDGET_ID` for the chat), then redeploy. Without them, the form asks visitors to call and the chat stays hidden. Every Vercel page sends `X-Robots-Tag: noindex` (`vercel.json`).
+In Vercel > Project > Settings > Environment Variables, set `GHL_WEBHOOK_URL` (and `NEXT_PUBLIC_GHL_CHAT_WIDGET_ID` for the chat), then redeploy. Without them, the website's own form (only used when a GHL form ID is `off`) asks visitors to call and the chat stays hidden. Every Vercel page sends `X-Robots-Tag: noindex` (`vercel.json`).
 
 ## Editing in /cms
 
 - **Settings > Site settings:** phone, email, address, hours, menus, footer columns, reviews widget, header button.
 - **Settings > Shared sections:** "Why Choose Smiles By Jiveh", "Our Process" and the reviews heading, shown on many treatment pages.
-- **Pages:** Home, Who We Are, Meet Dr. Jiveh, Insurance & Payment Options, Book An Appointment, Privacy Policy. On Book An Appointment, "GoHighLevel form ID" picks the embedded GHL form; type `off` to show the website's own appointment form instead (sent through `GHL_WEBHOOK_URL`).
+- **Pages:** Home, Who We Are, Meet Dr. Jiveh, Insurance & Payment Options, Book An Appointment, Privacy Policy. On Book An Appointment and in the Home "Contact Us" section, "GoHighLevel form ID" picks the embedded GHL form; type `off` to show the website's own form instead (sent through `GHL_WEBHOOK_URL`).
 - **Treatments:** by category (General / Cosmetic / Restorative). Each page is a header plus sections: details with table of contents, cards, text and photo, FAQ, or a shared section.
 - **Reviews / FAQs / Blog posts:** collections.
 

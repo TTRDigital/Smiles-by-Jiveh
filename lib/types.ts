@@ -120,8 +120,8 @@ export type HomeContent = {
   doctor: { eyebrow?: string; heading: string; text: Rich; highlights: string[]; cta?: Cta; image: Img };
   beforeAfter: { eyebrow?: string; heading: string; images: Img[] };
   testimonials: { eyebrow?: string; heading: string };
-  /** "Contact Us" section with the short contact form (between the reviews and the closing band). */
-  contact: { eyebrow?: string; heading: string; lead?: string; text?: string; formNote?: string };
+  /** "Contact Us" section with a form (between the reviews and the closing band). ghlFormId: the GoHighLevel form embedded there; "off" shows the website's own short form. */
+  contact: { eyebrow?: string; heading: string; lead?: string; text?: string; ghlFormId?: string; formNote?: string };
   ctaBand: { heading: string; text?: string; ctas: Cta[]; image?: Img };
   seo: Seo;
 };

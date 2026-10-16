@@ -96,6 +96,7 @@ export const fallbackHome: HomeContent = {
     heading: "Contact Us",
     lead: "Your healthiest, most confident smile begins here.",
     text: "Whether you’re interested in cosmetic dentistry, smile rehabilitation, preventive care, or simply finding a dental home that truly listens, we invite you to experience dentistry designed around you.",
+    ghlFormId: "o5N2Cg1KTnReA0wS8Jh2",
     formNote: "New patients: once you submit this form, we’ll send you a personal link to complete your new patient forms.",
   },
   ctaBand: {
