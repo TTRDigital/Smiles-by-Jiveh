@@ -5,7 +5,10 @@ import { useEffect } from "react";
 /**
  * GoHighLevel (LeadConnector) form, embedded exactly as the old WordPress
  * page did: the form's iframe plus GoHighLevel's form_embed.js, which sizes
- * the iframe to the form. Submissions go straight into GoHighLevel.
+ * the iframe to the form. Submissions go straight into GoHighLevel. The
+ * iframe loads lazily: on the home page it is far below the fold and weighs
+ * about 3 MB with its Cloudflare check; on /appointment/ it is in view and
+ * loads at once.
  */
 export function GhlFormEmbed({ formId, title = "Smiles by Jiveh Main Form", height = 523 }: { formId: string; title?: string; height?: number }) {
   useEffect(() => {
@@ -19,6 +22,7 @@ export function GhlFormEmbed({ formId, title = "Smiles by Jiveh Main Form", heig
 
   return (
     <iframe
+      loading="lazy"
       src={`https://api.leadconnectorhq.com/widget/form/${formId}`}
       id={`inline-${formId}`}
       title={title}

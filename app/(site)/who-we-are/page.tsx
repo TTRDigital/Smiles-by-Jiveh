@@ -36,7 +36,7 @@ export default async function WhoWeArePage() {
           ) : null}
         </div>
         <div data-reveal="right" className="relative aspect-[1440/1080] overflow-hidden rounded-[20px]">
-          <Image src={page.hero.image.src} alt={page.hero.image.alt} fill priority sizes="(min-width: 768px) 600px, 100vw" className="object-cover" />
+          <Image src={page.hero.image.src} alt={page.hero.image.alt || page.hero.heading} fill priority fetchPriority="high" sizes="(min-width: 768px) 600px, 100vw" className="object-cover" />
         </div>
       </section>
 
@@ -49,7 +49,7 @@ export default async function WhoWeArePage() {
           <RichText value={page.philosophy.text} className="text-[15px] leading-[1.75] text-[#555]" />
         </div>
         <div data-reveal="up" className="relative mt-10 aspect-[2000/1000] overflow-hidden rounded-[20px] md:aspect-[1296/500]">
-          <Image src={page.philosophy.image.src} alt={page.philosophy.image.alt} fill sizes="(min-width: 1340px) 1296px, 100vw" className="object-cover object-[50%_40%]" />
+          <Image src={page.philosophy.image.src} alt={page.philosophy.image.alt || page.philosophy.heading} fill sizes="(min-width: 1340px) 1296px, 100vw" className="object-cover object-[50%_40%]" />
         </div>
       </section>
 

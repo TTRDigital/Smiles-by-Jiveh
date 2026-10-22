@@ -31,10 +31,10 @@ export function DetailsSection({ block }: { block: DetailsBlock }) {
                   <div className="relative overflow-hidden rounded-[10px]">
                     <Image
                       src={it.image.src}
-                      alt={it.image.alt}
+                      alt={it.image.alt || it.heading}
                       width={it.image.width ?? 800}
                       height={it.image.height ?? 600}
-                      sizes="(min-width: 1024px) 300px, 40vw"
+                      sizes="(min-width: 1024px) 300px, (min-width: 640px) 40vw, 100vw"
                       className="h-auto w-full"
                     />
                   </div>

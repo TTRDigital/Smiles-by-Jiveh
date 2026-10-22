@@ -60,6 +60,11 @@
       transition-duration: 0.01ms !important;
     }
   }
+  /* Sections that reveal from the side sit 40px off to the right until they scroll into view; clip that so phones
+     never scroll sideways (clip, not hidden, so the sticky header keeps working). */
+  html {
+    overflow-x: clip;
+  }
   body {
     background: var(--color-page);
     color: var(--color-body);

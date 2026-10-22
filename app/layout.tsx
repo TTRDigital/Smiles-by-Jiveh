@@ -18,7 +18,8 @@ export const metadata: Metadata = {
   description: "Elevated dentistry and a personalized experience with Dr. Farokh Jiveh in Royal Palm Beach, FL.",
   applicationName: "Smiles By Jiveh",
   formatDetection: { telephone: false, address: false, email: false },
-  icons: { icon: [{ url: "/images/brand/favicon.png", type: "image/png" }], apple: "/images/brand/favicon.png" },
+  // favicon-192.png is a 10 KB copy of favicon.png (154 KB), which every page used to download.
+  icons: { icon: [{ url: "/images/brand/favicon-192.png", type: "image/png", sizes: "192x192" }], apple: "/images/brand/favicon-192.png" },
 };
 
 export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#ffffff" };

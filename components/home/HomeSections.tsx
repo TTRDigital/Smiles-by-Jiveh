@@ -14,7 +14,7 @@ import { HeroVideo } from "@/components/home/HeroVideo";
 export function HomeHero({ hero }: { hero: HomeContent["hero"] }) {
   return (
     <section className="relative isolate overflow-hidden bg-[#f9f9f9]">
-      <Image src={hero.image.src} alt="" fill priority sizes="100vw" className="-z-20 object-cover" />
+      <Image src={hero.image.src} alt={hero.image.alt ?? ""} fill priority fetchPriority="high" sizes="100vw" className="-z-20 object-cover" />
       <HeroVideo url={hero.videoUrl} />
       {/* White from the left, as on the old site, so the text stays readable over the video. */}
       <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(270deg,#ffffff00_0%,#fffffffa_65%)]" />
@@ -80,7 +80,7 @@ export function HomeAbout({ about }: { about: HomeContent["about"] }) {
           ) : null}
         </div>
         <div data-reveal="right" className="relative aspect-[351/400] overflow-hidden rounded-[15px] md:aspect-[660/700] md:rounded-[40px]">
-          <Image src={about.image.src} alt={about.image.alt} fill sizes="(min-width: 768px) 660px, 100vw" className="object-cover" />
+          <Image src={about.image.src} alt={about.image.alt || about.heading} fill sizes="(min-width: 768px) 660px, 100vw" className="object-cover" />
         </div>
       </div>
     </section>
@@ -102,7 +102,7 @@ export function HomeServices({ services }: { services: HomeContent["services"] }
                 <span className="relative block h-[350px] overflow-hidden">
                   <Image
                     src={s.image.src}
-                    alt={s.image.alt}
+                    alt={s.image.alt || s.title}
                     fill
                     sizes="(min-width: 1024px) 405px, (min-width: 768px) 50vw, 100vw"
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -144,7 +144,7 @@ export function HomeDoctor({ doctor }: { doctor: HomeContent["doctor"] }) {
           ) : null}
         </div>
         <div data-reveal="right" className="relative aspect-[588/736] overflow-hidden rounded-[25px]">
-          <Image src={doctor.image.src} alt={doctor.image.alt} fill sizes="(min-width: 768px) 588px, 100vw" className="object-cover" />
+          <Image src={doctor.image.src} alt={doctor.image.alt || doctor.heading} fill sizes="(min-width: 768px) 588px, 100vw" className="object-cover" />
         </div>
       </div>
     </section>
@@ -160,7 +160,7 @@ export function HomeBeforeAfter({ data }: { data: HomeContent["beforeAfter"] }) 
         <ul data-reveal="up" className="mt-10 grid gap-5 sm:grid-cols-2 md:mt-[50px] lg:grid-cols-4 lg:gap-[30px] lg:px-2.5">
           {data.images.map((img) => (
             <li key={img.src} className="relative aspect-[1080/1350] overflow-hidden rounded-[20px]">
-              <Image src={img.src} alt={img.alt} fill sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw" className="object-cover" />
+              <Image src={img.src} alt={img.alt || data.heading} fill sizes="(min-width: 1024px) 300px, (min-width: 640px) 50vw, 100vw" className="object-cover" />
             </li>
           ))}
         </ul>

@@ -30,7 +30,7 @@ export function SplitSection({ block }: { block: SplitBlock }) {
           {block.ctas?.length ? <CtaPair ctas={block.ctas} className="mt-7" /> : null}
         </div>
         <div className="relative min-h-[300px] overflow-hidden rounded-[var(--radius-card)] md:min-h-[420px]">
-          <Image src={block.image.src} alt={block.image.alt} fill sizes="(min-width: 1024px) 640px, 100vw" className="object-cover" />
+          <Image src={block.image.src} alt={block.image.alt || block.heading} fill sizes="(min-width: 1024px) 640px, 100vw" className="object-cover" />
         </div>
       </div>
     </section>

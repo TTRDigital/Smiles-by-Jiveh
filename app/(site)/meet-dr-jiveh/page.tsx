@@ -35,14 +35,14 @@ export default async function MeetDrJivehPage() {
         </div>
         <div className="flex justify-center">
           <div className="relative aspect-[1121/1403] w-full max-w-[440px] overflow-hidden">
-            <Image src={page.hero.image.src} alt={page.hero.image.alt} fill priority sizes="440px" className="object-cover" />
+            <Image src={page.hero.image.src} alt={page.hero.image.alt || page.hero.heading} fill priority fetchPriority="high" sizes="440px" className="object-cover" />
           </div>
         </div>
       </section>
 
       <section className="container-x grid gap-10 pb-10 md:grid-cols-[minmax(0,520fr)_minmax(0,720fr)] md:gap-[60px] md:pb-[60px]">
         <div data-reveal="left" className="relative aspect-[1024/1280] overflow-hidden rounded-[20px] md:aspect-[520/650]">
-          <Image src={page.story.image.src} alt={page.story.image.alt} fill sizes="(min-width: 768px) 520px, 100vw" className="object-cover" />
+          <Image src={page.story.image.src} alt={page.story.image.alt || page.story.heading} fill sizes="(min-width: 768px) 520px, 100vw" className="object-cover" />
         </div>
         <div>
           <Pill>{page.story.eyebrow}</Pill>

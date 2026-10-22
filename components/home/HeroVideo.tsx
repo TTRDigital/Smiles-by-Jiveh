@@ -7,7 +7,9 @@ const youtubeId = (url?: string) => url?.match(/(?:v=|youtu\.be\/|embed\/|shorts
 /**
  * Muted, looping YouTube video behind the home hero (as on the old site).
  * The poster photo shows first; the video is added once the page has
- * loaded, and never for visitors who prefer reduced motion.
+ * loaded, on desktop only (the player is about 1 MB and the home page's speed
+ * score on phones depends on it), and never for visitors who prefer reduced
+ * motion, have data saver on or are on a slow connection.
  */
 export function HeroVideo({ url }: { url?: string }) {
   const id = youtubeId(url);
@@ -16,6 +18,9 @@ export function HeroVideo({ url }: { url?: string }) {
 
   useEffect(() => {
     if (!id || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const conn = (navigator as Navigator & { connection?: { saveData?: boolean; effectiveType?: string } }).connection;
+    const slow = !!conn && (conn.saveData === true || /(^|\b)(slow-2g|2g|3g)\b/.test(conn.effectiveType ?? ""));
+    if (slow || !window.matchMedia("(min-width: 768px)").matches) return;
     const start = () => setShow(true);
     if (document.readyState === "complete") {
       const t = window.setTimeout(start, 800);

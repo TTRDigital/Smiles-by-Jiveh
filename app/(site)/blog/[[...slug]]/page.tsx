@@ -54,7 +54,7 @@ export default async function BlogPage(props: PageProps<"/blog/[[...slug]]">) {
           <h1 className="mt-2 text-[32px] leading-[1.2] md:text-[45px]">{post.title}</h1>
           {post.image ? (
             <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-[20px]">
-              <Image src={post.image.src} alt={post.image.alt} fill sizes="(min-width: 960px) 780px, 100vw" className="object-cover" />
+              <Image src={post.image.src} alt={post.image.alt || post.title} fill sizes="(min-width: 960px) 780px, 100vw" className="object-cover" />
             </div>
           ) : null}
           <RichText value={post.body} className="mt-8 md:text-lg" />
@@ -74,7 +74,7 @@ export default async function BlogPage(props: PageProps<"/blog/[[...slug]]">) {
                 <Link href={`/blog/${p.slug}/`} className="group block">
                   {p.image ? (
                     <span className="relative block aspect-[16/10] overflow-hidden rounded-[15px]">
-                      <Image src={p.image.src} alt={p.image.alt} fill sizes="400px" className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                      <Image src={p.image.src} alt={p.image.alt || p.title} fill sizes="400px" className="object-cover transition-transform duration-500 group-hover:scale-105" />
                     </span>
                   ) : null}
                   <span className="mt-4 block font-display text-xl font-bold group-hover:text-teal-deep">{p.title}</span>

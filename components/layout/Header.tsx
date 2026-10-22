@@ -143,7 +143,7 @@ function DesktopItem({ item, active, path }: { item: NavItem; active: boolean; p
         aria-controls={id}
         aria-label={`${item.label} submenu`}
         onClick={() => setOpen((o) => !o)}
-        className="-ml-1 flex h-8 w-6 items-center justify-center text-nav"
+        className="flex h-8 w-6 items-center justify-center text-nav"
       >
         <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`} strokeWidth={2.25} />
       </button>

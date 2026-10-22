@@ -14,7 +14,7 @@ export function PageHero({ hero }: { hero: PageHeroContent }) {
       <div className={`grid h-full gap-2.5 ${cls}`}>
         {imgs.map((img, i) => (
           <div key={img.src} className="relative min-h-[200px] overflow-hidden rounded-[var(--radius-card)]">
-            <Image src={img.src} alt={img.alt} fill priority={i === 0} sizes="(min-width: 1024px) 640px, 100vw" className="object-cover" />
+            <Image src={img.src} alt={img.alt || hero.heading} fill priority={i === 0} fetchPriority={i === 0 ? "high" : undefined} sizes="(min-width: 1024px) 640px, 100vw" className="object-cover" />
           </div>
         ))}
       </div>
@@ -27,13 +27,13 @@ export function PageHero({ hero }: { hero: PageHeroContent }) {
             className="relative w-full overflow-hidden rounded-[var(--radius-card)] bg-white"
             style={{ aspectRatio: imgs[0].width && imgs[0].height ? `${imgs[0].width} / ${imgs[0].height}` : "4 / 5" }}
           >
-            <Image src={img.src} alt={img.alt} fill priority={i === 0} sizes="(min-width: 1024px) 640px, 100vw" className={i === 0 ? "object-cover" : "object-contain"} />
+            <Image src={img.src} alt={img.alt || hero.heading} fill priority={i === 0} fetchPriority={i === 0 ? "high" : undefined} sizes="(min-width: 1024px) 640px, 100vw" className={i === 0 ? "object-cover" : "object-contain"} />
           </div>
         ))}
       </Slider>
     ) : imgs[0] ? (
       <div className={`relative h-[220px] w-full overflow-hidden rounded-[var(--radius-card)] sm:h-auto sm:aspect-[638/541] lg:aspect-auto lg:h-full lg:min-h-[470px] ${cls}`}>
-        <Image src={imgs[0].src} alt={imgs[0].alt} fill priority sizes="(min-width: 1024px) 640px, 100vw" className="object-cover" />
+        <Image src={imgs[0].src} alt={imgs[0].alt || hero.heading} fill priority fetchPriority="high" sizes="(min-width: 1024px) 640px, 100vw" className="object-cover" />
       </div>
     ) : null;
 
