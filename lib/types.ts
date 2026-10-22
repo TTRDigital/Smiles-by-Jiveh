@@ -177,6 +177,12 @@ export type Post = {
   title: string;
   excerpt?: string;
   date?: string;
+  /** Who wrote it, shown in the byline and the author box. Empty means Dr. Farokh Jiveh. */
+  author?: string;
+  /** Shown above the title, e.g. "Dental Implants" or "Cosmetic Dentistry". */
+  category?: string;
+  /** The treatment page the post supports, e.g. "/dental-veneers/", shown as a Related treatment box under the article. */
+  service?: string;
   image?: Img;
   body: Rich;
   seo?: Seo;

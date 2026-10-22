@@ -5,6 +5,7 @@ import { merge } from "@/lib/merge";
 import { fallbackSettings, fallbackShared, fallbackTestimonials } from "@/lib/data/site";
 import { fallbackAbout, fallbackAppointment, fallbackDoctor, fallbackHome, fallbackInsurance, fallbackPrivacy } from "@/lib/data/pages";
 import { fallbackTreatments } from "@/lib/data/treatments";
+import { fallbackPosts } from "@/lib/data/posts";
 import type {
   AboutContent,
   AppointmentContent,
@@ -111,13 +112,18 @@ export async function getTreatment(slug: string) {
 
 /* ---------- Posts ---------- */
 
+const POST = `{ "slug": slug.current, title, excerpt, date, author, category, service, "image": image${IMG}, body, ${SEO} }`;
+
 export const getPosts = cache(async (): Promise<Post[]> => {
-  const cms = await sanityFetch<Post[]>(
-    `*[_type == "post" && defined(slug.current) && !(_id in path("drafts.**"))] | order(date desc){ "slug": slug.current, title, excerpt, date, "image": image${IMG}, body, ${SEO} }`,
-    {},
-    ["post"],
-  );
-  return cms ?? [];
+  const cms = await sanityFetch<Partial<Post>[]>(`*[_type == "post" && defined(slug.current) && !(_id in path("drafts.**"))] | order(date desc) ${POST}`, {}, ["post"]);
+  // A post published in /cms merges over the built-in post with the same URL; new CMS posts are added; built-in posts stay until /cms has them. Newest first.
+  const bySlug = new Map(fallbackPosts.map((p) => [p.slug, p]));
+  const merged = (cms ?? []).map((c) => {
+    const base: Post = bySlug.get(c.slug ?? "") ?? { slug: c.slug ?? "", title: c.title ?? "", body: [] };
+    return merge(base, c);
+  });
+  const missing = fallbackPosts.filter((f) => !cms?.some((c) => c.slug === f.slug));
+  return [...merged, ...missing].sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
 });
 
 /* ---------- Pages ---------- */
