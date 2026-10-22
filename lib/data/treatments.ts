@@ -160,7 +160,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "General Dentistry – Smiles By Jiveh",
+      title: "General Dentistry in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "Exceptional dentistry begins with a healthy foundation. At Smiles By Jiveh, our comprehensive approach to general dentistry focuses on preventing disease…",
     },
   },
@@ -253,7 +253,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Dental Cleanings – Smiles By Jiveh",
+      title: "Dental Cleanings in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "A healthy mouth is the gateway to a healthier body. At Smiles By Jiveh, dental cleanings and periodontal care are treated as an essential part of your…",
     },
   },
@@ -323,7 +323,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Tooth-Colored Fillings – Smiles By Jiveh",
+      title: "Tooth-Colored Fillings in Royal Palm Beach - Smiles By Jiveh",
       description: "Preserving healthy, natural tooth structure is always a priority. When teeth develop decay, minor fractures, or worn areas that require repair, white…",
     },
   },
@@ -370,7 +370,7 @@ export const fallbackTreatments: Treatment[] = [
       { _type: "sharedBlock", kind: "process" },
     ],
     seo: {
-      title: "Root Canal Treatment – Smiles By Jiveh",
+      title: "Root Canal Treatment in Royal Palm Beach - Smiles By Jiveh",
       description: "At Smiles By Jiveh, modern root canal therapy is designed to relieve pain — not create it. Many patients who seek treatment are experiencing severe tooth…",
     },
   },
@@ -457,7 +457,7 @@ export const fallbackTreatments: Treatment[] = [
       { _type: "sharedBlock", kind: "testimonials" },
     ],
     seo: {
-      title: "Gum Therapy – Smiles By Jiveh",
+      title: "Gum Therapy in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "Modern periodontal therapy is about far more than saving teeth. It is about reducing inflammation, protecting your overall health, and helping you enjoy a…",
     },
   },
@@ -526,7 +526,7 @@ export const fallbackTreatments: Treatment[] = [
       { _type: "sharedBlock", kind: "testimonials" },
     ],
     seo: {
-      title: "Laser Dental Treatment – Smiles By Jiveh",
+      title: "Laser Dental Treatment in Royal Palm Beach - Smiles By Jiveh",
       description: "At Smiles By Jiveh, Dr. Farokh Jiveh uses advanced Fotona® LightWalker® laser technology to provide more comfortable, precise, and minimally invasive…",
     },
   },
@@ -574,7 +574,7 @@ export const fallbackTreatments: Treatment[] = [
       { _type: "sharedBlock", kind: "process" },
     ],
     seo: {
-      title: "Oral Surgery – Smiles By Jiveh",
+      title: "Oral Surgery in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "At Smiles By Jiveh, Dr. Jiveh is highly trained in performing many oral surgery procedures comfortably and predictably within the practice. For more…",
     },
   },
@@ -621,7 +621,7 @@ export const fallbackTreatments: Treatment[] = [
       { _type: "sharedBlock", kind: "process" },
     ],
     seo: {
-      title: "Sedation Dentistry – Smiles By Jiveh",
+      title: "Sedation Dentistry in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "At Smiles By Jiveh, we understand that dental anxiety can prevent patients from getting the care they need. Our team provides a calm, supportive, and…",
     },
   },
@@ -695,7 +695,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Sleep Apnea Treatment – Smiles By Jiveh",
+      title: "Sleep Apnea Treatment in Royal Palm Beach - Smiles By Jiveh",
       description: "At Smiles By Jiveh, Dr. Farokh Jiveh evaluates sleep and airway health as part of comprehensive dental care. Conditions like snoring, clenching, and sleep…",
     },
   },
@@ -731,7 +731,7 @@ export const fallbackTreatments: Treatment[] = [
       { _type: "sharedBlock", kind: "testimonials" },
     ],
     seo: {
-      title: "TMJ treatment – Smiles By Jiveh",
+      title: "TMJ Treatment in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "If your jaw hurts, clicks, locks, or feels sore during everyday activities like eating or yawning, you may be experiencing TMJ disorder (TMD). The good…",
     },
   },
@@ -815,7 +815,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Cosmetic Dentistry – Smiles By Jiveh",
+      title: "Cosmetic Dentistry in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "At Smiles By Jiveh, cosmetic dentistry is approached through a comprehensive blend of aesthetics, function, health, and long-term stability. Since 1997…",
     },
   },
@@ -878,7 +878,7 @@ export const fallbackTreatments: Treatment[] = [
       { _type: "sharedBlock", kind: "testimonials" },
     ],
     seo: {
-      title: "Teeth Whitening Treatment – Smiles By Jiveh",
+      title: "Teeth Whitening in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "Coffee, tea, wine, smoking, and everyday habits can gradually stain teeth over time. At Smiles By Jiveh, we offer professional whitening solutions to…",
     },
   },
@@ -973,7 +973,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Dental Veneers – Smiles By Jiveh",
+      title: "Dental Veneers in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "Porcelain veneers are one of the signature treatments at Smiles By Jiveh. Whether enhancing a single tooth or creating a complete smile makeover, Dr.…",
     },
   },
@@ -1055,7 +1055,7 @@ export const fallbackTreatments: Treatment[] = [
       { _type: "sharedBlock", kind: "testimonials" },
     ],
     seo: {
-      title: "Smile Makeovers – Smiles By Jiveh",
+      title: "Smile Makeovers in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "Every smile is unique, which is why we offer a full range of cosmetic dentistry solutions designed specifically for you. Your smile enhancement may be as…",
     },
   },
@@ -1124,7 +1124,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Invisalign – Smiles By Jiveh",
+      title: "Invisalign in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "Invisalign® offers a modern, discreet way to straighten your teeth without the appearance of traditional braces. Using a series of custom-crafted clear…",
     },
   },
@@ -1195,7 +1195,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Clear Aligners – Smiles By Jiveh",
+      title: "Clear Aligners in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "At Smiles By Jiveh, SimplyClear® offers a modern, comfortable way to straighten your teeth without the appearance or inconvenience of traditional braces.…",
     },
   },
@@ -1275,7 +1275,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Reconstructive Dentistry – Smiles By Jiveh",
+      title: "Reconstructive Dentist in Royal Palm Beach - Smiles By Jiveh",
       description: "For patients with severely worn, broken, collapsing, or failing dentition, full mouth reconstruction can be one of the most life-changing treatments in…",
     },
   },
@@ -1347,7 +1347,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Dental Implants – Smiles By Jiveh",
+      title: "Dental Implants in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "Dental implants are the gold standard for replacing missing teeth, restoring function, comfort, aesthetics, and confidence while preserving long-term oral…",
     },
   },
@@ -1442,7 +1442,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "All on X Full Arch Restoration – Smiles By Jiveh",
+      title: "All-on-X Implants in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "For patients living with failing, broken, severely worn, or hopeless teeth, All-on-X Full Arch Implant Dentistry offers an opportunity to completely…",
     },
   },
@@ -1491,7 +1491,7 @@ export const fallbackTreatments: Treatment[] = [
       { _type: "sharedBlock", kind: "process" },
     ],
     seo: {
-      title: "Dental Crowns – Smiles By Jiveh",
+      title: "Dental Crowns in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "Dr. Jiveh believes in preserving healthy, natural tooth structure whenever possible. However, in situations where a tooth has a very large failing…",
     },
   },
@@ -1560,7 +1560,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Dental Bridges – Smiles By Jiveh",
+      title: "Dental Bridges in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "Restore your smile with a solution designed to improve function, appearance, and confidence. At Smiles By Jiveh, we carefully evaluate every patient to…",
     },
   },
@@ -1638,7 +1638,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Dentures – Smiles By Jiveh",
+      title: "Dentures in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "For patients who do not qualify for dental implants, dentures are the next best thing! At Smiles By Jiveh, our top priority is helping every patient…",
     },
   },
@@ -1729,7 +1729,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Full Mouth Reconstruction – Smiles By Jiveh",
+      title: "Full Mouth Restoration in Royal Palm Beach - Smiles By Jiveh",
       description: "When teeth become worn, broken, failing, or missing, everyday activities like eating, smiling, and speaking can become frustrating. Full mouth…",
     },
   },
@@ -1820,7 +1820,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Worn Teeth Rehabilitation – Smiles By Jiveh",
+      title: "Worn Teeth Treatment in Royal Palm Beach - Smiles By Jiveh",
       description: "If you’ve spent years replacing broken fillings, cracked teeth, fractured crowns, or repairing the same teeth repeatedly, the problem may not be your…",
     },
   },

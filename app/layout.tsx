@@ -14,7 +14,7 @@ const openSans = Open_Sans({ subsets: ["latin"], display: "swap", variable: "--f
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: "Smiles By Jiveh", template: "%s – Smiles By Jiveh" },
+  title: { default: "Smiles By Jiveh", template: "%s - Smiles By Jiveh" },
   description: "Elevated dentistry and a personalized experience with Dr. Farokh Jiveh in Royal Palm Beach, FL.",
   applicationName: "Smiles By Jiveh",
   formatDetection: { telephone: false, address: false, email: false },

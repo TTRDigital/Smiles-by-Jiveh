@@ -26,12 +26,12 @@ export async function generateMetadata(props: PageProps<"/blog/[[...slug]]">): P
   const posts = await getPosts();
   if (!slug?.length)
     return pageMetadata(
-      { title: "Blog – Smiles By Jiveh", description: "News and dental health articles from Smiles By Jiveh in Royal Palm Beach, FL.", noIndex: !posts.length },
+      { title: "Blog - Smiles By Jiveh", description: "News and dental health articles from Smiles By Jiveh in Royal Palm Beach, FL.", noIndex: !posts.length },
       "/blog/",
     );
   const post = posts.find((p) => p.slug === slug[0]);
   if (!post) return {};
-  return pageMetadata(post.seo?.title ? post.seo : { title: `${post.title} – Smiles By Jiveh`, description: post.excerpt ?? "" }, `/blog/${post.slug}/`, post.image);
+  return pageMetadata(post.seo?.title ? post.seo : { title: `${post.title} - Smiles By Jiveh`, description: post.excerpt ?? "" }, `/blog/${post.slug}/`, post.image);
 }
 
 export default async function BlogPage(props: PageProps<"/blog/[[...slug]]">) {

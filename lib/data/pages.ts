@@ -109,9 +109,9 @@ export const fallbackHome: HomeContent = {
     image: images.ctaBand,
   },
   seo: {
-    title: "Smiles By Jiveh",
+    title: "Dentist in Royal Palm Beach, FL - Smiles By Jiveh",
     description:
-      "Elevated Dentistry. Personalized Experience. Comprehensive cosmetic and restorative dentistry with Dr. Farokh Jiveh in Royal Palm Beach, serving Wellington and the Palm Beaches.",
+      "Elevated dentistry, personalized care: cosmetic and restorative dentistry with Dr. Farokh Jiveh in Royal Palm Beach, serving Wellington and the Palm Beaches.",
   },
 };
 
@@ -152,7 +152,7 @@ export const fallbackAbout: AboutContent = {
     ],
   },
   seo: {
-    title: "Who we are – Smiles By Jiveh",
+    title: "Who We Are: Dentist in Royal Palm Beach - Smiles By Jiveh",
     description: "Award-winning dentistry led by Dr. Farokh Jiveh in Royal Palm Beach and Wellington, FL: lasting relationships, restored health and personalized care.",
   },
 };
@@ -196,7 +196,7 @@ export const fallbackDoctor: DoctorContent = {
       "“Dentistry is never just about teeth. It's about restoring health, building confidence, and creating relationships based on trust. Every patient deserves to feel heard, understood, and cared for — and every treatment should be as functional as it is beautiful.”",
   },
   seo: {
-    title: "Meet Dr. Jiveh – Smiles By Jiveh",
+    title: "Meet Dr. Farokh Jiveh in Royal Palm Beach - Smiles By Jiveh",
     description: "Dr. Farokh Jiveh has dedicated his career to the pursuit of excellence in cosmetic, restorative, and comprehensive dentistry.",
   },
 };
@@ -268,7 +268,7 @@ export const fallbackInsurance: InsuranceContent = {
     image: images.drJivehTreating,
   },
   seo: {
-    title: "Insurance & Payment Options – Smiles By Jiveh",
+    title: "Insurance & Payments in Royal Palm Beach - Smiles By Jiveh",
     description: "Out-of-network, fee-for-service care with insurance claims filed for you, plus cash, checks, cards and financing through Sunbit, Cherry and CareCredit.",
   },
 };
@@ -282,7 +282,7 @@ export const fallbackAppointment: AppointmentContent = {
   contactHeading: "Contact Info",
   contactText: "Don’t hesitate to reach out, we’ll answer all questions.",
   seo: {
-    title: "Book An Appointment – Smiles By Jiveh",
+    title: "Book an Appointment in Royal Palm Beach - Smiles By Jiveh",
     description: "Book an appointment with Smiles By Jiveh in Royal Palm Beach, FL. Our team will get back to you within 24 hours to arrange the best time for you.",
   },
 };
@@ -311,7 +311,7 @@ export const fallbackPrivacy: LegalContent = {
     "Smiles By Jiveh, 11989 Southern Blvd, Royal Palm Beach, FL 33411. Phone (561) 798-9997.",
   ),
   seo: {
-    title: "Privacy Policy – Smiles By Jiveh",
+    title: "Privacy Policy for smilesbyjiveh.com - Smiles By Jiveh",
     description: "How Smiles By Jiveh handles information sent through smilesbyjiveh.com, including appointment requests, text messages and analytics.",
   },
 };

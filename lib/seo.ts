@@ -4,7 +4,7 @@ import { images } from "@/lib/data/images";
 
 const SITE_NAME = "Smiles By Jiveh";
 
-/** One place for title, description, canonical, Open Graph and Twitter tags. Titles match the old site ("Page – Smiles By Jiveh"). */
+/** One place for title, description, canonical, Open Graph and Twitter tags. Titles name the service and the town ("Service in Royal Palm Beach, FL - Smiles By Jiveh"), 50 to 60 characters. */
 export function pageMetadata(seo: Seo, path: string, fallbackImage?: Img): Metadata {
   const image = seo.image ?? fallbackImage ?? images.heroVideoPoster;
   const og = { url: image.src, width: image.width, height: image.height, alt: image.alt };
