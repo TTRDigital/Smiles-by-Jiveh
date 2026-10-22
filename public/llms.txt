@@ -1,0 +1,43 @@
+# Smiles By Jiveh
+
+> Dental practice of Dr. Jiveh in Royal Palm Beach, Florida: general, cosmetic and reconstructive dentistry, including dental implants, All-on-X full arch restoration, veneers, Invisalign, crowns, dentures, sedation and TMJ treatment. 11989 Southern Blvd, Royal Palm Beach, FL. Phone (561) 798-9997.
+
+## Main pages
+- [Home](https://smilesbyjiveh.com/)
+- [Who we are](https://smilesbyjiveh.com/who-we-are/)
+- [Meet Dr. Jiveh](https://smilesbyjiveh.com/meet-dr-jiveh/)
+- [Insurance and payment options](https://smilesbyjiveh.com/insurance-payment-options/)
+- [Book an appointment](https://smilesbyjiveh.com/appointment/)
+
+## General dentistry
+- [General dentistry](https://smilesbyjiveh.com/general-dentistry/)
+- [Dental cleanings](https://smilesbyjiveh.com/dental-cleanings/)
+- [Tooth-colored fillings](https://smilesbyjiveh.com/tooth-color-fillings/)
+- [Root canal treatment](https://smilesbyjiveh.com/root-canal-treatment/)
+- [Gum therapy](https://smilesbyjiveh.com/gum-therapy/)
+- [Laser dental treatment](https://smilesbyjiveh.com/laser-dental-treatment/)
+- [Oral surgery](https://smilesbyjiveh.com/oral-surgery/)
+- [Sedation dentistry](https://smilesbyjiveh.com/sedation-dentistry/)
+- [Sleep apnea treatment](https://smilesbyjiveh.com/sleep-apnea-treatment/)
+- [TMJ treatment](https://smilesbyjiveh.com/tmj-treatment/)
+
+## Cosmetic dentistry
+- [Cosmetic dentistry](https://smilesbyjiveh.com/cosmetic-dentistry/)
+- [Teeth whitening](https://smilesbyjiveh.com/teeth-whitening-treatment/)
+- [Dental veneers](https://smilesbyjiveh.com/dental-veneers/)
+- [Smile makeovers](https://smilesbyjiveh.com/smile-makeovers/)
+- [Invisalign](https://smilesbyjiveh.com/invisalign/)
+- [Clear aligners](https://smilesbyjiveh.com/clear-aligners/)
+
+## Reconstructive dentistry
+- [Reconstructive dentistry](https://smilesbyjiveh.com/reconstructive-dentistry/)
+- [Dental implants](https://smilesbyjiveh.com/dental-implants/)
+- [All-on-X full arch restoration](https://smilesbyjiveh.com/all-on-x-full-arch-restoration/)
+- [Dental crowns](https://smilesbyjiveh.com/dental-crowns/)
+- [Dental bridges](https://smilesbyjiveh.com/dental-bridges/)
+- [Dentures](https://smilesbyjiveh.com/dentures/)
+- [Full mouth reconstruction](https://smilesbyjiveh.com/full-mouth-reconstruction/)
+- [Worn teeth rehabilitation](https://smilesbyjiveh.com/worn-teeth-rehabilitation/)
+
+## Sitemap
+- https://smilesbyjiveh.com/sitemap.xml

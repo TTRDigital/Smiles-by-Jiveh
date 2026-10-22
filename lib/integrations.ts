@@ -11,3 +11,5 @@ const env = (v: string | undefined, fallback: string) => (v === "off" ? "" : v |
 export const chatWidgetId = env(process.env.NEXT_PUBLIC_GHL_CHAT_WIDGET_ID, "");
 export const gaId = env(process.env.NEXT_PUBLIC_GA_ID, "GT-TBVN7SPV");
 export const gtmId = env(process.env.NEXT_PUBLIC_GTM_ID, "GTM-KW9CW8P7");
+// TTR OS website tracker (visits by source and form leads; no personal data). The site key is public.
+export const ttrSiteKey = env(process.env.NEXT_PUBLIC_TTR_SITE_KEY, "xIKk2Z_Pf3B3Tge2znW_0A");
