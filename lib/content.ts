@@ -112,7 +112,7 @@ export async function getTreatment(slug: string) {
 
 /* ---------- Posts ---------- */
 
-const POST = `{ "slug": slug.current, title, excerpt, date, author, category, service, "image": image${IMG}, body, ${SEO} }`;
+const POST = `{ "slug": slug.current, title, excerpt, date, author, category, service, "image": image${IMG}, body, "figures": figures[]{ before, "image": image${IMG}, caption }, steps{ heading, items[]{ title, text } }, facts{ heading, items[]{ label, value } }, ctaText, ${SEO} }`;
 
 export const getPosts = cache(async (): Promise<Post[]> => {
   const cms = await sanityFetch<Partial<Post>[]>(`*[_type == "post" && defined(slug.current) && !(_id in path("drafts.**"))] | order(date desc) ${POST}`, {}, ["post"]);

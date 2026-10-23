@@ -2,6 +2,7 @@ import type { Faq, Post, SiteSettings, Treatment } from "@/lib/types";
 import { absoluteUrl, siteUrl } from "@/lib/site";
 import { images } from "@/lib/data/images";
 import { postAuthor } from "@/lib/data/posts";
+import { readingMinutes, wordCount } from "@/lib/post";
 
 const BUSINESS_ID = `${siteUrl}/#dentist`;
 const DOCTOR_ID = `${siteUrl}/meet-dr-jiveh/#dr-jiveh`;
@@ -74,10 +75,11 @@ export function treatmentSchema(t: Treatment, path: string) {
   };
 }
 
-/** A blog post: written by Dr. Jiveh (the Person on /meet-dr-jiveh/) unless another author is named, published by the practice. */
+/** A blog post: written by Dr. Jiveh (the Person on /meet-dr-jiveh/) unless another author is named, published by the practice; with the word count and reading time. */
 export function postSchema(p: Post, path: string) {
   const author = p.author || postAuthor.name;
   const byDoctor = author === postAuthor.name;
+  const words = wordCount(p.body);
   return {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
@@ -88,6 +90,7 @@ export function postSchema(p: Post, path: string) {
     ...(p.date ? { datePublished: p.date, dateModified: p.date } : {}),
     ...(p.image ? { image: p.image.src.startsWith("http") ? p.image.src : absoluteUrl(p.image.src) } : {}),
     ...(p.category ? { articleSection: p.category } : {}),
+    ...(words ? { wordCount: words, timeRequired: `PT${readingMinutes(words)}M` } : {}),
     inLanguage: "en-US",
     author: byDoctor
       ? { "@type": "Person", "@id": DOCTOR_ID, name: author, jobTitle: postAuthor.jobTitle, url: absoluteUrl(postAuthor.path) }

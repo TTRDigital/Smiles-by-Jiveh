@@ -21,6 +21,8 @@ export const postAuthor = {
   name: "Dr. Farokh Jiveh",
   credentials: "",
   jobTitle: "Dentist",
+  /** Under the name in the byline and the author card, as the practice describes itself. */
+  role: "Cosmetic, General & Implant Dentistry",
   path: "/meet-dr-jiveh/",
   image: images.drJiveh,
   bio: "Dr. Farokh Jiveh has dedicated his career to the pursuit of excellence in cosmetic, restorative, and comprehensive dentistry. Today, he serves as the Clinical and Course Director at Palm Beach Dental Academy, where he mentors dentists in advanced clinical techniques and comprehensive patient care.",
@@ -72,6 +74,26 @@ export const fallbackPosts: Post[] = [
       "## Ready to talk it through?",
       "If you live in Royal Palm Beach, Wellington or the western communities and you are tired of patching the same failing teeth, we would be glad to meet you. A complimentary consultation gives you a clear picture of your options, with no pressure and one patient at a time. [Book an appointment](/appointment/) or call (561) 798-9997.",
     ),
+    figures: [
+      { before: "What happens at the first visit?", image: images.teamGroup, caption: "Dr. Jiveh and the Smiles By Jiveh team in Royal Palm Beach. The first visit is a conversation, not a procedure." },
+      { before: "What happens on surgery day?", image: images.drJivehTreating, caption: "Dr. Jiveh at work. Each implant is placed to the plan made from your scan." },
+      {
+        before: "What are the final teeth like, and how do you care for them?",
+        image: images.baAllOnXWoman,
+        caption: "Before and after: a full arch of failing teeth replaced with fixed teeth on implants.",
+      },
+    ],
+    steps: {
+      heading: "The five stages at a glance",
+      items: [
+        { title: "Consultation and 3D scan", text: "A conversation about what bothers you and your health history, then a CBCT scan, photos and a digital scan." },
+        { title: "Digital planning", text: "Each implant is planned on the computer, and the laboratory designs your new teeth with you." },
+        { title: "Surgery day", text: "The implants are placed to the plan. When they are stable enough, a fixed temporary bridge goes on the same day." },
+        { title: "Healing, about three to six months", text: "The bone grows onto the implants while you wear the temporary bridge and come in for checks." },
+        { title: "Your final teeth", text: "New scans, a final bridge in a stronger material, tried in, adjusted and secured." },
+      ],
+    },
+    ctaText: "Tired of patching the same failing teeth? See what All-on-X would involve for you at a complimentary consultation.",
     seo: { title: "All-on-X Process in Royal Palm Beach, FL - Smiles By Jiveh", description: "Dr. Farokh Jiveh walks through All-on-X full arch implant treatment step by step: the consultation, planning, surgery day, healing and your final teeth." },
   },
   {
@@ -113,6 +135,31 @@ export const fallbackPosts: Post[] = [
       "## A smile that is still yours",
       "If you have been putting off veneers because you were afraid of what they would do to your teeth, come and talk with us in Royal Palm Beach. A complimentary consultation includes a careful look at your teeth, bite and gums, and an honest answer about whether veneers, no-prep veneers or a gentler option fits you best. [Book your appointment](/appointment/) or call (561) 798-9997.",
     ),
+    figures: [
+      { before: "Who can have no-prep veneers, and who should not?", image: images.compare2, caption: "Porcelain veneers by Dr. Jiveh: the same smile before and after." },
+      {
+        before: "Is there a gentler option than veneers for my concern?",
+        image: images.whiteningHero,
+        caption: "Professional whitening in the office changes the color of teeth without touching the enamel.",
+      },
+      {
+        before: "Can the tooth under a veneer still decay?",
+        image: images.hygieneVisit,
+        caption: "Regular cleanings and exams let us check the edges of every veneer while they are easy to care for.",
+      },
+    ],
+    facts: {
+      heading: "Quick facts",
+      items: [
+        { label: "What a veneer covers", value: "The front surface of the tooth only" },
+        { label: "Enamel removed", value: "A thin layer for a traditional veneer, kept within enamel" },
+        { label: "Reversible?", value: "No. Enamel does not grow back" },
+        { label: "No-prep veneers", value: "For small teeth, spaces and modest color changes" },
+        { label: "Can the tooth still decay?", value: "Yes, so cleanings and exams continue" },
+        { label: "Average lifespan", value: "10 to 15 years with proper care" },
+      ],
+    },
+    ctaText: "Not sure whether veneers, no-prep veneers or a gentler option fits you? Ask Dr. Jiveh at a complimentary consultation.",
     seo: { title: "Do Veneers Damage Teeth? Royal Palm Beach - Smiles By Jiveh", description: "Dr. Farokh Jiveh explains what happens to your natural teeth under porcelain veneers, who fits no-prep veneers, and how to protect your enamel for life." },
   },
 ];
