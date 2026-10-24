@@ -31,7 +31,7 @@ export const postAuthor = {
 export const fallbackPosts: Post[] = [
   {
     slug: "all-on-x-process-what-to-expect",
-    title: "What to Expect With All-on-X, From Your First Visit to Your Final Teeth",
+    title: "The All-on-X Process: What to Expect From Your First Visit to Your Final Teeth",
     excerpt: "Dr. Farokh Jiveh walks through All-on-X full arch implant treatment step by step: the consultation, planning, surgery day, healing and your final teeth.",
     date: "2026-10-23",
     author: postAuthor.name,
@@ -39,7 +39,7 @@ export const fallbackPosts: Post[] = [
     service: "/all-on-x-full-arch-restoration/",
     image: images.implantModel,
     body: rich(
-      "[All-on-X](/all-on-x-full-arch-restoration/) replaces a full upper or lower set of failing or missing teeth with a fixed bridge held by four or more dental implants. Treatment moves through five stages: a consultation with a 3D scan, digital planning, the surgery day, a healing period of several months, and your final teeth. How long each stage takes depends on your bone, your health and your goals.",
+      "[All-on-X](/all-on-x-full-arch-restoration/) replaces a full upper or lower set of failing or missing teeth with a fixed bridge held by four or more dental implants. The All-on-X process moves through five stages: a consultation with a 3D scan, digital planning, the surgery day, a healing period of several months, and your final teeth. How long each stage takes depends on your bone, your health and your goals.",
       "## What is All-on-X, in plain words?",
       "All-on-X is a way to rebuild a whole arch of teeth on a small number of implants. The X stands for the number of implants, usually four to six, chosen to suit your jaw.",
       "A [dental implant](/dental-implants/) is a small titanium post that takes the place of a tooth root. In a full arch case the implants work as a team. The two front implants stand upright, and the two back implants are usually tilted, up to about 45 degrees, so they can use the bone you have and stay clear of the sinus above and the nerve in the lower jaw. That is why many patients once told they had too little bone can still be treated without grafting, although some cases need it. On top of the implants sits a fixed bridge of new teeth that only a dentist removes.",
@@ -98,7 +98,7 @@ export const fallbackPosts: Post[] = [
   },
   {
     slug: "do-veneers-damage-your-teeth",
-    title: "Do Veneers Damage Your Natural Teeth? What Really Happens Under Porcelain",
+    title: "Do Veneers Ruin Your Natural Teeth? What Really Happens Under Porcelain",
     excerpt: "Dr. Farokh Jiveh explains what happens to your natural teeth under porcelain veneers, who fits no-prep veneers, and how to protect your enamel for life.",
     date: "2026-10-23",
     author: postAuthor.name,
