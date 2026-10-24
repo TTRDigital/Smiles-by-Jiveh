@@ -117,7 +117,7 @@ export const fallbackPosts: Post[] = [
       "No-prep veneers add porcelain without reshaping the tooth, or with almost none. They work best when there is room for the added thickness: small teeth, teeth with spaces between them, teeth that lean slightly inward, and smiles that need only a modest change in color, about one or two shades. A dentist who has placed many of these recognizes the candidates quickly, and the laboratory confirms it on a model of your teeth before anything is decided.",
       "They are a poor fit when teeth are crowded, flared forward or already full in size, because adding porcelain where there is no room makes teeth look bulky and thick at the gumline. They also struggle with very dark teeth, since very thin porcelain cannot hide deep color on its own. In those situations a minimal-prep veneer, which still stays entirely in enamel, usually gives a slimmer and more natural result. And some patients do better with no veneers at all, which brings us to the next question.",
       "## Is there a gentler option than veneers for my concern?",
-      "Often, yes, and a cosmetic dentist should say so. If color is the only issue, [professional whitening](/teeth-whitening-treatment/) changes it without touching the enamel. If crowding or spacing is the issue, moving the teeth with [Invisalign or clear aligners](/invisalign/) treats the cause, and sometimes removes the need for veneers altogether. Small chips and uneven edges can often be repaired with bonding.",
+      "Often, yes, and a cosmetic dentist should say so. If color is the only issue, [professional whitening](/teeth-whitening-treatment/) changes it without removing any enamel. If crowding or spacing is the issue, moving the teeth with [Invisalign or clear aligners](/invisalign/) treats the cause, and sometimes removes the need for veneers altogether. Small chips and uneven edges can often be repaired with bonding.",
       "In a [smile makeover](/smile-makeovers/) these tools are combined: aligning first, whitening next, and then placing fewer or thinner veneers only where they are truly needed. The goal is the smile you want with the least change to your natural teeth.",
       "## Can the tooth under a veneer still decay?",
       "Yes. A veneer protects the surface it covers, but the tooth is still a living tooth, and you can still get a cavity under or around a veneer, most often at the edge where the porcelain meets the tooth near the gumline. Gum disease can also develop around veneered teeth, exactly as it does around natural teeth.",
@@ -140,7 +140,7 @@ export const fallbackPosts: Post[] = [
       {
         before: "Is there a gentler option than veneers for my concern?",
         image: images.whiteningHero,
-        caption: "Professional whitening in the office changes the color of teeth without touching the enamel.",
+        caption: "Professional whitening in the office changes the color of teeth without removing any enamel.",
       },
       {
         before: "Can the tooth under a veneer still decay?",
