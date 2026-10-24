@@ -12,6 +12,56 @@
       "statusCode": 301
     },
     {
+      "source": "/all-on-4-teeth-in-a-day.html",
+      "destination": "/all-on-x-full-arch-restoration/",
+      "statusCode": 301
+    },
+    {
+      "source": "/all-on-4-teeth-in-a-day.html/",
+      "destination": "/all-on-x-full-arch-restoration/",
+      "statusCode": 301
+    },
+    {
+      "source": "/dental-implants.html",
+      "destination": "/dental-implants/",
+      "statusCode": 301
+    },
+    {
+      "source": "/dental-implants.html/",
+      "destination": "/dental-implants/",
+      "statusCode": 301
+    },
+    {
+      "source": "/dental-veneers.html",
+      "destination": "/dental-veneers/",
+      "statusCode": 301
+    },
+    {
+      "source": "/dental-veneers.html/",
+      "destination": "/dental-veneers/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reconstructive-dentistry.html",
+      "destination": "/reconstructive-dentistry/",
+      "statusCode": 301
+    },
+    {
+      "source": "/reconstructive-dentistry.html/",
+      "destination": "/reconstructive-dentistry/",
+      "statusCode": 301
+    },
+    {
+      "source": "/dental-bridges.html",
+      "destination": "/dental-bridges/",
+      "statusCode": 301
+    },
+    {
+      "source": "/dental-bridges.html/",
+      "destination": "/dental-bridges/",
+      "statusCode": 301
+    },
+    {
       "source": "/api/lead.php",
       "destination": "/api/lead/",
       "statusCode": 308

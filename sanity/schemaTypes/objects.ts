@@ -79,7 +79,7 @@ export const navLink = defineType({
   preview: { select: { title: "label", subtitle: "href" } },
 });
 
-/** Rich text: paragraphs, bold/italic, links, bullet and numbered lists, small headings. */
+/** Rich text: paragraphs, bold/italic, links, bullet and numbered lists, headings (for blog posts) and small headings. */
 export const richText = defineType({
   name: "richText",
   title: "Text",
@@ -89,6 +89,8 @@ export const richText = defineType({
       type: "block",
       styles: [
         { title: "Normal", value: "normal" },
+        { title: "Heading", value: "h2" },
+        { title: "Subheading", value: "h3" },
         { title: "Small heading", value: "h4" },
       ],
       lists: [
