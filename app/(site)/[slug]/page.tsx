@@ -5,6 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 import { breadcrumbSchema, treatmentSchema } from "@/lib/schema";
 import { JsonLd } from "@/components/ui/JsonLd";
 import { PageHero } from "@/components/sections/PageHero";
+import { AreaHero } from "@/components/sections/AreaSections";
 import { Blocks } from "@/components/sections/Blocks";
 
 /* Every treatment page lives at the site root (/dental-implants/), as on the old WordPress site. */
@@ -40,7 +41,7 @@ export default async function TreatmentPage(props: PageProps<"/[slug]">) {
     <>
       <JsonLd data={treatmentSchema(t, path)} />
       <JsonLd data={breadcrumbSchema(crumbs)} />
-      <PageHero hero={t.hero} />
+      {t.layout === "area" ? <AreaHero hero={t.hero} settings={settings} /> : <PageHero hero={t.hero} />}
       <Blocks blocks={t.blocks} shared={shared} settings={settings} reviews={reviews} />
     </>
   );

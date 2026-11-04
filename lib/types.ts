@@ -83,7 +83,18 @@ export type SplitBlock = {
 };
 export type FaqBlock = { _type: "faqBlock"; _key?: string; eyebrow?: string; heading: string; items: Faq[] };
 export type SharedBlock = { _type: "sharedBlock"; _key?: string; kind: "whyChooseUs" | "process" | "testimonials"; hideButtons?: boolean };
-export type Block = DetailsBlock | CardsBlock | SplitBlock | FaqBlock | SharedBlock;
+/* ---- Richer blocks for service area pages (components/sections/AreaSections.tsx) ---- */
+export type StatsBlock = { _type: "statsBlock"; _key?: string; items: { value: string; label: string; source?: "rating" | "reviews" }[] };
+export type ImageCardsBlock = { _type: "imageCardsBlock"; _key?: string; eyebrow?: string; heading: string; text?: string; columns?: 3 | 4; cards: { title: string; text?: string; href: string; image: Img }[] };
+export type FeatureBlock = { _type: "featureBlock"; _key?: string; eyebrow?: string; heading: string; text: Rich; bullets?: string[]; image: Img; reverse?: boolean; ctas?: Cta[] };
+export type StepsBlock = { _type: "stepsBlock"; _key?: string; eyebrow?: string; heading: string; text?: string; steps: { title: string; text: string }[] };
+export type LocationBlock = { _type: "locationBlock"; _key?: string; eyebrow?: string; heading: string; text?: string; areas: string[] };
+export type DoctorBlock = { _type: "doctorBlock"; _key?: string; eyebrow?: string; heading: string; text: Rich; points: string[]; image: Img; cta?: Cta };
+export type GalleryBlock = { _type: "galleryBlock"; _key?: string; eyebrow?: string; heading: string; text?: string; images: Img[] };
+export type CtaBandBlock = { _type: "ctaBandBlock"; _key?: string; heading: string; text?: string; image: Img; ctas: Cta[] };
+export type Block =
+  | DetailsBlock | CardsBlock | SplitBlock | FaqBlock | SharedBlock
+  | StatsBlock | ImageCardsBlock | FeatureBlock | StepsBlock | LocationBlock | DoctorBlock | GalleryBlock | CtaBandBlock;
 
 export type PageHeroContent = {
   eyebrow?: string;
@@ -101,6 +112,8 @@ export type PageHeroContent = {
 export type TreatmentCategory = "general" | "cosmetic" | "restorative";
 
 export type Treatment = {
+  /** "area" renders the full-width photo hero used by the service area pages. */
+  layout?: "area";
   slug: string;
   title: string;
   category: TreatmentCategory;
