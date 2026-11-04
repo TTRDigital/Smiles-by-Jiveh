@@ -85,7 +85,7 @@ export type FaqBlock = { _type: "faqBlock"; _key?: string; eyebrow?: string; hea
 export type SharedBlock = { _type: "sharedBlock"; _key?: string; kind: "whyChooseUs" | "process" | "testimonials"; hideButtons?: boolean };
 /* ---- Richer blocks for service area pages (components/sections/AreaSections.tsx) ---- */
 export type StatsBlock = { _type: "statsBlock"; _key?: string; items: { value: string; label: string; source?: "rating" | "reviews" }[] };
-export type ImageCardsBlock = { _type: "imageCardsBlock"; _key?: string; eyebrow?: string; heading: string; text?: string; columns?: 3 | 4; cards: { title: string; text?: string; href: string; image: Img }[] };
+export type ImageCardsBlock = { _type: "imageCardsBlock"; _key?: string; eyebrow?: string; heading: string; text?: string; columns?: 3 | 4; cards: { title: string; text?: string; href: string; image?: Img; icon?: IconName }[] };
 export type FeatureBlock = { _type: "featureBlock"; _key?: string; eyebrow?: string; heading: string; text: Rich; bullets?: string[]; image: Img; reverse?: boolean; ctas?: Cta[] };
 export type StepsBlock = { _type: "stepsBlock"; _key?: string; eyebrow?: string; heading: string; text?: string; steps: { title: string; text: string }[] };
 export type LocationBlock = { _type: "locationBlock"; _key?: string; eyebrow?: string; heading: string; text?: string; areas: string[] };

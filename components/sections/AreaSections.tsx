@@ -75,19 +75,23 @@ export function ImageCardsSection({ block }: { block: ImageCardsBlock }) {
         <h2 className="mt-3 text-[1.6rem] leading-[1.2] md:text-[2.25rem]">{block.heading}</h2>
         {block.text ? <p className="mt-3 text-[15px] text-muted md:text-base">{block.text}</p> : null}
       </div>
-      <ul className={`mt-8 grid gap-6 sm:grid-cols-2 ${cols}`}>
+      <ul className={`mt-8 grid gap-5 sm:grid-cols-2 ${cols}`}>
         {block.cards.map((c) => (
           <li key={c.title}>
-            <Link href={c.href} className="group block h-full overflow-hidden rounded-2xl bg-white transition-shadow duration-300 hover:shadow-[var(--shadow-card)]">
-              <span className="relative block aspect-[3/2] overflow-hidden">
-                <Image src={c.image.src} alt={c.image.alt || c.title} fill sizes="(min-width: 1024px) 400px, (min-width: 640px) 45vw, 100vw" className="object-cover transition-transform duration-500 group-hover:scale-[1.03]" />
-              </span>
-              <span className="block p-5">
-                <span className="block font-display text-lg leading-snug">{c.title}</span>
-                {c.text ? <span className="mt-1.5 block text-sm leading-[1.6] text-muted">{c.text}</span> : null}
-                <span className="mt-3 flex items-center gap-1.5 text-sm font-semibold text-teal-deep">
-                  Learn more <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
+            <Link href={c.href} className="group flex h-full flex-col rounded-2xl bg-white p-6 transition-shadow duration-300 hover:shadow-[var(--shadow-card)] md:p-7">
+              {c.icon ? (
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-teal/15 text-teal-deep">
+                  <Icon name={c.icon} className="h-6 w-6" />
                 </span>
+              ) : c.image ? (
+                <span className="relative block aspect-[3/2] overflow-hidden rounded-xl">
+                  <Image src={c.image.src} alt={c.image.alt || c.title} fill sizes="(min-width: 1024px) 400px, 100vw" className="object-cover" />
+                </span>
+              ) : null}
+              <span className="mt-5 block font-display text-xl leading-snug">{c.title}</span>
+              {c.text ? <span className="mt-2 block text-[15px] leading-[1.65] text-muted">{c.text}</span> : null}
+              <span className="mt-auto flex items-center gap-1.5 pt-5 text-sm font-semibold text-teal-deep">
+                Learn more <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
               </span>
             </Link>
           </li>

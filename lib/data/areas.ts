@@ -1,4 +1,5 @@
 import type { Block, Treatment } from "../types";
+import type { IconName } from "../icons.ts";
 import { rich } from "../rich.ts";
 import { images } from "./images.ts";
 
@@ -25,7 +26,7 @@ const stats = (): Block => ({
   ],
 });
 
-const card = (title: string, text: string, href: string, image: (typeof images)[keyof typeof images]) => ({ title, text, href, image: image as { src: string; alt: string; width?: number; height?: number } });
+const card = (title: string, text: string, href: string, icon: IconName) => ({ title, text, href, icon });
 
 const doctor = (heading: string, line: string): Block => ({
   _type: "doctorBlock",
@@ -83,9 +84,9 @@ export const areaTreatments: Treatment[] = [
         text: "From routine visits to complete smile plans, you see one team who knows you.",
         columns: 3,
         cards: [
-          card("General Dentistry", "Exams, cleanings, fillings and gum care for the whole family.", "/general-dentistry/", images.generalHero),
-          card("Cosmetic Dentistry", "Veneers, whitening and smile makeovers designed around you.", "/cosmetic-dentistry/", images.serviceCosmetic),
-          card("Dental Implants", "Replace missing teeth with a stable, natural feeling solution.", "/dental-implants/", images.implantModel),
+          card("General Dentistry", "Exams, cleanings, fillings and gum care for the whole family.", "/general-dentistry/", "stethoscope"),
+          card("Cosmetic Dentistry", "Veneers, whitening and smile makeovers designed around you.", "/cosmetic-dentistry/", "sparkles"),
+          card("Dental Implants", "Replace missing teeth with a stable, natural feeling solution.", "/dental-implants/", "layers"),
         ],
       },
       {
@@ -143,9 +144,9 @@ export const areaTreatments: Treatment[] = [
         text: "Whether you want a brighter smile or need missing teeth replaced, we plan care around your goals.",
         columns: 3,
         cards: [
-          card("Veneers and Smile Makeovers", "A natural smile designed around your face, previewed before you begin.", "/veneers-smile-makeovers-wellington-fl/", images.serviceVeneers),
-          card("All-on-X Full Arch Implants", "A fixed, implant-supported option for patients missing many teeth.", "/all-on-x-wellington-palm-beach-county/", images.serviceAllOnX),
-          card("Smile Rehabilitation", "A complete plan for worn, broken or missing teeth.", "/smile-rehabilitation-palm-beach-county/", images.crownsHero),
+          card("Veneers and Smile Makeovers", "A natural smile designed around your face, previewed before you begin.", "/veneers-smile-makeovers-wellington-fl/", "sparkles"),
+          card("All-on-X Full Arch Implants", "A fixed, implant-supported option for patients missing many teeth.", "/all-on-x-wellington-palm-beach-county/", "layers"),
+          card("Smile Rehabilitation", "A complete plan for worn, broken or missing teeth.", "/smile-rehabilitation-palm-beach-county/", "badge-check"),
         ],
       },
       {
@@ -278,9 +279,9 @@ export const areaTreatments: Treatment[] = [
         text: "The right choice depends on how many teeth you are missing and the health of your bone and gums. We recommend what fits you, not one option for everyone.",
         columns: 3,
         cards: [
-          card("All-on-X", "A full arch of fixed teeth on a few implants.", "/all-on-x-full-arch-restoration/", images.serviceAllOnX),
-          card("Dental Implants", "Replace one tooth or several with implants.", "/dental-implants/", images.implantModel),
-          card("Dentures", "Removable dentures, including implant-supported options.", "/dentures/", images.denturesHero),
+          card("All-on-X", "A full arch of fixed teeth on a few implants.", "/all-on-x-full-arch-restoration/", "layers"),
+          card("Dental Implants", "Replace one tooth or several with implants.", "/dental-implants/", "layers"),
+          card("Dentures", "Removable dentures, including implant-supported options.", "/dentures/", "smile"),
         ],
       },
       doctor("Implant Dentistry You Can Trust", "Dr. Jiveh has served Wellington and Royal Palm Beach since 1997, and he mentors dentists in advanced implant and restorative care."),
@@ -338,9 +339,9 @@ export const areaTreatments: Treatment[] = [
         text: "These are reasons to have an evaluation, not a diagnosis. Dr. Jiveh will explain what he finds and your options.",
         columns: 3,
         cards: [
-          card("Worn or Short Teeth", "Teeth that look flat, short or worn down.", "/worn-teeth-rehabilitation/", images.wornTeethBeforeAfter),
-          card("Broken or Missing Teeth", "Chipped, cracked or several missing teeth.", "/dental-implants/", images.implantModel),
-          card("Jaw Discomfort", "Clenching, headaches or an uneven bite.", "/tmj-treatment/", images.tmjHero),
+          card("Worn or Short Teeth", "Teeth that look flat, short or worn down.", "/worn-teeth-rehabilitation/", "clock"),
+          card("Broken or Missing Teeth", "Chipped, cracked or several missing teeth.", "/dental-implants/", "puzzle"),
+          card("Jaw Discomfort", "Clenching, headaches or an uneven bite.", "/tmj-treatment/", "square-activity"),
         ],
       },
       doctor("Comprehensive Care From an Educator", "Dr. Jiveh is the Clinical and Course Director at Palm Beach Dental Academy, where he mentors dentists in comprehensive patient care."),
@@ -383,9 +384,9 @@ export const areaTreatments: Treatment[] = [
         heading: "Protection Made For Your Teeth",
         columns: 3,
         cards: [
-          card("Night Guards", "Made to fit your teeth and worn while you sleep, to help protect them from clenching and grinding.", "/tmj-treatment/", images.sleepApneaHero),
-          card("Sports Guards", "A custom fit is more comfortable than a store-bought guard, which helps you wear it.", "/appointment/", images.hygieneVisit),
-          card("TMJ Screening", "Jaw discomfort or headaches? Ask about our TMJ screening and treatment.", "/tmj-treatment/", images.tmjHero),
+          card("Night Guards", "Made to fit your teeth and worn while you sleep, to help protect them from clenching and grinding.", "/tmj-treatment/", "moon"),
+          card("Sports Guards", "A custom fit is more comfortable than a store-bought guard, which helps you wear it.", "/appointment/", "shield-check"),
+          card("TMJ Screening", "Jaw discomfort or headaches? Ask about our TMJ screening and treatment.", "/tmj-treatment/", "square-activity"),
         ],
       },
       {

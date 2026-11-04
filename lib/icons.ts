@@ -15,6 +15,13 @@ export const iconOptions = [
   { title: "Check", value: "check" },
   { title: "Check (circle)", value: "check-circle" },
   { title: "Hand pointing right", value: "hand-point-right" },
+  { title: "Stethoscope", value: "stethoscope" },
+  { title: "Sparkles", value: "sparkles" },
+  { title: "Layers", value: "layers" },
+  { title: "Shield check", value: "shield-check" },
+  { title: "Moon", value: "moon" },
+  { title: "Puzzle", value: "puzzle" },
+  { title: "Gem", value: "gem" },
 ] as const;
 
 export type IconName = (typeof iconOptions)[number]["value"];

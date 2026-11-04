@@ -13,6 +13,13 @@ import {
   Smile,
   Sparkle,
   SquareActivity,
+  Gem,
+  Layers,
+  Moon,
+  Puzzle,
+  ShieldCheck,
+  Sparkles,
+  Stethoscope,
   type LucideIcon,
 } from "lucide-react";
 import type { IconName } from "@/lib/icons";
@@ -41,6 +48,13 @@ const map: Record<Exclude<IconName, "hand-point-right">, LucideIcon> = {
   "map-pin": MapPin,
   check: Check,
   "check-circle": CircleCheck,
+  stethoscope: Stethoscope,
+  sparkles: Sparkles,
+  layers: Layers,
+  "shield-check": ShieldCheck,
+  moon: Moon,
+  puzzle: Puzzle,
+  gem: Gem,
 };
 
 export function Icon({ name, className = "h-6 w-6", strokeWidth = 1.75 }: { name?: IconName | string; className?: string; strokeWidth?: number }) {
