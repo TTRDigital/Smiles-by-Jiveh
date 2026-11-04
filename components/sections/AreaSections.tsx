@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Star } from "lucide-react";
 import type {
-  CtaBandBlock, DoctorBlock, FeatureBlock, GalleryBlock, ImageCardsBlock, LocationBlock, PageHeroContent, SiteSettings, StatsBlock, StepsBlock,
+  CtaBandBlock, DoctorBlock, FeatureBlock, GalleryBlock, ImageCardsBlock, LocationBlock, PageHeroContent, ProseBlock, SiteSettings, StatsBlock, StepsBlock,
 } from "@/lib/types";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
@@ -237,6 +237,19 @@ export function CtaBandSection({ block, settings }: { block: CtaBandBlock; setti
           {block.ctas.map((c) => <Button key={c.href} href={c.href}>{c.label}</Button>)}
           <Button href={settings.phoneHref} variant="white" arrow={false}>Call {settings.phone}</Button>
         </div>
+      </div>
+    </section>
+  );
+}
+
+/** A readable column of text with sub-headings: the part of the page that answers the questions patients ask. */
+export function ProseSection({ block }: { block: ProseBlock }) {
+  return (
+    <section aria-label={block.heading} className={section}>
+      <div className="mx-auto max-w-[820px]">
+        {block.eyebrow ? <p className={eyebrowCls}>{block.eyebrow}</p> : null}
+        <h2 className="mt-3 text-[1.6rem] leading-[1.2] md:text-[2.25rem]">{block.heading}</h2>
+        <RichText value={block.text} className="mt-5 text-[15px] leading-[1.8] md:text-base md:leading-[1.8] [&_h4]:mt-8 [&_h4]:mb-2 [&_h4]:font-display [&_h4]:text-xl" />
       </div>
     </section>
   );

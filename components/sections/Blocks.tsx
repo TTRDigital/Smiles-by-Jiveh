@@ -4,7 +4,7 @@ import { CardsSection } from "@/components/sections/CardsSection";
 import { SplitSection } from "@/components/sections/SplitSection";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { Process, ReviewsCard, WhyChooseUs } from "@/components/sections/SharedSections";
-import { CtaBandSection, DoctorSection, FeatureSection, GallerySection, ImageCardsSection, LocationSection, StatsSection, StepsSection } from "@/components/sections/AreaSections";
+import { ProseSection, CtaBandSection, DoctorSection, FeatureSection, GallerySection, ImageCardsSection, LocationSection, StatsSection, StepsSection } from "@/components/sections/AreaSections";
 
 /** Renders a page's sections in order. */
 export function Blocks({ blocks, shared, settings, reviews }: { blocks: Block[]; shared: SharedSections; settings: SiteSettings; reviews: Testimonial[] }) {
@@ -21,6 +21,8 @@ export function Blocks({ blocks, shared, settings, reviews }: { blocks: Block[];
             return <SplitSection key={key} block={b} />;
           case "faqBlock":
             return <FaqSection key={key} block={b} />;
+          case "proseBlock":
+            return <ProseSection key={key} block={b} />;
           case "statsBlock":
             return <StatsSection key={key} block={b} settings={settings} />;
           case "imageCardsBlock":

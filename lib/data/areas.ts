@@ -1,5 +1,6 @@
 import type { Block, Treatment } from "../types";
 import type { IconName } from "../icons.ts";
+import { extraFaqs, extraProse, morePages } from "./areas-more.ts";
 import { rich } from "../rich.ts";
 import { images } from "./images.ts";
 
@@ -57,7 +58,7 @@ const faq = (items: { question: string; answer: string }[]): Block => ({ _type: 
 
 const seoTitle = (t: string) => `${t} - Smiles By Jiveh`;
 
-export const areaTreatments: Treatment[] = [
+const baseAreaTreatments: Treatment[] = [
   /* ------------------------------------------------------------------ Royal Palm Beach */
   {
     slug: "dentist-royal-palm-beach-fl",
@@ -470,4 +471,17 @@ export const areaTreatments: Treatment[] = [
       description: "Your first visit at Smiles By Jiveh in Royal Palm Beach, FL is a complete health evaluation of your teeth, gums and bite. Book your first visit with Dr. Jiveh.",
     },
   },
+];
+
+/** Each page with its longer sections and extra questions, then the four more pages. */
+export const areaTreatments: Treatment[] = [
+  ...baseAreaTreatments.map((t) => {
+    const prose = extraProse[t.slug] ?? [];
+    const faqs = extraFaqs[t.slug] ?? [];
+    const at = t.blocks.findIndex((b) => b._type === "locationBlock");
+    const blocks = t.blocks.map((b) => (b._type === "faqBlock" && faqs.length ? { ...b, items: [...b.items, ...faqs] } : b));
+    if (prose.length && at >= 0) blocks.splice(at, 0, ...prose);
+    return { ...t, blocks };
+  }),
+  ...morePages,
 ];

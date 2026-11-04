@@ -91,10 +91,11 @@ export type StepsBlock = { _type: "stepsBlock"; _key?: string; eyebrow?: string;
 export type LocationBlock = { _type: "locationBlock"; _key?: string; eyebrow?: string; heading: string; text?: string; areas: string[] };
 export type DoctorBlock = { _type: "doctorBlock"; _key?: string; eyebrow?: string; heading: string; text: Rich; points: string[]; image: Img; cta?: Cta };
 export type GalleryBlock = { _type: "galleryBlock"; _key?: string; eyebrow?: string; heading: string; text?: string; images: Img[] };
+export type ProseBlock = { _type: "proseBlock"; _key?: string; eyebrow?: string; heading: string; text: Rich };
 export type CtaBandBlock = { _type: "ctaBandBlock"; _key?: string; heading: string; text?: string; image: Img; ctas: Cta[] };
 export type Block =
   | DetailsBlock | CardsBlock | SplitBlock | FaqBlock | SharedBlock
-  | StatsBlock | ImageCardsBlock | FeatureBlock | StepsBlock | LocationBlock | DoctorBlock | GalleryBlock | CtaBandBlock;
+  | ProseBlock | StatsBlock | ImageCardsBlock | FeatureBlock | StepsBlock | LocationBlock | DoctorBlock | GalleryBlock | CtaBandBlock;
 
 export type PageHeroContent = {
   eyebrow?: string;
