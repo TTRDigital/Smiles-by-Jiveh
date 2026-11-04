@@ -4,7 +4,11 @@ import { sanityFetch } from "@/lib/sanity/fetch";
 import { merge } from "@/lib/merge";
 import { fallbackSettings, fallbackShared, fallbackTestimonials } from "@/lib/data/site";
 import { fallbackAbout, fallbackAppointment, fallbackDoctor, fallbackHome, fallbackInsurance, fallbackPrivacy } from "@/lib/data/pages";
-import { fallbackTreatments } from "@/lib/data/treatments";
+import { fallbackTreatments as coreTreatments } from "@/lib/data/treatments";
+import { areaTreatments } from "@/lib/data/areas";
+
+/* The treatment pages plus the service area and gap pages (lib/data/areas.ts). */
+const fallbackTreatments = [...coreTreatments, ...areaTreatments];
 import type {
   AboutContent,
   AppointmentContent,
