@@ -18,10 +18,10 @@ const AREAS = ["Royal Palm Beach", "Wellington", "Palm Beach County", "The Weste
 const stats = (): Block => ({
   _type: "statsBlock",
   items: [
-    { value: "4.9", label: "Google rating", source: "rating" },
-    { value: "111", label: "Google reviews", source: "reviews" },
-    { value: "1997", label: "Serving patients since" },
-    { value: "Free", label: "Consultations for cosmetic and restorative care" },
+    { value: "4.9", label: "on Google", source: "rating" },
+    { value: "111", label: "Google reviews" },
+    { value: "Since 1997", label: "serving patients" },
+    { value: "Private", label: "fee for service practice" },
   ],
 });
 
@@ -81,12 +81,11 @@ export const areaTreatments: Treatment[] = [
         eyebrow: "Our Care",
         heading: "Everything Your Smile Needs, Under One Roof",
         text: "From routine visits to complete smile plans, you see one team who knows you.",
-        columns: 4,
+        columns: 3,
         cards: [
           card("General Dentistry", "Exams, cleanings, fillings and gum care for the whole family.", "/general-dentistry/", images.generalHero),
           card("Cosmetic Dentistry", "Veneers, whitening and smile makeovers designed around you.", "/cosmetic-dentistry/", images.serviceCosmetic),
           card("Dental Implants", "Replace missing teeth with a stable, natural feeling solution.", "/dental-implants/", images.implantModel),
-          card("Sedation Dentistry", "A calmer visit for patients who feel nervous at the dentist.", "/sedation-dentistry/", images.sedationHero),
         ],
       },
       {
@@ -102,16 +101,6 @@ export const areaTreatments: Treatment[] = [
         ctas: [book, { label: "Our Practice", href: "/who-we-are/" }],
       },
       doctor("Dr. Farokh Jiveh", "Dr. Jiveh has been caring for patients in Royal Palm Beach and Wellington since 1997, and he teaches other dentists how to do advanced dentistry."),
-      {
-        _type: "stepsBlock",
-        eyebrow: "How It Works",
-        heading: "Your First Visit, Step by Step",
-        steps: [
-          { title: "Call or book online", text: "Choose a time Monday to Thursday. Visits are by appointment only, so you always have our full attention." },
-          { title: "Meet the team and be heard", text: "Tell us what matters to you. We examine your teeth, gums and bite and explain what we find." },
-          { title: "Decide with confidence", text: "We lay out your options and any financing in plain language. You choose the pace." },
-        ],
-      },
       location("Find Us in Royal Palm Beach", "Our office is easy to reach for patients across Royal Palm Beach and Wellington."),
       faq([
         { question: "Where is Smiles By Jiveh located?", answer: "Our office is at 11989 Southern Blvd, Royal Palm Beach, FL 33411. We also welcome patients from Wellington and nearby communities." },
@@ -157,9 +146,6 @@ export const areaTreatments: Treatment[] = [
           card("Veneers and Smile Makeovers", "A natural smile designed around your face, previewed before you begin.", "/veneers-smile-makeovers-wellington-fl/", images.serviceVeneers),
           card("All-on-X Full Arch Implants", "A fixed, implant-supported option for patients missing many teeth.", "/all-on-x-wellington-palm-beach-county/", images.serviceAllOnX),
           card("Smile Rehabilitation", "A complete plan for worn, broken or missing teeth.", "/smile-rehabilitation-palm-beach-county/", images.crownsHero),
-          card("Teeth Whitening", "Professional whitening for a brighter, more confident smile.", "/teeth-whitening-treatment/", images.whiteningHero),
-          card("Invisalign", "Straighten your teeth with clear aligners.", "/invisalign/", images.invisalignHero),
-          card("General Dentistry", "Exams, cleanings and gum care to keep your smile healthy.", "/general-dentistry/", images.hygieneVisit),
         ],
       },
       {
@@ -174,12 +160,6 @@ export const areaTreatments: Treatment[] = [
         image: images.smileMakeoverHero,
         reverse: true,
         ctas: [{ label: "Book A Cosmetic Consultation", href: "/appointment/" }],
-      },
-      {
-        _type: "galleryBlock",
-        heading: "Smiles We Have Designed",
-        text: "A few of Dr. Jiveh's patients, before and after.",
-        images: [images.baPortrait, images.baFrontTeeth, images.baSmileStack],
       },
       doctor("A Dentist Who Teaches Dentists", "Wellington patients make the short trip to Royal Palm Beach to see Dr. Jiveh, who mentors other dentists in advanced techniques."),
       location("From Wellington to Our Royal Palm Beach Office", "We are at 11989 Southern Blvd in Royal Palm Beach, serving Wellington families and professionals."),
@@ -245,7 +225,6 @@ export const areaTreatments: Treatment[] = [
         text: "Real patients, designed around their own faces.",
         images: [images.baPortrait, images.baPortraitCurly, images.baFrontTeeth],
       },
-      doctor("Cosmetic Dentistry From an Educator", "Dr. Jiveh teaches other dentists advanced cosmetic techniques, and he is a past President of the Florida Academy of Cosmetic Dentistry."),
       location("Wellington Patients Visit Us in Royal Palm Beach", "11989 Southern Blvd, Royal Palm Beach. Visits are by appointment, Monday to Thursday."),
       faq([
         { question: "Can I see my new smile before treatment?", answer: "Yes. Digital smile design lets you preview a plan and give feedback before treatment begins." },
@@ -304,22 +283,6 @@ export const areaTreatments: Treatment[] = [
           card("Dentures", "Removable dentures, including implant-supported options.", "/dentures/", images.denturesHero),
         ],
       },
-      {
-        _type: "galleryBlock",
-        heading: "All-on-X Patients",
-        text: "Smiles restored by Dr. Jiveh.",
-        images: [images.baAllOnXWoman, images.baAllOnXMan, images.baSmileStack],
-      },
-      {
-        _type: "stepsBlock",
-        eyebrow: "The Process",
-        heading: "What Happens at Your Consultation",
-        steps: [
-          { title: "Evaluation", text: "We review your health and your jawbone with imaging, and listen to your goals." },
-          { title: "Options explained", text: "Dr. Jiveh explains All-on-X, implants and dentures so you can compare them." },
-          { title: "Your plan", text: "If All-on-X fits, we plan your care step by step, including comfort and sedation." },
-        ],
-      },
       doctor("Implant Dentistry You Can Trust", "Dr. Jiveh has served Wellington and Royal Palm Beach since 1997, and he mentors dentists in advanced implant and restorative care."),
       location("Serving Wellington and Palm Beach County", "Patients visit our Royal Palm Beach office for implant consultations."),
       faq([
@@ -373,19 +336,12 @@ export const areaTreatments: Treatment[] = [
         eyebrow: "Signs To Look For",
         heading: "When To Have an Evaluation",
         text: "These are reasons to have an evaluation, not a diagnosis. Dr. Jiveh will explain what he finds and your options.",
-        columns: 4,
+        columns: 3,
         cards: [
           card("Worn or Short Teeth", "Teeth that look flat, short or worn down.", "/worn-teeth-rehabilitation/", images.wornTeethBeforeAfter),
           card("Broken or Missing Teeth", "Chipped, cracked or several missing teeth.", "/dental-implants/", images.implantModel),
           card("Jaw Discomfort", "Clenching, headaches or an uneven bite.", "/tmj-treatment/", images.tmjHero),
-          card("Failing Restorations", "Older crowns, bridges or fillings that need attention.", "/dental-crowns/", images.crownsHero),
         ],
-      },
-      {
-        _type: "galleryBlock",
-        heading: "Rebuilt Smiles",
-        text: "Patients of Dr. Jiveh, before and after.",
-        images: [images.wornTeethBeforeAfter, images.baSmileStack, images.baFrontTeeth],
       },
       doctor("Comprehensive Care From an Educator", "Dr. Jiveh is the Clinical and Course Director at Palm Beach Dental Academy, where he mentors dentists in comprehensive patient care."),
       location("See Us in Royal Palm Beach", "Patients come from across Palm Beach County for complete dentistry."),
