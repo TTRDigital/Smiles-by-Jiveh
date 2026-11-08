@@ -1,0 +1,13 @@
+{
+  "name": "sbj-ad-landing-pages",
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Smiles By Jiveh Google Ads landing pages (offer + implant). Static pages built by build.mjs, one Vercel Function for the forms. Not part of the main Next.js site.",
+  "scripts": {
+    "build": "node build.mjs",
+    "seed": "node scripts/seed-sanity.mjs",
+    "seed:dry": "node scripts/seed-sanity.mjs --dry-run"
+  },
+  "engines": { "node": ">=20" }
+}
