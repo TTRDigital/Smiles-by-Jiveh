@@ -22,7 +22,7 @@ Next.js 16 (App Router, static export) + Sanity Studio embedded at `/cms`, Tailw
 
 1. **Sanity project:** `3wz2011s`, dataset `production` (the defaults in `sanity/env.ts`).
 2. **CORS:** in sanity.io/manage > API > CORS origins, allow `http://localhost:3000`, `https://smilesbyjiveh.com` and `https://www.smilesbyjiveh.com` with credentials (needed for `/cms`).
-3. **Load the content into Sanity (once):** create an Editor token (sanity.io/manage > API > Tokens), put it in `.env.local` as `SANITY_WRITE_TOKEN`, then `npm install && npm run seed`. Running it again only adds missing documents; `npm run seed -- --force` overwrites the CMS with the built-in content; `npm run seed -- --dry-run` checks everything without writing. Delete or rotate the token afterwards.
+3. **Load the content into Sanity (once):** create an Editor token (sanity.io/manage > API > Tokens), put it in `.env.local` as `SANITY_WRITE_TOKEN`, then `npm install && npm run seed`. It only ever adds missing documents. `npm run seed` is a dry run; add `-- --write` to really add the missing documents (it never overwrites or deletes). Delete or rotate the token afterwards.
 4. **Run:** `npm run dev`, then open http://localhost:3000 and http://localhost:3000/cms.
 
 ## Hosting on SiteGround
