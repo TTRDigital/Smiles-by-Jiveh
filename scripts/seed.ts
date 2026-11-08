@@ -3,15 +3,18 @@
  * CMS starts full instead of empty: site settings, shared sections, every
  * page, the 24 treatment pages, Google reviews and FAQs.
  *
- *   npm run seed                # create documents that don't exist yet
- *   npm run seed -- --force     # overwrite everything with the built-in content
- *   npm run seed -- --dry-run   # build every document without uploading or writing
- *   npm run seed -- --dry-run --out=docs.json   # ...and save them to a file to inspect
+ * SAFE BY DESIGN: it only ever ADDS. It never deletes, never overwrites and
+ * never edits a document that already exists (createIfNotExists), so editors'
+ * changes are always kept. Photos are added to the media library (Sanity
+ * recognises identical files and reuses them).
  *
- * Needs SANITY_WRITE_TOKEN (an Editor token from sanity.io/manage > API >
- * Tokens) in .env.local or the environment. Writes to project 3wz2011s /
- * production unless NEXT_PUBLIC_SANITY_PROJECT_ID / NEXT_PUBLIC_SANITY_DATASET
- * say otherwise. Without --force, anything an editor already changed is kept.
+ *   npm run seed                      # DRY RUN (default): builds every document, writes nothing
+ *   npm run seed -- --out=docs.json   # ...and saves them to a file to inspect
+ *   npm run seed -- --write           # really add the missing documents
+ *
+ * --write needs SANITY_WRITE_TOKEN (an Editor token) in .env.local or the
+ * environment. Never commit it. Writes to project 3wz2011s / production unless
+ * NEXT_PUBLIC_SANITY_PROJECT_ID / NEXT_PUBLIC_SANITY_DATASET say otherwise.
  */
 import { createReadStream, existsSync, readFileSync } from "node:fs";
 import { basename, join } from "node:path";
@@ -33,8 +36,7 @@ if (existsSync(join(root, ".env.local"))) {
 // Imported after .env.local is loaded so its values apply.
 const { dataset, projectId, apiVersion } = await import("../sanity/env.ts");
 const token = process.env.SANITY_WRITE_TOKEN;
-const force = process.argv.includes("--force");
-const dryRun = process.argv.includes("--dry-run");
+const dryRun = !process.argv.includes("--write");
 
 if (!dryRun && (!projectId || !token)) {
   console.error("Set SANITY_WRITE_TOKEN in .env.local (an Editor token from sanity.io/manage > API > Tokens).");
@@ -168,7 +170,7 @@ async function build() {
   return docs;
 }
 
-console.log(`Seeding ${projectId}/${dataset}${dryRun ? " (dry run)" : force ? " (overwriting)" : " (keeping existing documents)"}. Uploading photos`);
+console.log(`Seeding ${projectId}/${dataset}${dryRun ? " (DRY RUN, nothing is written)" : " (adding missing documents only)"}. Uploading photos`);
 const docs = (await build()) as { _id: string; _type: string }[];
 console.log(`\n${uploaded.size} photos ${dryRun ? "checked" : "uploaded"}. ${docs.length} documents.`);
 if (dryRun) {
@@ -180,11 +182,12 @@ if (dryRun) {
 }
 
 // Transactions in batches, so a large seed stays under the API's size limits.
+const existing = new Set<string>(await client.fetch(`*[_id in $ids]._id`, { ids: docs.map((d) => d._id) }));
+console.log(`${existing.size} already exist and are left untouched; ${docs.length - existing.size} will be created.`);
 for (let i = 0; i < docs.length; i += 40) {
   const tx = client.transaction();
   for (const d of docs.slice(i, i + 40)) {
-    if (force) tx.createOrReplace(d);
-    else tx.createIfNotExists(d);
+    tx.createIfNotExists(d);
   }
   await tx.commit();
 }
