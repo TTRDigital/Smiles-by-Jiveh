@@ -11,3 +11,8 @@ A separate static project: it does not touch the main Next.js site. Preview only
 
 Env vars (Vercel, names only, see `.env.example`): `GHL_WEBHOOK_URL`, `TTR_SITE_KEY`. Seed: `SANITY_WRITE_TOKEN` on a trusted machine only.
 Same tags as the old pages: GTM-KW9CW8P7 and AW-872559974.
+
+## Removed for ad compliance (Ben, Nov 9) — Kia to decide if any returns
+- Offer: the genetic-testing bullet (named disease-risk claims: heart attack, stroke, Alzheimer's, diabetes, cancers).
+- Both: the "Real People, Real Results" before/after gallery and its intro line (implies outcomes).
+- Implant: Pam's patient quote (results claims); replaced with Dr. Jiveh's own quote from the offer page.

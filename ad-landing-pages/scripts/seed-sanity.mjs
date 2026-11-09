@@ -21,9 +21,8 @@ if (!dryRun && !token) {
 }
 
 const docs = ["offer", "implant"].map((slug) => {
-  const { host, gallery, ...c } = JSON.parse(readFileSync(new URL(`../content/${slug}.json`, import.meta.url), "utf8"));
-  const { images, ...galleryText } = gallery; // gallery photos stay static files
-  return { _id: `landingPage-${slug}`, _type: "landingPage", ...c, slug: { _type: "slug", current: slug }, gallery: galleryText };
+  const { host, ...c } = JSON.parse(readFileSync(new URL(`../content/${slug}.json`, import.meta.url), "utf8"));
+  return { _id: `landingPage-${slug}`, _type: "landingPage", ...c, slug: { _type: "slug", current: slug } };
 });
 
 for (const d of docs) console.log(`${dryRun ? "[dry run] would create if missing" : "create if missing"}: ${d._id} (${Object.keys(d).length} fields)`);

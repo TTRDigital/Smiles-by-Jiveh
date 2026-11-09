@@ -32,7 +32,6 @@ export const landingPage = defineType({
       fields: [str("heading", "Heading"), str("intro", "Intro", 6), str("priceRegular", "Regular price line"), str("priceToday", "Price / offer line"), str("priceSave", "Savings / note line"), str("listHeading", "List heading"), list("list", "Included"), str("optionalHeading", "Optional heading"), list("optional", "Optional items"), str("closing", "Closing line", 3), str("note", "Please note", 5)],
     }),
     defineField({ name: "dentist", type: "object", group: "body", fields: [str("eyebrow", "Eyebrow"), str("name", "Name"), str("subheading", "Subheading"), str("tagline", "Tagline"), list("body", "Paragraphs"), str("quote", "Quote", 5), str("quoteBy", "Quote by"), list("credentials", "Credentials")] }),
-    defineField({ name: "gallery", type: "object", group: "body", fields: [str("heading", "Heading"), str("text", "Text", 3)] }),
     defineField({ name: "banner", type: "object", group: "body", fields: [str("heading", "Heading"), str("text", "Text"), str("cta", "Button")] }),
     defineField({ name: "office", type: "object", group: "body", fields: [str("heading", "Heading"), str("text", "Text", 3), list("address", "Address lines")] }),
     defineField({ name: "footer", type: "object", group: "body", fields: [str("tagline", "Tagline"), str("copyright", "Copyright")] }),

@@ -49,7 +49,7 @@ h3{font-size:18px;margin:24px 0 12px}
 .eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--ink)}
 blockquote{margin:20px 0;padding-left:18px;border-left:3px solid var(--primary);font-family:'Playfair Display',serif;font-style:italic;font-size:17px;color:var(--ink)}
 blockquote cite{display:block;font:normal 13px Inter,sans-serif;margin-top:8px;color:var(--muted)}
-.gal{display:grid;grid-template-columns:1fr;gap:16px;margin-top:28px}.gal img{width:100%;height:auto;border-radius:14px;box-shadow:0 6px 18px rgba(0,0,0,.14)}
+
 .center{text-align:center}.center p{max-width:640px;margin:0 auto;color:var(--muted)}
 .banner{background:var(--primary);color:#fff;text-align:center;padding:48px 20px}.banner h2{color:#fff;font-size:clamp(20px,3vw,28px)}.banner p{margin:12px 0 22px}
 .contact{background:var(--tint);border-radius:12px;padding:20px;margin:20px 0;display:grid;gap:14px}
@@ -103,7 +103,7 @@ const FORM_JS = `
 
 export function render(c) {
   const cta = (label, extra = "") => `<a href="#request" class="btn ${extra}" data-open>${esc(label)}</a>`;
-  const o = c.offer, dn = c.dentist, g = c.gallery;
+  const o = c.offer, dn = c.dentist;
   const media =
     o.media === "video"
       ? `<div class="media"><video controls playsinline preload="metadata" poster="/${c.slug}/expect-poster.jpg"><source src="/${c.slug}/expect.mp4" type="video/mp4"></video></div>`
@@ -167,9 +167,6 @@ document.addEventListener('click',function(e){var a=e.target.closest&&e.target.c
     <blockquote>“${esc(dn.quote)}”${dn.quoteBy ? `<cite>${esc(dn.quoteBy)}</cite>` : ""}</blockquote>
     <ul class="checks" style="grid-template-columns:1fr">${dn.credentials.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>
   </div></div></section>
-<section class="tint"><div class="wrap center"><h2>${esc(g.heading)}</h2><p>${esc(g.text)}</p>
-  <div class="gal">${g.images.map((s, i) => `<img src="/${c.slug}/${esc(s)}" alt="Smiles By Jiveh patient smile ${i + 1}" width="900" height="900" loading="lazy">`).join("")}</div>
-  <p style="margin-top:32px">${cta(c.ctaLabel)}</p></div></section>
 <div class="banner"><h2>${esc(c.banner.heading)}</h2><p>${esc(c.banner.text)}</p>${cta(c.banner.cta, "sand")}</div>
 <section><div class="wrap grid2">
   <div><h2>${esc(c.office.heading)}</h2><p>${esc(c.office.text)}</p>

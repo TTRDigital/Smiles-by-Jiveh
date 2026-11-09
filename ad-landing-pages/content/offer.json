@@ -14,7 +14,12 @@
     "pillBadge": "Only $189",
     "cta": "CLAIM YOUR NEW PATIENT EXPERIENCE"
   },
-  "trust": ["5.0 (168 Reviews)", "Artistry Meets Advanced Dentistry", "Relationships Built on Trust", "Elevated Dental Care"],
+  "trust": [
+    "5.0 (168 Reviews)",
+    "Artistry Meets Advanced Dentistry",
+    "Relationships Built on Trust",
+    "Elevated Dental Care"
+  ],
   "offer": {
     "heading": "More Than a Dental Exam. A Complete Health Evaluation.",
     "intro": "Your first visit is designed to give you answers, not assumptions. We call it the New Patient Experience because it is far more than a routine dental exam. Dr. Jiveh sees only one patient at a time, allowing the time, attention, and clinical precision needed to thoroughly evaluate your oral and overall health before any recommendations are made. Every finding is carefully explained, and every treatment recommendation is based on a complete understanding of your health.",
@@ -37,7 +42,6 @@
     "optionalHeading": "When Clinically Indicated, We May Also Recommend:",
     "optional": [
       "Saliva testing to evaluate your periodontal health",
-      "Genetic testing to assess your risk for heart attack, stroke, Alzheimer's disease and dementia, rheumatoid arthritis, diabetes, certain cancers, and pregnancy-related complications",
       "Bacterial testing to identify harmful oral pathogens and help personalize your treatment"
     ],
     "closing": "Every part of your New Patient Experience is designed to provide the most accurate diagnosis possible so the right treatment plan is created from the very beginning.",
@@ -55,12 +59,12 @@
     ],
     "quote": "I love helping patients understand how oral health connects to their overall quality of life. Education and gentle, advanced care — that's what we're about.",
     "quoteBy": "",
-    "credentials": ["Dental Academy Instructor", "FACD President (2021)", "20+ Years Experience", "Trusted Royal Palm Beach provider"]
-  },
-  "gallery": {
-    "heading": "Real People, Real Results",
-    "text": "At Smiles By Jiveh, we create confident, healthy smiles with personalized, high-quality care in a comfortable, modern setting.",
-    "images": ["gallery-1.jpg", "gallery-2.jpg", "gallery-3.jpg", "gallery-4.jpg"]
+    "credentials": [
+      "Dental Academy Instructor",
+      "FACD President (2021)",
+      "20+ Years Experience",
+      "Trusted Royal Palm Beach provider"
+    ]
   },
   "banner": {
     "heading": "⚠️ Limited Spots Available — This $189 New Patient Experience Won't Last Long",
@@ -70,7 +74,10 @@
   "office": {
     "heading": "Your Dental Office For Life",
     "text": "Experience concierge-level dentistry where your comfort, time, and smile are our top priorities. We look forward to welcoming you to our Royal Palm Beach practice.",
-    "address": ["11989 Southern Blvd", "Royal Palm Beach, FL 33411"]
+    "address": [
+      "11989 Southern Blvd",
+      "Royal Palm Beach, FL 33411"
+    ]
   },
   "footer": {
     "tagline": "Elevated Dentistry. Personalized Experience. Comprehensive Cosmetic & Restorative Dentistry.",
