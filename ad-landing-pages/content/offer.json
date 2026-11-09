@@ -1,0 +1,92 @@
+{
+  "slug": "offer",
+  "host": "offer.smilesbyjiveh.com",
+  "title": "Smiles By Jiveh — $189 New Patient Experience",
+  "description": "Your first visit is designed to give you answers, not assumptions. Get a complete health evaluation for just $189 with Dr. Farokh Jiveh at Smiles By Jiveh.",
+  "topBar": "11989 Southern Blvd Royal Palm Beach, FL 33411",
+  "phone": "+1 561-763-4307",
+  "phoneHref": "+15617634307",
+  "ctaLabel": "Claim Your New Patient Experience",
+  "headerCta": "CLAIM YOUR NEW PATIENT EXPERIENCE",
+  "hero": {
+    "heading": "Smiles By Jiveh Brings The New Patient Experience",
+    "pill": "New Patient Experience",
+    "pillBadge": "Only $189",
+    "cta": "CLAIM YOUR NEW PATIENT EXPERIENCE"
+  },
+  "trust": [
+    "5.0 (168 Reviews)",
+    "Artistry Meets Advanced Dentistry",
+    "Relationships Built on Trust",
+    "Elevated Dental Care"
+  ],
+  "offer": {
+    "heading": "More Than a Dental Exam. A Complete Health Evaluation.",
+    "intro": "Your first visit is designed to give you answers, not assumptions. We call it the New Patient Experience because it is far more than a routine dental exam. Dr. Jiveh sees only one patient at a time, allowing the time, attention, and clinical precision needed to thoroughly evaluate your oral and overall health before any recommendations are made. Every finding is carefully explained, and every treatment recommendation is based on a complete understanding of your health.",
+    "priceRegular": "Regular Value $300",
+    "priceToday": "Today Only $189",
+    "priceSave": "You Save $111",
+    "listHeading": "Your 10-Point New Patient Experience Includes:",
+    "list": [
+      "Complete Medical History Review",
+      "Comprehensive Digital Cavity Detection Imaging",
+      "Full Panoramic Digital Imaging",
+      "3D iTero Digital Scan and Impression of Your Mouth",
+      "Head, Neck, Muscle, and TMJ Evaluation",
+      "Comprehensive Oral Cancer Screening",
+      "Complete Evaluation of Every Tooth and Existing Dental Work",
+      "Comprehensive Gum Evaluation to Detect Periodontal Disease",
+      "Clinical Photography for Complete Documentation and Treatment Planning",
+      "Smile Design Consultation with Digital Smile Simulation to Visualize Your Potential Results"
+    ],
+    "optionalHeading": "When Clinically Indicated, We May Also Recommend:",
+    "optional": [
+      "Saliva testing to evaluate your periodontal health",
+      "Bacterial testing to identify harmful oral pathogens and help personalize your treatment"
+    ],
+    "closing": "Every part of your New Patient Experience is designed to provide the most accurate diagnosis possible so the right treatment plan is created from the very beginning.",
+    "note": "Please Note: Your New Patient Experience does not include a dental cleaning. We believe the proper cleaning can only be determined after a comprehensive examination. Every mouth is different, and recommending treatment before a complete diagnosis would not meet our standard of care. Your evaluation determines whether you need a routine preventive cleaning, periodontal therapy, or another level of care to best support your long-term oral health.",
+    "media": "video"
+  },
+  "dentist": {
+    "eyebrow": "MEET YOUR DENTIST",
+    "name": "Dr. Farokh Jiveh",
+    "subheading": "Why Choose Us For Your Dental Care?",
+    "tagline": "Personalized Dentistry for Patients Who Value Excellence",
+    "body": [
+      "At Smiles By Jiveh, we provide an elevated, concierge-style dental experience for patients seeking exceptional quality, personalized attention, and long-term health. Our practice is intentionally designed for individuals who value precision, artistry, advanced care, and an uncompromising standard of dentistry, never rushed, transactional, or one-size-fits-all.",
+      "Led by Dr. Farokh Jiveh, every treatment is approached with intention, integrity, and a commitment to naturally beautiful, lasting results."
+    ],
+    "quote": "I love helping patients understand how oral health connects to their overall quality of life. Education and gentle, advanced care — that's what we're about.",
+    "quoteBy": "",
+    "credentials": [
+      "Dental Academy Instructor",
+      "FACD President (2021)",
+      "20+ Years Experience",
+      "Trusted Royal Palm Beach provider"
+    ]
+  },
+  "banner": {
+    "heading": "⚠️ Limited Spots Available — This $189 New Patient Experience Won't Last Long",
+    "text": "Book your New Patient Experience today before this offer expires.",
+    "cta": "CLAIM YOUR NEW PATIENT EXPERIENCE"
+  },
+  "office": {
+    "heading": "Your Dental Office For Life",
+    "text": "Experience concierge-level dentistry where your comfort, time, and smile are our top priorities. We look forward to welcoming you to our Royal Palm Beach practice.",
+    "address": [
+      "11989 Southern Blvd",
+      "Royal Palm Beach, FL 33411"
+    ]
+  },
+  "footer": {
+    "tagline": "Elevated Dentistry. Personalized Experience. Comprehensive Cosmetic & Restorative Dentistry.",
+    "copyright": "© 2026 Smile by Jiveh. All rights reserved."
+  },
+  "form": {
+    "heading": "Request Your Appointment",
+    "consent": "I agree to receive communications from Smiles By Jiveh. I understand I can opt out at any time.",
+    "submit": "Submit Request",
+    "messagePlaceholder": "How can we help you?"
+  }
+}

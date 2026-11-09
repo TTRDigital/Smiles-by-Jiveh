@@ -1,0 +1,89 @@
+{
+  "slug": "implant",
+  "host": "implant.smilesbyjiveh.com",
+  "title": "Smiles By Jiveh — All-on-X & Full Mouth Reconstruction",
+  "description": "Experience a higher standard of implant care. Our personalized All-on-X and Full Mouth Reconstruction experience is designed around clarity, confidence, and long-term health.",
+  "topBar": "11989 Southern Blvd Royal Palm Beach, FL 33411",
+  "phone": "+1 561-763-4307",
+  "phoneHref": "+15617634307",
+  "ctaLabel": "Schedule Your Comprehensive Evaluation",
+  "headerCta": "SCHEDULE EVALUATION",
+  "hero": {
+    "heading": "All-on-X / Full Arch Dental Implants",
+    "pill": "Personalized Implant & Reconstruction Experience",
+    "pillBadge": "All-on-X & Full Mouth",
+    "cta": "SCHEDULE YOUR COMPREHENSIVE EVALUATION"
+  },
+  "trust": [
+    "5.0 (168 Reviews)",
+    "Artistry Meets Advanced Dentistry",
+    "Relationships Built on Trust",
+    "Elevated Dental Care"
+  ],
+  "offer": {
+    "heading": "A More Comprehensive Approach To Full Arch Dental Implants",
+    "intro": "If you’ve ever felt embarrassed by your smile, frustrated with dentures, afraid of hidden costs, or unsure about your options, our All-on-X experience was designed differently.",
+    "priceRegular": "",
+    "priceToday": "Comprehensive Implant Evaluation & 3D CBCT",
+    "priceSave": "(The fee for your comprehensive implant exam and CBCT scan will be credited toward treatment.)",
+    "listHeading": "Your Evaluation Includes:",
+    "list": [
+      "Comprehensive implant consultation",
+      "3D CBCT imaging",
+      "Digital scan",
+      "Bone and jaw evaluation",
+      "Full mouth health assessment",
+      "Smile design discussion",
+      "Personalized treatment consultation",
+      "Implant candidacy evaluation",
+      "Advanced digital planning",
+      "One-on-one doctor consultation"
+    ],
+    "optionalHeading": "",
+    "optional": [],
+    "closing": "Our advanced digital evaluation process helps determine the best treatment options for your long-term comfort, function, and smile goals.",
+    "note": "",
+    "media": "image"
+  },
+  "dentist": {
+    "eyebrow": "MEET YOUR DENTIST",
+    "name": "Dr. Farokh Jiveh",
+    "subheading": "Why Choose Us For Your Dental Care?",
+    "tagline": "Personalized Dentistry for Patients Who Value Excellence",
+    "body": [
+      "At Smiles By Jiveh, we provide an elevated, concierge-style dental experience for patients seeking exceptional quality, personalized attention, and long-term health. Our practice is intentionally designed for individuals who value precision, artistry, advanced care, and an uncompromising standard of dentistry, never rushed, transactional, or one-size-fits-all.",
+      "Led by Dr. Farokh Jiveh, every treatment is approached with intention, integrity, and a commitment to naturally beautiful, lasting results."
+    ],
+    "quote": "I love helping patients understand how oral health connects to their overall quality of life. Education and gentle, advanced care — that's what we're about.",
+    "quoteBy": "",
+    "credentials": [
+      "Dental Academy Instructor",
+      "Florida Academy of Cosmetic Dentistry President (2021)",
+      "20+ Years Experience",
+      "Trusted Royal Palm Beach provider"
+    ]
+  },
+  "banner": {
+    "heading": "⚠️ Now Accepting New Implant & Reconstruction Consultations",
+    "text": "Book your Comprehensive Evaluation today to discover your options.",
+    "cta": "SCHEDULE YOUR COMPREHENSIVE EVALUATION"
+  },
+  "office": {
+    "heading": "Your Dental Office For Life",
+    "text": "Experience concierge-level dentistry where your comfort, time, and smile are our top priorities. We look forward to welcoming you to our Royal Palm Beach practice.",
+    "address": [
+      "11989 Southern Blvd",
+      "Royal Palm Beach, FL 33411"
+    ]
+  },
+  "footer": {
+    "tagline": "Elevated Dentistry. Personalized Experience. Comprehensive Cosmetic & Restorative Dentistry.",
+    "copyright": "© 2026 Smile by Jiveh. All rights reserved."
+  },
+  "form": {
+    "heading": "Request Your Appointment",
+    "consent": "I agree to receive communications from Smiles By Jiveh. I understand I can opt out at any time.",
+    "submit": "Submit Request",
+    "messagePlaceholder": "How can we help you?"
+  }
+}
