@@ -80,7 +80,7 @@ export default async function handler(req, res) {
 
   const jobs = [];
 
-  // 1. TTR OS (same URL-encoded shape the TTR tracker script uses: k, p, r, u, f_<field>).
+  // 1. TTR OS (form-encoded, not JSON: k site key, p page path, r referrer, u full landing URL with its query, f_<field>; it always answers 204, so check the Leads page).
   const ttrKey = (process.env.TTR_SITE_KEY || "").trim();
   if (ttrKey) {
     const body = new URLSearchParams({
@@ -88,12 +88,12 @@ export default async function handler(req, res) {
       p: `/${slug || ""}`,
       r: track.referrer,
       u: track.page_url,
-      f_first_name: lead.first_name,
-      f_last_name: lead.last_name,
+      // Contract (ttr-portal siteForm): f_name, f_phone, f_email, f_service. No free-text message:
+      // a dental lead may type health details, so the message goes only to the practice's own GHL webhook.
+      f_name: `${lead.first_name} ${lead.last_name}`.trim(),
       f_email: lead.email,
       f_phone: phone,
-      f_message: lead.message,
-      f_landing_page: pageName,
+      f_service: pageName,
       f_gclid: track.gclid,
       f_utm_source: track.utm_source,
       f_utm_campaign: track.utm_campaign,

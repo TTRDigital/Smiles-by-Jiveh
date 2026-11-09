@@ -29,7 +29,7 @@
     fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, keepalive: true, signal: ctl ? ctl.signal : undefined,
       body: JSON.stringify({ k: KEY, gclid: gclid, campaign: q.get('campaign_id') || '', adgroup: q.get('ad_group_id') || '',
         page: location.pathname, referrer: document.referrer || '' }) })
-      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (r) { return r.status === 200 ? r.json() : null; })   // 204 = keep the default number
       .then(function (n) { clearTimeout(timer); if (n && /^\+1\d{10}$/.test(n.number || '') && n.display) { var v = { tel: n.number, display: n.display }; write(v); apply(v); } })
       .catch(function () { clearTimeout(timer); });
   }
