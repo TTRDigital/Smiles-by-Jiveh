@@ -1,56 +1,38 @@
-/*
- * Call-number swap for the Smiles By Jiveh ad landing pages (Twilio tracking numbers).
- * Every phone link on a page carries data-phone-href (the tel: link) and, where the number
- * is shown as text, a data-phone-text child. This script replaces both with a tracking number
- * when the visit came from a mapped source. The number printed in the HTML stays the real
- * office line, so the page works with no script, and with no tracking number configured.
- *
- * Sources are remembered for the session, so the number does not change mid-visit.
- * Fill NUMBERS below with the Twilio numbers (E.164) once they exist. Until then nothing is swapped.
- * Optional per-campaign override: ?tn=+15615550123 is ignored on purpose (no way to inject numbers).
- */
+/* Dynamic call number for Google Ads visitors (TTR-1342; adapted from Pro Wildlife's number.js, branch claude/pw-number-swap-ben). A visitor who arrives from an ad (gclid in the address) gets one number
+   from the pool for about 30 minutes after their last activity; calls to it are matched to the click in TTR OS.
+   Anything else (no gclid, pool busy, error, slow answer, no JavaScript): the page keeps its default number. */
 (function () {
-  "use strict";
-  // key = source rule, value = Twilio number in E.164, e.g. "+15615550100". Empty = no swap.
-  var NUMBERS = {
-    "google-ads-offer": "", // offer.smilesbyjiveh.com, visits with gclid / utm_medium=cpc
-    "google-ads-implant": "", // implant.smilesbyjiveh.com
-    "google-ads": "", // any other paid Google visit
-    "default": "" // everyone else (usually leave empty: the office line)
-  };
-  var STORE = "sbj_tn";
+  var DEFAULT = { tel: '+15617634307', display: '+1 561-763-4307' };
+  var KEY = 'xIKk2Z_Pf3B3Tge2znW_0A';   // TTR OS site key for Smiles By Jiveh (public, it is in the page)
+  var API = 'https://ttr-portal.vercel.app/api/site/number';
+  var STORE = 'sbj_call_number', HOLD_MS = 30 * 60 * 1000, WAIT_MS = 1500;
 
-  function source() {
-    var q = new URLSearchParams(location.search);
-    var paid = q.get("gclid") || q.get("gbraid") || q.get("wbraid") || /^(cpc|ppc|paid)/i.test(q.get("utm_medium") || "");
-    var page = location.hostname.indexOf("implant") === 0 || /^\/implant/.test(location.pathname) ? "implant" : "offer";
-    if (paid) return NUMBERS["google-ads-" + page] ? "google-ads-" + page : "google-ads";
-    return "default";
-  }
+  function read() { try { var s = JSON.parse(localStorage.getItem(STORE) || 'null'); return s && s.exp > Date.now() && s.tel && s.display ? s : null; } catch (e) { return null; } }
+  function write(n) { try { localStorage.setItem(STORE, JSON.stringify({ tel: n.tel, display: n.display, exp: Date.now() + HOLD_MS })); } catch (e) {} }
 
-  function format(e164) {
-    var d = e164.replace(/\D/g, "");
-    if (d.length === 11 && d[0] === "1") d = d.slice(1);
-    return d.length === 10 ? "+1 " + d.slice(0, 3) + "-" + d.slice(3, 6) + "-" + d.slice(6) : e164;
+  function apply(n) {
+    var links = document.querySelectorAll('a[href^="tel:"]');
+    for (var i = 0; i < links.length; i++) links[i].setAttribute('href', 'tel:' + n.tel);
+    var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null), node, todo = [];
+    while ((node = walker.nextNode())) { if (node.nodeValue.indexOf(DEFAULT.display) > -1 && !/^(SCRIPT|STYLE|NOSCRIPT)$/.test(node.parentNode.nodeName)) todo.push(node); }
+    for (var j = 0; j < todo.length; j++) todo[j].nodeValue = todo[j].nodeValue.split(DEFAULT.display).join(n.display);
+    document.documentElement.setAttribute('data-call-number', n.tel);
   }
 
-  function apply(e164) {
-    if (!/^\+\d{10,15}$/.test(e164)) return;
-    document.querySelectorAll("[data-phone-href]").forEach(function (a) { a.setAttribute("href", "tel:" + e164); });
-    document.querySelectorAll("[data-phone-text]").forEach(function (s) { s.textContent = format(e164); });
+  function run() {
+    var held = read();
+    if (held) { write(held); apply(held); return; }   // keep it, and renew the hold on activity
+    var q = new URLSearchParams(location.search), gclid = q.get('gclid');
+    if (!gclid) return;
+    var ctl = typeof AbortController === 'function' ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, WAIT_MS);
+    fetch(API, { method: 'POST', headers: { 'content-type': 'application/json' }, keepalive: true, signal: ctl ? ctl.signal : undefined,
+      body: JSON.stringify({ k: KEY, gclid: gclid, campaign: q.get('campaign_id') || '', adgroup: q.get('ad_group_id') || '',
+        page: location.pathname, referrer: document.referrer || '' }) })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (n) { clearTimeout(timer); if (n && /^\+1\d{10}$/.test(n.number || '') && n.display) { var v = { tel: n.number, display: n.display }; write(v); apply(v); } })
+      .catch(function () { clearTimeout(timer); });
   }
-
-  var key, saved = null;
-  try { saved = sessionStorage.getItem(STORE); } catch (e) {}
-  if (saved) { try { saved = JSON.parse(saved); } catch (e) { saved = null; } }
-  if (!saved) {
-    key = source();
-    saved = { k: key, n: NUMBERS[key] || "" };
-    // A paid visit keeps its number even if the next page view has no gclid.
-    try { if (saved.n) sessionStorage.setItem(STORE, JSON.stringify(saved)); } catch (e) {}
-  }
-  if (saved.n) {
-    apply(saved.n);
-    (window.dataLayer = window.dataLayer || []).push({ event: "call_number_swapped", number_source: saved.k });
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run); else run();
+  ['click', 'scroll', 'touchstart'].forEach(function (ev) { window.addEventListener(ev, function () { var h = read(); if (h) write(h); }, { passive: true, once: false }); });
 })();

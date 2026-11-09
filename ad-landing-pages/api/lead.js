@@ -1,7 +1,7 @@
 /*
  * Lead form handler for the ad landing pages (Vercel Function, Node runtime, no packages).
  * One submit goes to both:
- *   1. TTR OS  POST https://ttr-portal.vercel.app/api/site/form  (key = env TTR_SITE_KEY; the public Jiveh key is the default)
+ *   1. TTR OS  POST https://ttr-portal.vercel.app/api/site/form  (key = env TTR_SITE_KEY)
  *   2. GoHighLevel inbound webhook                                (url = env GHL_WEBHOOK_URL)
  * The browser tracker is told to skip this form (data-ttr-skip), so TTR OS gets it once, from here.
  * The lead counts as received when at least one of the two accepted it.
@@ -81,7 +81,7 @@ export default async function handler(req, res) {
   const jobs = [];
 
   // 1. TTR OS (same URL-encoded shape the TTR tracker script uses: k, p, r, u, f_<field>).
-  const ttrKey = (process.env.TTR_SITE_KEY || "xIKk2Z_Pf3B3Tge2znW_0A").trim();
+  const ttrKey = (process.env.TTR_SITE_KEY || "").trim();
   if (ttrKey) {
     const body = new URLSearchParams({
       k: ttrKey,

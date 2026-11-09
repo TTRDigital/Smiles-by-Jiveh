@@ -5,7 +5,7 @@ A separate static project: it does not touch the main Next.js site. Preview only
 
 - `content/<slug>.json` static content (the fallback); `build.mjs` overlays the `landingPage` doc from Sanity project 3wz2011s when one exists, then writes `public/<slug>/index.html`.
 - `api/lead.js` Vercel Function: sends each lead to TTR OS (`/api/site/form`) and the GHL webhook.
-- `public/number.js` Twilio tracking-number swap (fill `NUMBERS` when the numbers exist).
+- `public/number.js` the Pro Wildlife dynamic-number script, pointed at the Jiveh site key. Inert until the number pool exists in TTR OS; the page keeps the office line (561) 763-4307 otherwise.
 - `sanity-landingPage.ts` schema; `scripts/seed-sanity.mjs` seed (`--dry-run` first, never overwrites).
 - `vercel.json` noindex header + host rewrites (`/` to `/offer/` or `/implant/` by host). Root directory in Vercel: `ad-landing-pages`.
 
