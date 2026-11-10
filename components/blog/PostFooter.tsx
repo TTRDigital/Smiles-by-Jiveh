@@ -31,8 +31,8 @@ export function RelatedPage({ service, treatments }: { service?: string; treatme
     <div className="mt-12" data-reveal="up">
       <aside aria-label="Related treatment" className="lift grid overflow-hidden rounded-[var(--radius-card)] bg-page sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
         {image ? (
-          <Link href={service} aria-label={title} className="relative block aspect-[16/10] sm:aspect-auto sm:min-h-[260px]">
-            <Image src={image.src} alt="" fill sizes="(min-width: 1024px) 440px, (min-width: 640px) 40vw, 100vw" className="object-cover" />
+          <Link href={service} aria-label={title} className="relative block aspect-[16/10] bg-mint sm:aspect-auto sm:min-h-[260px]">
+            <Image src={image.src} alt="" fill sizes="(min-width: 1024px) 440px, (min-width: 640px) 40vw, 100vw" className="object-contain" />
           </Link>
         ) : null}
         <div className="flex flex-col items-start justify-center p-6 md:p-8">
@@ -65,8 +65,8 @@ export function RelatedServices({ items }: { items: Treatment[] }) {
             <li key={t.slug} data-reveal="up" style={{ "--reveal-delay": `${i * 70}ms` } as CSSProperties}>
               <Link href={`/${t.slug}/`} className="lift group flex items-center gap-3 rounded-[14px] bg-white p-3 pr-4 ring-1 ring-line">
                 {img ? (
-                  <span className="relative block h-12 w-12 shrink-0 overflow-hidden rounded-full">
-                    <Image src={img.src} alt="" fill sizes="48px" className="object-cover" />
+                  <span className="relative block h-12 w-12 shrink-0 overflow-hidden rounded-full bg-mint">
+                    <Image src={img.src} alt="" fill sizes="48px" className="object-contain" />
                   </span>
                 ) : null}
                 <span className="text-[15px] font-semibold leading-tight transition-colors group-hover:text-teal-deep">{t.title}</span>
