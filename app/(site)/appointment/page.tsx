@@ -34,8 +34,10 @@ export default async function AppointmentPage() {
         <h1 className="text-[28px] leading-[1.2] md:text-[40px]">{page.heading}</h1>
         {page.text ? <p className="mt-3 text-[15px]">{page.text}</p> : null}
         {ghl ? (
-          <div className="mx-auto mt-6 max-w-[500px]">
-            <GhlFormEmbed formId={ghl} />
+          // GoHighLevel's script takes the iframe out of the layout while the form loads, which used to collapse this card and
+          // push everything below it back down (layout shift 0.57). 859px is the height it sizes this form to at every width.
+          <div className="mx-auto mt-6 min-h-[859px] max-w-[500px]">
+            <GhlFormEmbed formId={ghl} height={859} />
           </div>
         ) : (
           <div className="mx-auto mt-6 max-w-[500px] rounded-lg bg-white px-5 py-6 shadow-[0_2px_14px_rgb(16_24_40/0.12)] md:px-[18px]">
