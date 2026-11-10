@@ -31,7 +31,7 @@ import type {
 
 // alt falls back to the asset's own alt text or title (set once per photo in the media library); components fall back to the section heading.
 const IMG = `{ "src": asset->url, "alt": coalesce(alt, asset->altText, asset->title, ""), "width": asset->metadata.dimensions.width, "height": asset->metadata.dimensions.height }`;
-const SEO = `seo{ title, description, noIndex, "image": ogImage${IMG} }`;
+const SEO = `seo{ title, description, noIndex, schema, "image": ogImage${IMG} }`;
 const CTA = `{ label, href }`;
 const CARD = `{ icon, title, text, href, linkLabel }`;
 const FAQ = `{ question, answer }`;

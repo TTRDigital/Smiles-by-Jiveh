@@ -6,6 +6,15 @@ const groups = [
   { name: "seo", title: "SEO" },
 ];
 const seoField = defineField({ name: "seo", title: "SEO", type: "seo", group: "seo" });
+// The page's address on the site, e.g. /dental-implants/. TTR OS's page fixer finds a page by this. Filled by scripts/fill-paths.ts.
+const pathField = defineField({
+  name: "path",
+  title: "Page address (path)",
+  type: "string",
+  group: "seo",
+  description: "Where this page lives, with slashes, e.g. /dental-implants/. Used by TTR OS to find the page. Normally filled in automatically; do not change it.",
+  validation: (r) => r.custom((v) => (typeof v !== "string" || !v ? true : /^\/([a-z0-9-]+\/)*$/.test(v) || "Use slashes at both ends, e.g. /dental-implants/.")),
+});
 const section = (name: string, title: string, fields: ReturnType<typeof defineField>[]) =>
   defineField({ name, title, type: "object", group: "content", options: { collapsible: true, collapsed: false }, fields });
 const s = (name: string, title?: string) => defineField({ name, title, type: "string" });
@@ -191,6 +200,7 @@ export const homePage = defineType({
     section("contact", "Contact Us (form)", [s("eyebrow", "Small label"), s("heading"), s("lead", "Bold line"), t("text"), s("ghlFormId", "GoHighLevel form ID (type off for the website's own short form)"), t("formNote", "Note under the form")]),
     section("ctaBand", "Call to action band", [s("heading"), t("text"), ctas(), img("image", "Background")]),
     seoField,
+    pathField,
   ],
   preview: { prepare: () => ({ title: "Home" }) },
 });
@@ -227,6 +237,7 @@ export const aboutPage = defineType({
       }),
     ]),
     seoField,
+    pathField,
   ],
   preview: { prepare: () => ({ title: "Who We Are" }) },
 });
@@ -242,6 +253,7 @@ export const doctorPage = defineType({
     section("highlights", "Professional highlights", [s("heading"), strings("items", "Highlights")]),
     section("philosophy", "Philosophy quote", [s("eyebrow", "Small label"), t("quote")]),
     seoField,
+    pathField,
   ],
   preview: { prepare: () => ({ title: "Meet Dr. Jiveh" }) },
 });
@@ -272,6 +284,7 @@ export const insurancePage = defineType({
     ]),
     section("cta", "Closing section", [s("heading"), rt(), ctaF(), img()]),
     seoField,
+    pathField,
   ],
   preview: { prepare: () => ({ title: "Insurance & Payment Options" }) },
 });
@@ -296,6 +309,7 @@ export const appointmentPage = defineType({
     defineField({ name: "contactHeading", type: "string", group: "content" }),
     defineField({ name: "contactText", type: "text", rows: 2, group: "content", description: "Phone, email, address and hours come from Site settings." }),
     seoField,
+    pathField,
   ],
   preview: { prepare: () => ({ title: "Book An Appointment" }) },
 });
@@ -310,6 +324,7 @@ export const privacyPage = defineType({
     defineField({ name: "updated", title: "Effective date (as shown)", type: "string", group: "content" }),
     defineField({ name: "body", type: "richText", group: "content" }),
     seoField,
+    pathField,
   ],
   preview: { prepare: () => ({ title: "Privacy Policy" }) },
 });
@@ -357,6 +372,7 @@ export const treatment = defineType({
       description: "The page sections in order. FAQs are added as an FAQ section.",
     }),
     seoField,
+    pathField,
   ],
   orderings: [{ title: "Menu order", name: "order", by: [{ field: "order", direction: "asc" }] }],
   preview: { select: { title: "title", subtitle: "category", media: "hero.images.0" } },
@@ -413,6 +429,7 @@ export const post = defineType({
     defineField({ name: "image", type: "altImage", group: "content" }),
     defineField({ name: "body", type: "richText", group: "content" }),
     seoField,
+    pathField,
   ],
   orderings: [{ title: "Newest", name: "date", by: [{ field: "date", direction: "desc" }] }],
   preview: { select: { title: "title", subtitle: "date", media: "image" } },

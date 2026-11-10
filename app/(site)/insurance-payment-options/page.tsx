@@ -3,7 +3,7 @@ import { getInsurance } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { breadcrumbSchema } from "@/lib/schema";
 import { rich } from "@/lib/rich";
-import { JsonLd } from "@/components/ui/JsonLd";
+import { JsonLd, SeoSchema } from "@/components/ui/JsonLd";
 import { RichText } from "@/components/ui/RichText";
 import { PageHero } from "@/components/sections/PageHero";
 import { CardSection } from "@/components/sections/Card";
@@ -20,6 +20,7 @@ export default async function InsurancePage() {
   const p = page.payment;
   return (
     <>
+      <SeoSchema seo={page.seo} />
       <JsonLd data={breadcrumbSchema([{ name: "Insurance & Payment Options", path: "/insurance-payment-options/" }])} />
       <PageHero hero={page.hero} />
       <CardSection label={page.philosophy.heading}>

@@ -3,7 +3,7 @@ import { Clock4, Mail, MapPin, Phone } from "lucide-react";
 import { getAppointment, getSiteSettings } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { breadcrumbSchema } from "@/lib/schema";
-import { JsonLd } from "@/components/ui/JsonLd";
+import { JsonLd, SeoSchema } from "@/components/ui/JsonLd";
 import { AppointmentForm } from "@/components/forms/AppointmentForm";
 import { GhlFormEmbed } from "@/components/forms/GhlFormEmbed";
 
@@ -29,6 +29,7 @@ export default async function AppointmentPage() {
   const ghl = page.ghlFormId && page.ghlFormId.toLowerCase() !== "off" ? page.ghlFormId.trim() : "";
   return (
     <section className="container-x grid gap-5 py-[25px] lg:grid-cols-[minmax(0,55fr)_minmax(0,45fr)]">
+      <SeoSchema seo={page.seo} />
       <JsonLd data={breadcrumbSchema([{ name: "Book An Appointment", path: "/appointment/" }])} />
       <div className="card self-start px-5 py-8 md:p-[30px]">
         <h1 className="text-[28px] leading-[1.2] md:text-[40px]">{page.heading}</h1>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getHome, getSiteSettings, getTestimonials } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { HomeAbout, HomeBeforeAfter, HomeContact, HomeCtaBand, HomeDoctor, HomeHero, HomeIntro, HomeServices } from "@/components/home/HomeSections";
+import { SeoSchema } from "@/components/ui/JsonLd";
 import { Pill } from "@/components/ui/Pill";
 import { ReviewsWidget } from "@/components/sections/Reviews";
 
@@ -14,6 +15,7 @@ export default async function HomePage() {
   const [home, settings, reviews] = await Promise.all([getHome(), getSiteSettings(), getTestimonials()]);
   return (
     <>
+      <SeoSchema seo={home.seo} />
       <HomeHero hero={home.hero} />
       <HomeIntro intro={home.intro} />
       <HomeAbout about={home.about} />

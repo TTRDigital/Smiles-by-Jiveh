@@ -3,7 +3,7 @@ import Image from "next/image";
 import { getAbout } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { breadcrumbSchema } from "@/lib/schema";
-import { JsonLd } from "@/components/ui/JsonLd";
+import { JsonLd, SeoSchema } from "@/components/ui/JsonLd";
 import { Button } from "@/components/ui/Button";
 import { Pill } from "@/components/ui/Pill";
 import { RichText } from "@/components/ui/RichText";
@@ -21,6 +21,7 @@ export default async function WhoWeArePage() {
   const page = await getAbout();
   return (
     <div className="bg-white">
+      <SeoSchema seo={page.seo} />
       <JsonLd data={breadcrumbSchema([{ name: "Who We Are", path: "/who-we-are/" }])} />
       <section className="container-x grid items-center gap-10 py-10 md:grid-cols-2 md:gap-[70px] md:py-[60px]">
         <div className="md:p-2.5">
