@@ -3,7 +3,7 @@ import Image from "next/image";
 import { getDoctor, getSiteSettings } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { breadcrumbSchema, doctorSchema } from "@/lib/schema";
-import { JsonLd } from "@/components/ui/JsonLd";
+import { JsonLd, SeoSchema } from "@/components/ui/JsonLd";
 import { Button } from "@/components/ui/Button";
 import { Pill } from "@/components/ui/Pill";
 import { RichText } from "@/components/ui/RichText";
@@ -18,7 +18,7 @@ export default async function MeetDrJivehPage() {
   const [page, settings] = await Promise.all([getDoctor(), getSiteSettings()]);
   return (
     <div className="bg-white">
-      <JsonLd data={doctorSchema(settings)} />
+      <SeoSchema seo={page.seo} fallback={doctorSchema(settings)} />
       <JsonLd data={breadcrumbSchema([{ name: "Meet Dr. Jiveh", path: "/meet-dr-jiveh/" }])} />
       <section className="container-x grid items-center gap-10 py-10 md:grid-cols-2 md:gap-[70px] md:py-[60px]">
         <div className="md:p-2.5">

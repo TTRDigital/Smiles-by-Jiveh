@@ -23,6 +23,24 @@ export const seo = defineType({
       description: "Aim for under 160 characters.",
       validation: (r) => r.max(170).warning("Over 160 characters may be cut off in Google."),
     }),
+    defineField({
+      name: "schema",
+      title: "Structured data (JSON-LD)",
+      type: "text",
+      rows: 8,
+      description: "Optional. A JSON-LD object (or list of objects). When filled and valid it replaces the structured data the site generates for this page; leave empty to keep the generated one.",
+      validation: (r) =>
+        r.custom((v) => {
+          if (typeof v !== "string" || !v.trim()) return true;
+          try {
+            const x = JSON.parse(v);
+            const list = Array.isArray(x) ? x : [x];
+            return list.every((i) => typeof i === "object" && i !== null && !Array.isArray(i)) || "Must be a JSON object or a list of JSON objects.";
+          } catch {
+            return "Not valid JSON.";
+          }
+        }),
+    }),
     defineField({ name: "ogImage", title: "Social share image", type: "image", description: "1200 x 630. Leave empty to use the page's main photo." }),
     defineField({ name: "noIndex", title: "Hide from search engines", type: "boolean", initialValue: false }),
   ],

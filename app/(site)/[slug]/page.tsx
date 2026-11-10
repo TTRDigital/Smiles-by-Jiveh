@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { getShared, getSiteSettings, getTestimonials, getTreatment, getTreatments } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { breadcrumbSchema, treatmentSchema } from "@/lib/schema";
-import { JsonLd } from "@/components/ui/JsonLd";
+import { JsonLd, SeoSchema } from "@/components/ui/JsonLd";
 import { PageHero } from "@/components/sections/PageHero";
 import { Blocks } from "@/components/sections/Blocks";
 
@@ -38,7 +38,7 @@ export default async function TreatmentPage(props: PageProps<"/[slug]">) {
         ];
   return (
     <>
-      <JsonLd data={treatmentSchema(t, path)} />
+      <SeoSchema seo={t.seo} fallback={treatmentSchema(t, path)} />
       <JsonLd data={breadcrumbSchema(crumbs)} />
       <PageHero hero={t.hero} />
       <Blocks blocks={t.blocks} shared={shared} settings={settings} reviews={reviews} />

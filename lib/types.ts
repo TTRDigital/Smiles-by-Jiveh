@@ -5,7 +5,7 @@ import type { IconName } from "@/lib/icons";
 
 export type Img = { src: string; alt: string; width?: number; height?: number };
 export type Cta = { label: string; href: string };
-export type Seo = { title: string; description: string; image?: Img; noIndex?: boolean };
+export type Seo = { title: string; description: string; image?: Img; noIndex?: boolean; /** JSON-LD (text) from the CMS; replaces the generated schema when valid. */ schema?: string };
 
 /** Rich text (Portable Text). Built-in content is written with rich() from lib/rich.ts. */
 export type Rich = PortableTextBlock[];
