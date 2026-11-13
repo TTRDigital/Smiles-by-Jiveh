@@ -16,7 +16,15 @@ export async function sanityFetch<T>(query: string, params: Record<string, unkno
 
   // Draft preview (Vercel previews only): when draft mode is on, read unpublished drafts straight from the API with the read token.
   // The token is only ever used in draft mode, which only a correctly signed /api/preview link can turn on.
-  const draft = process.env.VERCEL_ENV === "preview" && !!process.env.SANITY_READ_TOKEN && (await draftMode()).isEnabled;
+  // draftMode() throws outside a request (generateStaticParams at build time); then there is no draft mode.
+  let draft = false;
+  if (process.env.VERCEL_ENV === "preview" && process.env.SANITY_READ_TOKEN) {
+    try {
+      draft = (await draftMode()).isEnabled;
+    } catch {
+      draft = false;
+    }
+  }
 
   const search = new URLSearchParams({ query, perspective: draft ? "drafts" : "published" });
   for (const [key, value] of Object.entries(params)) {
