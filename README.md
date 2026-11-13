@@ -15,7 +15,7 @@ Next.js 16 (App Router, static export) + Sanity Studio embedded at `/cms`, Tailw
 | `/appointment/` | GoHighLevel appointment form, contact info, map (`/appoinment/` redirects here, in `.htaccess` and `vercel.json`) |
 | 24 treatment pages, e.g. `/general-dentistry/`, `/dental-implants/` | One template (`app/(site)/[slug]`), content in `lib/data/treatments.ts` and Sanity "Treatment" documents |
 | `/privacy-policy/` | New (the old site had none); linked from the form and footer |
-| `/blog/` | Lists posts from `/cms` (none yet: hidden from search until the first post) |
+| `/blog/` | Blog posts from `lib/data/posts.ts` and `/cms` (hidden from search and the sitemap until the first post). Each post shows Dr. Jiveh's byline, a Related treatment box and an author box |
 | `/cms` | Sanity Studio |
 
 ## Setup
@@ -69,7 +69,7 @@ Vercel has no PHP and ignores `.htaccess`, so Vercel builds (the `VERCEL` variab
 
 - the website's own form (when a GHL form ID is `off`) posts to `app/api/lead/route.vercel.ts`, the same handler as `lead.php` (keep the two in sync);
 - `/cms` inner URLs render on demand;
-- redirects (`/appoinment/`, and `/api/lead.php` to the Vercel handler) are in `vercel.json`.
+- redirects (`/appoinment/`, five old `.html` addresses Google still lists, and `/api/lead.php` to the Vercel handler) are in `vercel.json`.
 
 In Vercel > Project > Settings > Environment Variables, set `GHL_WEBHOOK_URL` (and `NEXT_PUBLIC_GHL_CHAT_WIDGET_ID` for the chat), then redeploy. Without them, the website's own form (only used when a GHL form ID is `off`) asks visitors to call and the chat stays hidden. Every Vercel page sends `X-Robots-Tag: noindex` (`vercel.json`).
 
