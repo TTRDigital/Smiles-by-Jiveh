@@ -1,8 +1,11 @@
-import type { Faq, SiteSettings, Treatment } from "@/lib/types";
+import type { Faq, Post, SiteSettings, Treatment } from "@/lib/types";
 import { absoluteUrl, siteUrl } from "@/lib/site";
 import { images } from "@/lib/data/images";
+import { postAuthor } from "@/lib/data/posts";
+import { readingMinutes, wordCount } from "@/lib/post";
 
 const BUSINESS_ID = `${siteUrl}/#dentist`;
+const DOCTOR_ID = `${siteUrl}/meet-dr-jiveh/#dr-jiveh`;
 
 /** Dentist (a LocalBusiness) for the whole site, from the practice's own address, phone and hours. */
 export function businessSchema(s: SiteSettings) {
@@ -20,7 +23,7 @@ export function businessSchema(s: SiteSettings) {
     openingHours: s.openingHours,
     ...(s.mapsUrl ? { hasMap: s.mapsUrl } : {}),
     areaServed: ["Royal Palm Beach", "Wellington", "Palm Beach County"].map((name) => ({ "@type": "City", name })),
-    founder: { "@id": `${siteUrl}/meet-dr-jiveh/#dr-jiveh` },
+    founder: { "@id": DOCTOR_ID },
     knowsLanguage: ["en", "es"],
     sameAs: [s.mapsUrl, ...s.social.map((x) => x.href)].filter(Boolean),
   };
@@ -30,7 +33,7 @@ export function doctorSchema(s: SiteSettings) {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
-    "@id": `${siteUrl}/meet-dr-jiveh/#dr-jiveh`,
+    "@id": DOCTOR_ID,
     name: "Dr. Farokh Jiveh",
     jobTitle: "Dentist",
     url: absoluteUrl("/meet-dr-jiveh/"),
@@ -68,6 +71,30 @@ export function treatmentSchema(t: Treatment, path: string) {
     description: t.seo.description,
     url: absoluteUrl(path),
     about: { "@type": "MedicalProcedure", name: t.title },
+    publisher: { "@id": BUSINESS_ID },
+  };
+}
+
+/** A blog post: written by Dr. Jiveh (the Person on /meet-dr-jiveh/) unless another author is named, published by the practice; with the word count and reading time. */
+export function postSchema(p: Post, path: string) {
+  const author = p.author || postAuthor.name;
+  const byDoctor = author === postAuthor.name;
+  const words = wordCount(p.body);
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: p.title,
+    ...(p.excerpt ? { description: p.excerpt } : {}),
+    url: absoluteUrl(path),
+    mainEntityOfPage: { "@type": "WebPage", "@id": absoluteUrl(path) },
+    ...(p.date ? { datePublished: p.date, dateModified: p.date } : {}),
+    ...(p.image ? { image: p.image.src.startsWith("http") ? p.image.src : absoluteUrl(p.image.src) } : {}),
+    ...(p.category ? { articleSection: p.category } : {}),
+    ...(words ? { wordCount: words, timeRequired: `PT${readingMinutes(words)}M` } : {}),
+    inLanguage: "en-US",
+    author: byDoctor
+      ? { "@type": "Person", "@id": DOCTOR_ID, name: author, jobTitle: postAuthor.jobTitle, url: absoluteUrl(postAuthor.path) }
+      : { "@type": "Person", name: author },
     publisher: { "@id": BUSINESS_ID },
   };
 }

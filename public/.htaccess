@@ -22,6 +22,12 @@ ErrorDocument 404 /404.html
   # Old WordPress URLs that changed. Targets keep the visitor's host so a
   # staging domain stays on staging.
   RewriteRule ^appoinment/?$ /appointment/ [R=301,L]
+  # Older .html addresses Google still lists (also in vercel.json).
+  RewriteRule ^all-on-4-teeth-in-a-day\.html/?$ /all-on-x-full-arch-restoration/ [R=301,L]
+  RewriteRule ^dental-implants\.html/?$ /dental-implants/ [R=301,L]
+  RewriteRule ^dental-veneers\.html/?$ /dental-veneers/ [R=301,L]
+  RewriteRule ^reconstructive-dentistry\.html/?$ /reconstructive-dentistry/ [R=301,L]
+  RewriteRule ^dental-bridges\.html/?$ /dental-bridges/ [R=301,L]
   # WordPress leftovers: feeds, sitemap and the REST API go home or 410.
   RewriteRule ^(feed|comments/feed)/?$ / [R=301,L]
   RewriteRule ^wp-sitemap\.xml$ /sitemap.xml [R=301,L]

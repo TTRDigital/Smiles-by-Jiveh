@@ -172,12 +172,33 @@ export type AppointmentContent = {
 
 export type LegalContent = { heading: string; updated?: string; body: Rich; seo: Seo };
 
+/** A photo inside an article, shown before the H2 named in `before` (the heading's text, as written in the body). */
+export type PostFigure = { before: string; image: Img; caption?: string };
+/** One step of the numbered timeline on a post ("what to expect" posts). */
+export type PostStep = { title: string; text?: string };
+/** One line of the Quick facts card on a post. */
+export type PostFact = { label: string; value: string };
+
 export type Post = {
   slug: string;
   title: string;
   excerpt?: string;
   date?: string;
+  /** Who wrote it, shown in the byline and the author box. Empty means Dr. Farokh Jiveh. */
+  author?: string;
+  /** Shown above the title, e.g. "Dental Implants" or "Cosmetic Dentistry". */
+  category?: string;
+  /** The treatment page the post supports, e.g. "/dental-veneers/", shown as a Related treatment card under the article. */
+  service?: string;
   image?: Img;
   body: Rich;
+  /** Photos inside the article, each before one H2. Two or three per post, from the site's own photo library, with a caption. */
+  figures?: PostFigure[];
+  /** Numbered step timeline shown under the In short box, for "what to expect" posts. */
+  steps?: { heading?: string; items: PostStep[] };
+  /** Quick facts card shown under the In short box. */
+  facts?: { heading?: string; items: PostFact[] };
+  /** One sentence for the booking band in the middle of the article. Empty: a general line. */
+  ctaText?: string;
   seo?: Seo;
 };

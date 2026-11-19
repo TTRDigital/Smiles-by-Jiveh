@@ -75,6 +75,7 @@ export const images = {
   baFrontTeeth: { src: "/images/before-after/front-teeth.jpg", alt: "Before and after: broken, discolored front teeth restored", width: 1200, height: 630 },
   baPortraitCurly: { src: "/images/before-after/portrait-woman.jpg", alt: "Patient portrait before and after her smile makeover", width: 1000, height: 1475 },
   compare1: { src: "/images/before-after/smile-1.webp", alt: "Before and after smile transformation by Smiles By Jiveh", width: 1080, height: 1350 },
+  veneers3dPrinted: { src: "/images/blog/3d-printed-composite-veneers-before-after.png", alt: "Before and after 3D-printed composite veneers", width: 225, height: 225 },
   compare2: { src: "/images/before-after/smile-2.webp", alt: "Before and after porcelain veneers by Smiles By Jiveh", width: 1080, height: 1350 },
   compare3: { src: "/images/before-after/smile-3.webp", alt: "Before and after smile enhancement by Smiles By Jiveh", width: 1080, height: 1350 },
   compare4: { src: "/images/before-after/smile-4.webp", alt: "Before and after smile transformation by Smiles By Jiveh", width: 1080, height: 1350 },
