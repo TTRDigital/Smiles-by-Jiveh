@@ -108,6 +108,15 @@ function PostFigure({ figure }: { figure: PostFigureData }) {
   const { image, caption } = figure;
   const known = !!image.width && !!image.height;
   const portrait = known && image.height! > image.width!;
+  // A small original (narrower than the photo column on a phone) is shown at its own size, never stretched.
+  if (known && image.width! < 320) {
+    return (
+      <figure className="post-figure" data-reveal="up">
+        <Image src={image.src} alt={image.alt} width={image.width!} height={image.height!} sizes={`${image.width}px`} className="rounded-[16px]" />
+        {caption ? <figcaption>{caption}</figcaption> : null}
+      </figure>
+    );
+  }
   return (
     <figure className={`post-figure ${portrait ? "post-figure-portrait" : ""}`} data-reveal="up">
       <div className="relative overflow-hidden rounded-[16px] bg-mint" style={{ aspectRatio: known ? `${image.width} / ${image.height}` : "16 / 10" }}>
