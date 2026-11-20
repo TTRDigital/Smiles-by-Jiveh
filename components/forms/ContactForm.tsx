@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { Check, CircleAlert, LoaderCircle } from "lucide-react";
 import { ATTRIBUTION_STORAGE_KEY, attributionKeys } from "@/lib/lead-options";
+import { preloadRecaptcha, recaptchaToken } from "@/lib/spam-guard";
 
 type Field = "name" | "email" | "phone" | "message";
 type Values = Record<Field, string>;
@@ -35,6 +36,7 @@ export function ContactForm({ phone, phoneHref, practice }: { phone: string; pho
 
   useEffect(() => {
     startedAt.current = Date.now();
+    preloadRecaptcha();
   }, []);
 
   const set = (f: Field, v: string) => {
@@ -67,6 +69,8 @@ export function ContactForm({ phone, phoneHref, practice }: { phone: string; pho
       /* storage blocked */
     }
     const honeypot = (formRef.current?.elements.namedItem("hp_sbj") as HTMLInputElement | null)?.value ?? "";
+    const elapsed = Date.now() - startedAt.current;
+    const token = await recaptchaToken("lead");
     const smsText = formRef.current?.querySelector(`#${CSS.escape(`${uid}-sms-text`)}`)?.textContent ?? "";
 
     try {
@@ -79,7 +83,8 @@ export function ContactForm({ phone, phoneHref, practice }: { phone: string; pho
           sms_consent: sms,
           consent_text: sms ? smsText.replace(/\s+/g, " ").trim() : "",
           hp_sbj: honeypot,
-          elapsed_ms: Date.now() - startedAt.current,
+          elapsed_ms: elapsed,
+          recaptcha_token: token,
           page_url: window.location.href,
           landing_page: attribution.landing_page ?? "",
           referrer: attribution.referrer ?? document.referrer,
