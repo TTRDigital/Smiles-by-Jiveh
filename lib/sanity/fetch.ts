@@ -1,6 +1,7 @@
 import "server-only";
 
 import { draftMode } from "next/headers";
+import { unstable_rethrow } from "next/navigation";
 import { apiVersion, dataset, projectId } from "@/sanity/env";
 
 /**
@@ -16,7 +17,16 @@ export async function sanityFetch<T>(query: string, params: Record<string, unkno
 
   // Draft preview (Vercel previews only): when draft mode is on, read unpublished drafts straight from the API with the read token.
   // The token is only ever used in draft mode, which only a correctly signed /api/preview link can turn on.
-  const draft = process.env.VERCEL_ENV === "preview" && !!process.env.SANITY_READ_TOKEN && (await draftMode()).isEnabled;
+  // Outside a request (generateStaticParams at build time) draftMode() throws: that is "not in draft mode". Next's own signals are rethrown.
+  const isDraft = async () => {
+    try {
+      return (await draftMode()).isEnabled;
+    } catch (e) {
+      unstable_rethrow(e);
+      return false;
+    }
+  };
+  const draft = process.env.VERCEL_ENV === "preview" && !!process.env.SANITY_READ_TOKEN && (await isDraft());
 
   const search = new URLSearchParams({ query, perspective: draft ? "drafts" : "published" });
   for (const [key, value] of Object.entries(params)) {

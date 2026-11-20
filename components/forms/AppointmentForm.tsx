@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { CalendarDays, Check, CircleAlert, LoaderCircle, Mail } from "lucide-react";
 import { ATTRIBUTION_STORAGE_KEY, attributionKeys, serviceOptions } from "@/lib/lead-options";
+import { preloadRecaptcha, recaptchaToken } from "@/lib/spam-guard";
 
 type Field = "first_name" | "last_name" | "phone" | "email" | "preferred_time" | "service" | "message";
 type Values = Record<Field, string>;
@@ -39,6 +40,7 @@ export function AppointmentForm({ phone, phoneHref, practice }: { phone: string;
 
   useEffect(() => {
     startedAt.current = Date.now();
+    preloadRecaptcha();
     const d = new Date();
     setMinDate(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}T00:00`);
   }, []);
@@ -74,6 +76,8 @@ export function AppointmentForm({ phone, phoneHref, practice }: { phone: string;
       /* storage blocked */
     }
     const honeypot = (formRef.current?.elements.namedItem("hp_sbj") as HTMLInputElement | null)?.value ?? "";
+    const elapsed = Date.now() - startedAt.current;
+    const token = await recaptchaToken("lead");
     const consentText = formRef.current?.querySelector(`#${CSS.escape(`${uid}-consent-text`)}`)?.textContent ?? "";
 
     try {
@@ -85,7 +89,8 @@ export function AppointmentForm({ phone, phoneHref, practice }: { phone: string;
           consent: true,
           consent_text: consentText.replace(/\s+/g, " ").trim(),
           hp_sbj: honeypot,
-          elapsed_ms: Date.now() - startedAt.current,
+          elapsed_ms: elapsed,
+          recaptcha_token: token,
           page_url: window.location.href,
           landing_page: attribution.landing_page ?? "",
           referrer: attribution.referrer ?? document.referrer,

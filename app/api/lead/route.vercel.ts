@@ -6,6 +6,7 @@
  * refused with 503 and the form asks the visitor to call.
  */
 import { MIN_FILL_MS, serviceOptions } from "@/lib/lead-options";
+import { clientIp, guardLead, rateLimited, SPAM_LABEL } from "@/lib/spam-guard";
 
 type In = Record<string, unknown>;
 
@@ -27,6 +28,7 @@ export async function POST(request: Request) {
       return reply(403, { ok: false, error: "Forbidden." });
     }
   }
+  if (rateLimited(clientIp(request))) return reply(429, { ok: false, error: "Too many requests. Please call us instead." });
 
   let input: In;
   try {
@@ -60,12 +62,13 @@ export async function POST(request: Request) {
   const smsConsent = form === "appointment" ? true : input.sms_consent === true;
   if (Object.keys(errors).length) return reply(422, { ok: false, error: "Please check the form.", fields: errors });
 
-  // Spam: drop only when both signals agree (hidden field filled AND sent too fast).
-  const trapFilled = text(input, "hp_sbj", 200) !== "";
-  const elapsed = Number.isInteger(input.elapsed_ms) ? (input.elapsed_ms as number) : null;
-  const tooFast = elapsed !== null && elapsed < MIN_FILL_MS;
-  if (trapFilled && tooFast) return reply(200, { ok: true });
-  const spamCheck = trapFilled ? "suspect: hidden field filled" : tooFast ? `suspect: sent in ${elapsed} ms` : "ok";
+  // Spam (lib/spam-guard.ts): a bot gets the usual ok answer and nothing is sent; a doubtful lead is still sent, marked "Possible spam".
+  const verdict = await guardLead({
+    trap: input.hp_sbj, elapsedMs: input.elapsed_ms, minFillMs: MIN_FILL_MS,
+    texts: [lead.name, lead.first_name, lead.last_name, lead.email, lead.message], recaptchaToken: input.recaptcha_token, ip: clientIp(request),
+  });
+  if (verdict.action === "drop") return reply(200, { ok: true });
+  const spamCheck = verdict.note;
 
   const webhook = (process.env.GHL_WEBHOOK_URL ?? "").trim().replace(/^["']|["']$/g, "");
   if (!webhook.startsWith("https://")) {
@@ -91,10 +94,10 @@ export async function POST(request: Request) {
         .replace(/[^a-z0-9]+/g, "-")
         .replace(/^-|-$/g, "")}`,
     );
-  if (spamCheck !== "ok") tags.push("suspected-spam");
+  if (verdict.possibleSpam) tags.unshift(SPAM_LABEL, "suspected-spam");
 
   const payload: Record<string, unknown> = {
-    source: form === "contact" ? "Website contact form" : "Website appointment form",
+    source: `${verdict.possibleSpam ? `${SPAM_LABEL}: ` : ""}${form === "contact" ? "Website contact form" : "Website appointment form"}`,
     form,
     submitted_at: new Date().toISOString(),
     name: `${lead.first_name} ${lead.last_name}`.trim(),
