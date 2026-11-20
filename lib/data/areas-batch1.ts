@@ -10,6 +10,7 @@ import { images } from "./images.ts";
  * Same rules and look as areas.ts and areas-more.ts: only facts already on this site or in the practice's brain, the approved
  * insurance line word for word, no prices, no promised results or timelines, no health or money claims, no claim that one
  * treatment is better than another, no patient stories. Written in Dr. Jiveh's own approach: conservative, least invasive first.
+ * The trust strip leaves out "Since 1997" because the brain lists the start date as unconfirmed (Ben, TTR-2488).
  * DRAFTS FOR REVIEW: nothing goes live until Kia approves and Dr. Jiveh approves in writing.
  */
 
@@ -26,7 +27,6 @@ const stats = (): Block => ({
   items: [
     { value: "4.9", label: "on Google", source: "rating" },
     { value: "111", label: "Google reviews" },
-    { value: "Since 1997", label: "serving patients" },
     { value: "Private", label: "fee for service practice" },
   ],
 });
@@ -243,8 +243,8 @@ export const batch1Pages: Treatment[] = [
       ),
       prose(
         "Implant-Supported Dentures", "Dentures on Implants",
-        "An implant-supported denture is held in place by dental implants placed in the jawbone, rather than resting on the gums alone. Patients who find a traditional denture loose or uncomfortable often ask about this option.",
-        "Implants need enough healthy jawbone, so Dr. Jiveh evaluates your bone and overall health with advanced 3D imaging first. If bone has been lost, grafting can often restore enough support. Anesthesia and sedation are available to keep you comfortable during implant treatment.",
+        "An implant-supported denture is held in place by dental implants placed in the jawbone, rather than resting on the gums alone.",
+        "Whether it suits you depends on your jawbone and overall health, so Dr. Jiveh evaluates both with advanced 3D imaging and explains what he finds.",
         "If you would prefer teeth that are fixed in place and do not come out, ask about [All-on-X full arch implants](/all-on-x-wellington-palm-beach-county/). We do not push one option over another: we explain each one and recommend what fits you.",
       ),
       {
@@ -271,7 +271,7 @@ export const batch1Pages: Treatment[] = [
       location("Dentures at Our Royal Palm Beach Office", "Patients from Wellington and across Palm Beach County visit us."),
       faq([
         { question: "What is the difference between dentures and implant-supported dentures?", answer: "Traditional dentures rest on the gums and are removable. Implant-supported dentures are held in place by dental implants placed in the jawbone. Dr. Jiveh explains both so you can choose what fits you." },
-        { question: "Am I a candidate for implant-supported dentures?", answer: "Implants need enough healthy jawbone and good overall health. Dr. Jiveh evaluates your bone with 3D imaging at your consultation. If bone has been lost, grafting can often restore enough support." },
+        { question: "Am I a candidate for implant-supported dentures?", answer: "It depends on your jawbone and overall health. Dr. Jiveh evaluates both with 3D imaging at your consultation and explains your options." },
         { question: "What is the difference between implant-supported dentures and All-on-X?", answer: "Implant-supported dentures are held by implants, while All-on-X is a full arch of fixed teeth on a few implants that only a dentist removes. We explain both at your visit." },
         { question: "How do I care for my dentures?", answer: "Rinse them after meals, brush them daily with a denture brush and a non-abrasive cleaner, and soak them overnight in a denture solution. Keep your regular checkups so we can check the fit." },
         { question: "Will my dentures need adjusting?", answer: "Your mouth changes shape over time, so dentures may need adjustment or replacement. Regular checkups let us check the fit." },
