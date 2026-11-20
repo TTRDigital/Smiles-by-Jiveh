@@ -1,6 +1,7 @@
 import type { Block, Treatment } from "../types";
 import type { IconName } from "../icons.ts";
 import { extraFaqs, extraProse, morePages } from "./areas-more.ts";
+import { batch1Pages } from "./areas-batch1.ts";
 import { rich } from "../rich.ts";
 import { images } from "./images.ts";
 
@@ -484,4 +485,5 @@ export const areaTreatments: Treatment[] = [
     return { ...t, blocks };
   }),
   ...morePages,
+  ...batch1Pages,
 ];
