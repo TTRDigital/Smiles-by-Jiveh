@@ -95,10 +95,16 @@ npm run build      # production build (static export to out/)
 - `public/.htaccess`, `public/api/lead.php`: the SiteGround side (redirects, headers, form).
 - `sanity/schemaTypes`: CMS schema. `scripts/seed.ts`: loads the built-in content into Sanity.
 
-## Draft preview for TTR OS's page fixer (Vercel previews only)
+## Draft preview for TTR OS's page fixer (any Vercel deployment, production included)
 
-`GET /api/preview?path=/dental-implants/&exp=<unix seconds>&sig=<hex>` with `sig = HMAC-SHA256(PREVIEW_SECRET, "<path>\n<exp>")` (hex) turns on Next draft mode and redirects to the page, which then reads Sanity **drafts** (`lib/sanity/fetch.ts`). `exp` must be in the future and at most 30 days away; a bad signature, an expired link, a non-preview deployment or a missing secret all answer 404. The route is `app/api/preview/route.vercel.ts`, so it only exists in Vercel builds, never in the SiteGround export.
+`GET /api/preview?path=/dental-implants/&exp=<unix seconds>&sig=<hex>` with `sig = HMAC-SHA256(PREVIEW_SECRET, "<path>\n<exp>")` (hex) turns on Next draft mode and redirects to the page, which then reads Sanity **drafts** (`lib/sanity/fetch.ts`). It works on the production deployment too, so TTR OS can open a draft without a separate preview deployment; visitors without the signed link never get draft mode. `exp` must be in the future and at most 30 days away; a bad signature, an expired link, or a missing `PREVIEW_SECRET` or `SANITY_READ_TOKEN` all answer 404. The route is `app/api/preview/route.vercel.ts`, so it only exists in Vercel builds, never in the SiteGround export.
 
 Set in the Vercel project (names only; never in the repo): `PREVIEW_SECRET`, `SANITY_READ_TOKEN` (Viewer token, used only in draft mode).
+
+## Publish → refresh on Vercel (`/api/revalidate`)
+
+`POST /api/revalidate` is a Sanity webhook target (`app/api/revalidate/route.vercel.ts`, Vercel builds only). It checks the `sanity-webhook-signature` header (`t=<ms>,v1=<base64url HMAC-SHA256(SANITY_REVALIDATE_SECRET, "<t>.<body>")>`, constant-time) and then refreshes the cache tags of the document's `_id` and `_type`, plus the page at the body's `path` when it is a safe site-relative path. Missing secret: 503; bad signature: 401. Every published Sanity read is tagged `sanity`, the document id (singletons) or the type (collections).
+
+Sanity webhook: URL `https://smilesbyjiveh.com/api/revalidate`, POST, create/update/delete, projection `{_id, _type, path}`, secret = the value of `SANITY_REVALIDATE_SECRET` in Vercel. The site uses trailing slashes (`trailingSlash: true`), so paths look like `/dental-implants/`.
 
 Page fields the fixer uses: `seo.title`, `seo.description`, `seo.schema` (JSON-LD text; replaces the generated structured data when valid), image `alt`, and `path` (e.g. `/dental-implants/`). `npm run fill-paths` fills `path` on existing documents (`-- --dry-run` first).
