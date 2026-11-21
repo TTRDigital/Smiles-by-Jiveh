@@ -3,9 +3,10 @@ import { draftMode } from "next/headers";
 import { redirect } from "next/navigation";
 
 /*
- * Signed draft preview for TTR OS's page fixer. Vercel preview deployments only:
- * the file is named *.vercel.ts, so the SiteGround static export never contains
- * it, and any other Vercel environment (production) answers 404.
+ * Signed draft preview for TTR OS's page fixer. Any Vercel deployment, the
+ * production one included (no separate preview deployment needed): the file
+ * is named *.vercel.ts, so the SiteGround static export never contains it.
+ * Without PREVIEW_SECRET and SANITY_READ_TOKEN it answers 404.
  *
  *   GET /api/preview?path=/dental-implants/&exp=<unix seconds>&sig=<hex>
  *   sig = HMAC-SHA256(PREVIEW_SECRET, "<path>\n<exp>"), hex.
@@ -20,7 +21,7 @@ const notFound = () => new Response("Not found", { status: 404, headers: { "Cach
 
 export async function GET(request: Request) {
   const secret = process.env.PREVIEW_SECRET;
-  if (process.env.VERCEL_ENV !== "preview" || !secret) return notFound();
+  if (!secret || !process.env.SANITY_READ_TOKEN) return notFound();
 
   const params = new URL(request.url).searchParams;
   const path = params.get("path") ?? "";
