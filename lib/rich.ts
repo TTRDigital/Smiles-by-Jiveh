@@ -4,7 +4,8 @@ import type { Rich } from "@/lib/types";
  * Writes Portable Text from short markdown-like lines, for the built-in
  * content in lib/data (the same format Sanity stores):
  *   "A paragraph with **bold**, *italic* and [a link](/appointment/)."
- *   "- bullet item"     "1. numbered item"     "#### Small heading"
+ *   "- bullet item"     "1. numbered item"
+ *   "## Heading"        "### Subheading"       "#### Small heading"
  * A "\n" inside a line is a line break.
  */
 
@@ -43,6 +44,12 @@ export function rich(...lines: string[]): Rich {
     if (text.startsWith("#### ")) {
       style = "h4";
       text = text.slice(5);
+    } else if (text.startsWith("### ")) {
+      style = "h3";
+      text = text.slice(4);
+    } else if (text.startsWith("## ")) {
+      style = "h2";
+      text = text.slice(3);
     } else if (text.startsWith("- ")) {
       listItem = "bullet";
       text = text.slice(2);
