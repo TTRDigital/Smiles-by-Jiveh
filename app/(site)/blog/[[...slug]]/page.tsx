@@ -4,15 +4,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getPosts } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
-import { breadcrumbSchema } from "@/lib/schema";
-import { formatDate } from "@/lib/text";
-import { JsonLd } from "@/components/ui/JsonLd";
-import { RichText } from "@/components/ui/RichText";
+import { PostArticle } from "@/components/blog/PostArticle";
 
 /*
  * Blog: /blog/ lists the posts published in /cms > Blog posts, /blog/<url>/
  * shows one. The old site had no posts, so until the first one is published
  * the list page is hidden from search engines and not in the menu or sitemap.
+ *
+ * Only prerendered posts exist here (the static export needs that). In draft
+ * mode on Vercel, proxy.vercel.ts sends /blog/<url>/ to blog-draft-preview,
+ * which can also open a draft that was never published.
  */
 export const dynamicParams = false;
 
@@ -41,26 +42,7 @@ export default async function BlogPage(props: PageProps<"/blog/[[...slug]]">) {
   if (slug?.length) {
     const post = posts.find((p) => p.slug === slug[0]);
     if (!post) notFound();
-    return (
-      <article className="container-x py-[25px]">
-        <JsonLd
-          data={breadcrumbSchema([
-            { name: "Blog", path: "/blog/" },
-            { name: post.title, path: `/blog/${post.slug}/` },
-          ])}
-        />
-        <div className="card mx-auto max-w-[900px] px-5 py-10 md:px-[60px] md:py-[50px]">
-          {post.date ? <p className="text-sm text-muted">{formatDate(post.date)}</p> : null}
-          <h1 className="mt-2 text-[32px] leading-[1.2] md:text-[45px]">{post.title}</h1>
-          {post.image ? (
-            <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-[20px]">
-              <Image src={post.image.src} alt={post.image.alt || post.title} fill sizes="(min-width: 960px) 780px, 100vw" className="object-cover" />
-            </div>
-          ) : null}
-          <RichText value={post.body} className="mt-8 md:text-lg" />
-        </div>
-      </article>
-    );
+    return <PostArticle post={post} />;
   }
 
   return (

@@ -1,6 +1,7 @@
 import "server-only";
 
 import { draftMode } from "next/headers";
+import { unstable_rethrow } from "next/navigation";
 import { apiVersion, dataset, projectId } from "@/sanity/env";
 
 /**
@@ -19,7 +20,7 @@ export async function sanityFetch<T>(query: string, params: Record<string, unkno
 
   // Draft preview (any Vercel deployment, production included): when draft mode is on, read unpublished drafts straight from the API with
   // the read token. The token is only ever used in draft mode, which only a correctly signed /api/preview link (PREVIEW_SECRET) can turn on.
-  const draft = !!process.env.VERCEL && !!process.env.PREVIEW_SECRET && !!process.env.SANITY_READ_TOKEN && (await draftMode()).isEnabled;
+  const draft = !!process.env.VERCEL && !!process.env.PREVIEW_SECRET && !!process.env.SANITY_READ_TOKEN && (await isDraftMode());
 
   const search = new URLSearchParams({ query, perspective: draft ? "drafts" : "published" });
   for (const [key, value] of Object.entries(params)) {
@@ -38,5 +39,16 @@ export async function sanityFetch<T>(query: string, params: Record<string, unkno
   } catch (error) {
     console.warn("[sanity] fetch failed, using fallbacks", error);
     return null;
+  }
+}
+
+// draftMode() throws outside a request (generateStaticParams at build time, where the
+// Vercel build has PREVIEW_SECRET set): there is no draft there, so read published content.
+async function isDraftMode(): Promise<boolean> {
+  try {
+    return (await draftMode()).isEnabled;
+  } catch (error) {
+    unstable_rethrow(error);
+    return false;
   }
 }

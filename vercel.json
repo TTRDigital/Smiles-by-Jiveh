@@ -22,8 +22,9 @@
       "statusCode": 301
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!api/).*)",
       "has": [{ "type": "host", "value": "smiles-by-jiveh.vercel.app" }],
+      "missing": [{ "type": "cookie", "key": "__prerender_bypass" }],
       "destination": "https://smilesbyjiveh.com/$1",
       "statusCode": 301
     }
