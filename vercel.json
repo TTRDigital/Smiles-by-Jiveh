@@ -57,7 +57,10 @@
     },
     {
       "source": "/(.*)",
-      "missing": [{ "type": "host", "value": "smilesbyjiveh.com" }],
+      "missing": [
+        { "type": "host", "value": "smilesbyjiveh.com" },
+        { "type": "cookie", "key": "__prerender_bypass" }
+      ],
       "headers": [
         {
           "key": "X-Robots-Tag",
