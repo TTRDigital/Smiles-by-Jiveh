@@ -97,7 +97,11 @@ npm run build      # production build (static export to out/)
 
 ## Draft preview for TTR OS's page fixer (any Vercel deployment, production included)
 
-`GET /api/preview?path=/dental-implants/&exp=<unix seconds>&sig=<hex>` with `sig = HMAC-SHA256(PREVIEW_SECRET, "<path>\n<exp>")` (hex) turns on Next draft mode and redirects to the page, which then reads Sanity **drafts** (`lib/sanity/fetch.ts`). It works on the production deployment too, so TTR OS can open a draft without a separate preview deployment; visitors without the signed link never get draft mode. `exp` must be in the future and at most 30 days away; a bad signature, an expired link, or a missing `PREVIEW_SECRET` or `SANITY_READ_TOKEN` all answer 404. The route is `app/api/preview/route.vercel.ts`, so it only exists in Vercel builds, never in the SiteGround export.
+`GET /api/preview?path=/dental-implants/&exp=<unix seconds>&sig=<hex>` with `sig = HMAC-SHA256(PREVIEW_SECRET, "<path>\n<exp>")` (hex) turns on Next draft mode and redirects to the page, which then reads Sanity **drafts** (`lib/sanity/fetch.ts`). It works on the production deployment too, so TTR OS can open a draft without a separate preview deployment; visitors without the signed link never get draft mode. `exp` must be in the future and at most 30 days away. A bad signature or an expired link answers 401; a malformed link or a missing `PREVIEW_SECRET` or `SANITY_READ_TOKEN` answers 404. `GET /api/preview/exit?path=/blog/my-post/` turns draft mode off again. The routes are `app/api/preview/**/route.vercel.ts`, so they only exist in Vercel builds, never in the SiteGround export.
+
+Blog drafts that were never published (for example TTR OS's staging check, a draft `post` with slug `ttr-os-staging-check`) open at their real address `/blog/<slug>/`: in draft mode `proxy.vercel.ts` serves blog posts from `app/(site)/blog-draft-preview/[slug]/page.vercel.tsx`, which renders on request (drafts read uncached with the token, noindex). Without draft mode that page answers 404, and any slug that is not a post still answers 404.
+
+On Vercel, `skipTrailingSlashRedirect` is on and `proxy.vercel.ts` makes the same trailing-slash redirects Next.js made before for every page; only `/api/...` answers with or without the slash, so TTR OS can call `/api/preview?...` and `/api/revalidate` directly.
 
 Set in the Vercel project (names only; never in the repo): `PREVIEW_SECRET`, `SANITY_READ_TOKEN` (Viewer token, used only in draft mode).
 

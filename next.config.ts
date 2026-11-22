@@ -21,12 +21,15 @@ const onVercel = !!process.env.VERCEL;
 
 const nextConfig: NextConfig = {
   output: onVercel ? undefined : "export",
-  // Files named *.vercel.ts only exist in Vercel builds.
-  pageExtensions: onVercel ? ["vercel.ts", "tsx", "ts"] : ["tsx", "ts"],
+  // Files named *.vercel.ts(x) only exist in Vercel builds.
+  pageExtensions: onVercel ? ["vercel.ts", "vercel.tsx", "tsx", "ts"] : ["tsx", "ts"],
   env: { NEXT_PUBLIC_LEAD_ENDPOINT: onVercel ? "/api/lead/" : "/api/lead.php" },
   // /dental-implants/ -> dental-implants/index.html, which Apache serves as is
   // (and matches the old WordPress URLs).
   trailingSlash: true,
+  // Vercel: proxy.vercel.ts makes the same slash redirects for pages and lets
+  // /api/ routes answer without the slash (TTR OS calls /api/revalidate).
+  skipTrailingSlashRedirect: onVercel,
   poweredByHeader: false,
   images: {
     loader: "custom",

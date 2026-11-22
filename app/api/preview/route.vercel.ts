@@ -15,9 +15,14 @@ import { redirect } from "next/navigation";
  * Next draft mode (a cookie) and redirects to the page, which then reads
  * Sanity drafts (lib/sanity/fetch.ts). Env vars (names only, set in Vercel):
  * PREVIEW_SECRET, SANITY_READ_TOKEN.
+ *
+ * 404 when not configured or the link is malformed; 401 when the link is
+ * expired or its signature is wrong. /api/preview/exit turns draft mode off.
+ * Works with or without the trailing slash (proxy.vercel.ts).
  */
 const MAX_AGE_SECONDS = 30 * 24 * 60 * 60;
 const notFound = () => new Response("Not found", { status: 404, headers: { "Cache-Control": "no-store" } });
+const unauthorized = () => new Response("Invalid or expired link", { status: 401, headers: { "Cache-Control": "no-store" } });
 
 export async function GET(request: Request) {
   const secret = process.env.PREVIEW_SECRET;
@@ -32,11 +37,11 @@ export async function GET(request: Request) {
   if (!/^\/([A-Za-z0-9._~-]+\/)*$/.test(path) || !/^\d{1,12}$/.test(exp) || !/^[0-9a-f]{64}$/.test(sig)) return notFound();
   const now = Math.floor(Date.now() / 1000);
   const expiry = Number(exp);
-  if (expiry <= now || expiry > now + MAX_AGE_SECONDS) return notFound();
+  if (expiry <= now || expiry > now + MAX_AGE_SECONDS) return unauthorized();
 
   const expected = createHmac("sha256", secret).update(`${path}\n${exp}`).digest();
   const given = Buffer.from(sig, "hex");
-  if (given.length !== expected.length || !timingSafeEqual(given, expected)) return notFound();
+  if (given.length !== expected.length || !timingSafeEqual(given, expected)) return unauthorized();
 
   (await draftMode()).enable();
   redirect(path);
