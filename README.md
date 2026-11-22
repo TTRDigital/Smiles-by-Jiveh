@@ -103,6 +103,10 @@ Blog drafts that were never published (for example TTR OS's staging check, a dra
 
 On Vercel, `skipTrailingSlashRedirect` is on and `proxy.vercel.ts` makes the same trailing-slash redirects Next.js made before for every page; only `/api/...` answers with or without the slash, so TTR OS can call `/api/preview?...` and `/api/revalidate` directly.
 
+`smiles-by-jiveh.vercel.app` still 301s visitors to `smilesbyjiveh.com` (`vercel.json`), except `/api/...` and requests in draft mode (the `__prerender_bypass` cookie a signed preview link sets), so TTR OS can open signed previews on the Vercel address.
+
+`lib/sanity/fetch.ts` treats `draftMode()` outside a request (`generateStaticParams` at build time) as "not draft"; before, the Vercel build failed there as soon as `PREVIEW_SECRET` and `SANITY_READ_TOKEN` were set.
+
 Set in the Vercel project (names only; never in the repo): `PREVIEW_SECRET`, `SANITY_READ_TOKEN` (Viewer token, used only in draft mode).
 
 ## Publish → refresh on Vercel (`/api/revalidate`)
