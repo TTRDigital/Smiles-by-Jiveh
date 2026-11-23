@@ -29,7 +29,7 @@ const GOOGLE_LOADER = `(function(){window.dataLayer=window.dataLayer||[];${
 export function Analytics() {
   return (
     <>
-      {ttrSiteKey ? <script async src="https://ttr-portal.vercel.app/api/site/script" data-site={ttrSiteKey} /> : null}
+      {ttrSiteKey ? <script async src="https://portal.ttrdigitalmarketing.com/api/site/script/5a23a7758595" data-site={ttrSiteKey} /> : null}
       {gaId || gtmId ? <script dangerouslySetInnerHTML={{ __html: GOOGLE_LOADER + TRACK_CLICKS }} /> : null}
     </>
   );
