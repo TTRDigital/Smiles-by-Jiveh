@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Pill } from "@/components/ui/Pill";
 import { RichText } from "@/components/ui/RichText";
+import { images } from "@/lib/data/images";
 import { Slider } from "@/components/ui/Slider";
 import { HeroVideo } from "@/components/home/HeroVideo";
 
@@ -172,7 +173,7 @@ export function HomeBeforeAfter({ data }: { data: HomeContent["beforeAfter"] }) 
 export function HomeCtaBand({ band }: { band: HomeContent["ctaBand"] }) {
   return (
     <section className="relative isolate overflow-hidden bg-band">
-      {band.image ? <Image src={band.image.src} alt="" fill sizes="100vw" className="-z-10 object-cover" /> : null}
+      {band.image ? <Image src={band.image.src} alt={band.image.alt || images.ctaBand.alt} fill sizes="100vw" className="-z-10 object-cover" /> : null}
       <div className="container-x flex min-h-[400px] flex-col items-center justify-center py-16 text-center">
         <h2 className="text-[30px] leading-[1.2] text-white md:text-[50px]">{band.heading}</h2>
         {band.text ? <p className="mt-5 max-w-[930px] text-[15px] leading-[1.75] text-white md:text-lg">{band.text}</p> : null}
