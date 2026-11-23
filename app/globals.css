@@ -207,3 +207,9 @@
 .no-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Playfair italic is a separate font (app/layout.tsx): italic display text uses it, so it looks as before. Outside the layers so it wins over the font utility. */
+.font-display.italic,
+:is(h1, h2, h3, h4, .font-display) :is(em, i) {
+  font-family: var(--font-playfair-italic), var(--font-display);
+}

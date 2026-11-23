@@ -9,7 +9,10 @@ import { siteUrl } from "@/lib/site";
  */
 
 // Variable fonts: every weight the old site used (Open Sans 400-700, Playfair 700-800 and italic).
-const playfair = Playfair_Display({ subsets: ["latin"], display: "swap", variable: "--font-playfair", style: ["normal", "italic"] });
+// Playfair's italic is only in a few quotes, so it is its own font and not preloaded: the preloaded files are the ones
+// every page's first screen uses, and the italic no longer competes with them (and the hero photo) for the phone's bandwidth.
+const playfair = Playfair_Display({ subsets: ["latin"], display: "swap", variable: "--font-playfair" });
+const playfairItalic = Playfair_Display({ subsets: ["latin"], display: "swap", variable: "--font-playfair-italic", style: ["italic"], preload: false });
 const openSans = Open_Sans({ subsets: ["latin"], display: "swap", variable: "--font-open-sans" });
 
 export const metadata: Metadata = {
@@ -26,7 +29,7 @@ export const viewport: Viewport = { width: "device-width", initialScale: 1, them
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-US" className={`${playfair.variable} ${openSans.variable}`} suppressHydrationWarning>
+    <html lang="en-US" className={`${playfair.variable} ${playfairItalic.variable} ${openSans.variable}`} suppressHydrationWarning>
       <body>{children}</body>
     </html>
   );
