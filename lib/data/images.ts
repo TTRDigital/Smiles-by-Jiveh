@@ -6,7 +6,7 @@ export const images = {
   logo: { src: "/images/brand/logo.png", alt: "Smiles By Jiveh", width: 482, height: 213 },
   favicon: { src: "/images/brand/favicon.png", alt: "Smiles By Jiveh", width: 512, height: 512 },
   heroVideoPoster: { src: "/images/home/hero-team.webp", alt: "Dr. Farokh Jiveh and the Smiles By Jiveh team in the office", width: 1280, height: 720 },
-  ctaBand: { src: "/images/home/cta-banner.webp", alt: "", width: 1935, height: 812 },
+  ctaBand: { src: "/images/home/cta-banner.webp", alt: "Smiling patient at a dental checkup, with gloved hands holding dental tools", width: 1935, height: 812 },
   homeConsultation: { src: "/images/home/consultation.webp", alt: "Smiling patient during a consultation at Smiles By Jiveh", width: 1402, height: 1122 },
   drJiveh: { src: "/images/team/dr-farokh-jiveh.jpg", alt: "Dr. Farokh Jiveh", width: 1121, height: 1403 },
   drJivehTreating: { src: "/images/team/dr-jiveh-treating-patient.jpg", alt: "Dr. Farokh Jiveh wearing loupes while treating a patient", width: 1024, height: 1536 },

@@ -815,7 +815,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Cosmetic Dentistry in Royal Palm Beach, FL - Smiles By Jiveh",
+      title: "Cosmetic Dentist in Royal Palm Beach, FL - Smiles By Jiveh",
       description: "At Smiles By Jiveh, cosmetic dentistry is approached through a comprehensive blend of aesthetics, function, health, and long-term stability. Since 1997…",
     },
   },
@@ -878,7 +878,7 @@ export const fallbackTreatments: Treatment[] = [
       { _type: "sharedBlock", kind: "testimonials" },
     ],
     seo: {
-      title: "Teeth Whitening in Royal Palm Beach, FL - Smiles By Jiveh",
+      title: "Teeth Whitening Near Royal Palm Beach, FL - Smiles By Jiveh",
       description: "Coffee, tea, wine, smoking, and everyday habits can gradually stain teeth over time. At Smiles By Jiveh, we offer professional whitening solutions to…",
     },
   },
@@ -1275,7 +1275,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Reconstructive Dentist in Royal Palm Beach - Smiles By Jiveh",
+      title: "Smile Rehabilitation in Palm Beach County - Smiles By Jiveh",
       description: "For patients with severely worn, broken, collapsing, or failing dentition, full mouth reconstruction can be one of the most life-changing treatments in…",
     },
   },
@@ -1729,7 +1729,7 @@ export const fallbackTreatments: Treatment[] = [
       },
     ],
     seo: {
-      title: "Full Mouth Restoration in Royal Palm Beach - Smiles By Jiveh",
+      title: "Full Mouth Dental Reconstruction in Royal Palm Beach, FL",
       description: "When teeth become worn, broken, failing, or missing, everyday activities like eating, smiling, and speaking can become frustrating. Full mouth…",
     },
   },
