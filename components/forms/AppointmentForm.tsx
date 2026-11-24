@@ -108,7 +108,7 @@ export function AppointmentForm({ phone, phoneHref, practice }: { phone: string;
         <span className="flex h-16 w-16 items-center justify-center rounded-full bg-teal text-white">
           <Check className="h-8 w-8" strokeWidth={2.5} aria-hidden="true" />
         </span>
-        <p className="mt-6 font-display text-2xl font-bold">Thank you{values.first_name ? `, ${values.first_name}` : ""}!</p>
+        <p className="mt-6 font-display text-[30px] font-light leading-tight text-ink">Thank you{values.first_name ? `, ${values.first_name}` : ""}!</p>
         <p className="mt-3 max-w-sm text-[15px] text-muted">We received your request. Our team will get back to you within 24 hours to arrange the best time for you.</p>
       </div>
     );

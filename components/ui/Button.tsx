@@ -10,7 +10,7 @@ const styles: Record<Variant, string> = {
   outline: "border border-ink/25 bg-transparent text-ink hover:border-teal hover:text-teal-deep",
   white: "bg-ivory text-spruce hover:bg-white",
   // Outline buttons on photos and the dark band.
-  light: "border border-white/60 bg-white/5 text-white backdrop-blur-sm hover:bg-white/15",
+  light: "border border-white/60 bg-white/5 text-white hover:bg-white/15",
   ghost: "border border-ink/15 bg-white/60 text-ink hover:border-teal hover:text-teal-deep",
 };
 

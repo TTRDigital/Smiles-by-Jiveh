@@ -8,10 +8,11 @@ import { siteUrl } from "@/lib/site";
  * without them.
  */
 
-// Two families: Newsreader (light display serif) for headings and Manrope for text. Headings use Newsreader's italic
-// for one accent phrase, often in the first screen's headline, so it is preloaded too (left to load late, it swapped
-// in and moved the headline: layout shift). Only the one italic weight the design uses (300) is downloaded.
-const newsreader = Newsreader({ subsets: ["latin"], display: "swap", variable: "--font-newsreader" });
+// Two families: Newsreader (light display serif) for headings and Manrope for text. The design draws Newsreader only
+// at its light weight (300), so that one weight is downloaded, upright and italic (about 25 KB each instead of a 58 KB
+// variable file). The italic is the accent phrase in headings, often in the first screen's headline, so it is
+// preloaded too: left to load late, it swapped in and moved the headline (layout shift).
+const newsreader = Newsreader({ subsets: ["latin"], display: "swap", variable: "--font-newsreader", weight: "300" });
 const newsreaderItalic = Newsreader({ subsets: ["latin"], display: "swap", variable: "--font-newsreader-italic", style: ["italic"], weight: "300" });
 const manrope = Manrope({ subsets: ["latin"], display: "swap", variable: "--font-manrope" });
 

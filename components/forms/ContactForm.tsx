@@ -102,7 +102,7 @@ export function ContactForm({ phone, phoneHref, practice }: { phone: string; pho
         <span className="flex h-16 w-16 items-center justify-center rounded-full bg-teal text-white">
           <Check className="h-8 w-8" strokeWidth={2.5} aria-hidden="true" />
         </span>
-        <p className="mt-6 font-display text-2xl font-bold">Thank you{values.name ? `, ${values.name.split(" ")[0]}` : ""}!</p>
+        <p className="mt-6 font-display text-[30px] font-light leading-tight text-ink">Thank you{values.name ? `, ${values.name.split(" ")[0]}` : ""}!</p>
         <p className="mt-3 max-w-sm text-[15px] text-muted">We received your message and will be in touch soon.</p>
       </div>
     );

@@ -63,7 +63,7 @@ export function Slider({
       ? "flex h-12 w-12 items-center justify-center rounded-full bg-teal text-white shadow-sm transition-colors hover:bg-teal-hi"
       : arrows === "glass"
         ? "flex h-12 w-12 items-center justify-center rounded-full border border-white/70 bg-white/75 text-ink shadow-[0_10px_30px_-12px_rgb(23_46_48/0.5)] backdrop-blur-md transition-colors hover:bg-white"
-        : "flex h-11 w-11 items-center justify-center rounded-full border border-white/60 bg-black/20 text-white backdrop-blur-sm transition-colors hover:bg-black/35";
+        : "flex h-11 w-11 items-center justify-center rounded-full border border-white/60 bg-black/30 text-white transition-colors hover:bg-black/45";
 
   return (
     <div
