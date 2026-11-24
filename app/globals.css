@@ -1,45 +1,58 @@
 @import "tailwindcss";
 
 /* ==========================================================================
-   Smiles By Jiveh design tokens, measured from the original WordPress site:
-   Playfair Display headings, Open Sans text, muted teal buttons, sand
-   secondary buttons, a cream top bar and light grey pages with white
-   rounded cards.
+   Smiles By Jiveh design tokens: an editorial, quiet-luxury look.
+   Ivory and cream pages, one deep spruce band colour (the practice's teal
+   taken dark), the brand's muted teal #81a5ac and sand #d2c7aa deepened
+   where they carry text so every pairing passes WCAG AA. Newsreader (light
+   display serif with true italics) for headings, Manrope for text.
    ========================================================================== */
 
 @theme {
-  --color-ink: #0c0c0c;
-  --color-heading: #0c0c0c;
-  --color-hero: #414141;
-  --color-body: #0c0c0c;
-  --color-muted: #505050;
-  --color-nav: #3e3e3e;
+  /* Text */
+  --color-ink: #1b2a2c;
+  --color-heading: #1b2a2c;
+  --color-hero: #1b2a2c;
+  --color-body: #364244;
+  --color-muted: #5a6466;
+  --color-nav: #1b2a2c;
 
-  --color-teal: #81a5ac;
-  --color-teal-hi: #6f969e;
-  --color-teal-deep: #4d7179;
+  /* Brand. "teal" is the brand teal deepened for buttons and links (6.2:1 with white);
+     teal-soft is the brand colour as it is, for lines and tints only. */
+  --color-teal: #3c6770;
+  --color-teal-hi: #31575f;
+  --color-teal-deep: #2c4f56;
+  --color-teal-soft: #81a5ac;
+  --color-teal-mist: #dfe8e7;
   --color-sand: #d2c7aa;
   --color-sand-hi: #c6b994;
-  --color-cream: #f1eedd;
-  --color-blue: #3558a0;
-  --color-navy: #162144;
+  --color-sand-deep: #76643c;
+  --color-cream: #efe9dd;
+  --color-ivory: #f8f5ef;
+  --color-paper: #fdfcf9;
+  --color-spruce: #172e30;
+  --color-spruce-2: #1f3b3d;
+  --color-blue: #3c6770;
+  --color-navy: #2c4f56;
 
-  --color-page: #f3f4f6;
-  --color-pill: #f3f4f6;
-  --color-mint: #f4fbfb;
-  --color-icon: #f7fafd;
-  --color-footer: #f9f9f9;
-  --color-band: #c5d4d7;
-  --color-line: #e5e7eb;
-  --color-field: #ebebeb;
+  /* Surfaces (names kept from the first design so every component keeps working). */
+  --color-page: #f8f5ef;
+  --color-pill: #efe9dd;
+  --color-mint: #efe9dd;
+  --color-icon: #efe9dd;
+  --color-footer: #172e30;
+  --color-band: #172e30;
+  --color-line: #e2ddd2;
+  --color-field: #e2ddd2;
 
-  --font-display: var(--font-playfair), Georgia, "Times New Roman", serif;
-  --font-sans: var(--font-open-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-newsreader), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
 
-  --radius-card: 20px;
-  --radius-btn: 8px;
-  --shadow-card: 0 10px 20px 0 rgb(0 0 0 / 0.1);
-  --shadow-header: 0 10px 20px 0 rgb(44 62 80 / 0.05);
+  --radius-card: 28px;
+  --radius-panel: 32px;
+  --radius-btn: 999px;
+  --shadow-card: 0 30px 60px -30px rgb(23 46 48 / 0.25);
+  --shadow-header: 0 1px 0 0 rgb(27 42 44 / 0.08);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -70,7 +83,7 @@
     color: var(--color-body);
     font-family: var(--font-sans);
     font-size: 1rem;
-    line-height: 1.65;
+    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -79,8 +92,14 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 400;
     color: var(--color-heading);
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  h1,
+  h2 {
+    font-weight: 300;
   }
   p {
     text-wrap: pretty;
@@ -90,9 +109,9 @@
     text-decoration: none;
   }
   :focus-visible {
-    outline: 3px solid var(--color-blue);
+    outline: 2px solid var(--color-teal);
     outline-offset: 3px;
-    border-radius: 4px;
+    border-radius: 6px;
   }
   ::selection {
     background: var(--color-teal);
@@ -101,98 +120,169 @@
 }
 
 @layer components {
-  /* 1296px content width on desktop (as the old site), 20px side gutters on phones. */
+  /* 1296px content width on desktop, 20px side gutters on phones. */
   .container-x {
     width: min(1296px, calc(100% - 40px));
     margin-inline: auto;
   }
 
-  /* Small rounded label with a blue dot ("Dedicated to Your Best Smile"). */
+  /* Eyebrow: tiny tracked capitals after a hairline ("—— DEDICATED TO YOUR BEST SMILE").
+     The component is still called Pill so the CMS and every page keep using it. */
   .pill {
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    border-radius: 100px;
-    background: var(--color-pill);
-    padding: 2px 14px;
-    font-size: 0.875rem;
-    line-height: 1.65;
-    letter-spacing: 0.02em;
-    color: var(--color-ink);
+    gap: 0.9rem;
+    font-family: var(--font-sans);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--color-sand-deep);
   }
   .pill::before {
     content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-blue);
+    width: 2.5rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.55;
     flex: none;
   }
-  .pill.on-white {
-    background: #fff;
+  /* Centered eyebrows get a hairline on both sides. */
+  .pill.centered::after {
+    content: "";
+    width: 2.5rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.55;
+    flex: none;
+  }
+  .on-dark .pill,
+  .pill.on-dark {
+    color: var(--color-sand);
   }
 
-  /* White rounded card used for every section on inner pages. */
+  /* Display headings: light serif. Short ones become uppercase statements (.statement);
+     longer ones keep sentence case with an italic accent (components/ui/Display.tsx). */
+  .statement {
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 400;
+    line-height: 1.08;
+  }
+  .display em,
+  :is(h1, h2, h3, blockquote) em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--color-sand-deep);
+  }
+  .on-dark :is(h1, h2, h3) em,
+  .on-dark .display em {
+    color: var(--color-sand);
+  }
+
+  /* Plain ivory section; inner pages used to put every section in a white card. */
   .card {
-    background: #fff;
+    background: var(--color-paper);
     border-radius: var(--radius-card);
+  }
+
+  /* Frosted-glass info card over a photo. */
+  .glass {
+    background: rgb(253 252 249 / 0.92);
+    -webkit-backdrop-filter: blur(18px) saturate(1.2);
+    backdrop-filter: blur(18px) saturate(1.2);
+    border: 1px solid rgb(255 255 255 / 0.6);
+    border-radius: 24px;
+    box-shadow: var(--shadow-card);
+  }
+  .glass-dark {
+    background: rgb(23 46 48 / 0.72);
+    -webkit-backdrop-filter: blur(16px) saturate(1.1);
+    backdrop-filter: blur(16px) saturate(1.1);
+    border: 1px solid rgb(255 255 255 / 0.12);
+    border-radius: 24px;
+    color: var(--color-ivory);
+  }
+
+  .hairline {
+    height: 1px;
+    background: var(--color-line);
   }
 
   .prose-site p,
   .prose-site ul,
   .prose-site ol {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.25rem;
   }
   .prose-site > :last-child {
     margin-bottom: 0;
   }
   .prose-site ul {
-    list-style: disc;
+    list-style: none;
+    padding-left: 0;
+  }
+  .prose-site ul > li {
+    position: relative;
     padding-left: 1.6rem;
+  }
+  .prose-site ul > li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.85em;
+    width: 0.8rem;
+    height: 1px;
+    background: var(--color-teal-soft);
   }
   .prose-site ol {
     list-style: decimal;
-    padding-left: 1.6rem;
+    padding-left: 1.4rem;
+  }
+  .prose-site ol > li::marker {
+    color: var(--color-sand-deep);
+    font-family: var(--font-display);
   }
   .prose-site li + li {
-    margin-top: 0.25rem;
+    margin-top: 0.4rem;
   }
   .prose-site h4 {
-    margin: 1.75rem 0 0.75rem;
-    font-size: 1.25rem;
-    line-height: 1.4;
+    margin: 2rem 0 0.75rem;
+    font-size: 1.375rem;
+    line-height: 1.3;
   }
   .prose-site a {
-    color: var(--color-blue);
+    color: var(--color-teal);
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
   }
   .prose-site strong {
     font-weight: 700;
+    color: var(--color-ink);
   }
 }
 
 /* --------------------------------------------------------------------------
-   Scroll reveal (fade in / fade up / fade from the side, like the old site).
-   Content stays visible without JavaScript: elements are only hidden once
-   lib/reveal-script.ts has set <html data-reveal-ready>.
+   Scroll reveal. Content stays visible without JavaScript: elements are only
+   hidden once lib/reveal-script.ts has set <html data-reveal-ready>.
    -------------------------------------------------------------------------- */
 @media (prefers-reduced-motion: no-preference) {
   [data-reveal-ready] [data-reveal] {
     opacity: 0;
     transition:
-      opacity 0.9s var(--ease-out-expo),
-      transform 0.9s var(--ease-out-expo);
+      opacity 1s var(--ease-out-expo),
+      transform 1s var(--ease-out-expo);
     transition-delay: var(--reveal-delay, 0ms);
   }
   [data-reveal-ready] [data-reveal="up"] {
-    transform: translateY(40px);
+    transform: translateY(32px);
   }
   [data-reveal-ready] [data-reveal="left"] {
-    transform: translateX(-40px);
+    transform: translateX(-32px);
   }
   [data-reveal-ready] [data-reveal="right"] {
-    transform: translateX(40px);
+    transform: translateX(32px);
   }
   [data-reveal-ready] [data-reveal][data-in] {
     opacity: 1;
@@ -208,8 +298,8 @@
   display: none;
 }
 
-/* Playfair italic is a separate font (app/layout.tsx): italic display text uses it, so it looks as before. Outside the layers so it wins over the font utility. */
+/* Newsreader's italic is its own font file (app/layout.tsx); italic display text uses it. Outside the layers so it wins over the font utility. */
 .font-display.italic,
-:is(h1, h2, h3, h4, .font-display) :is(em, i) {
-  font-family: var(--font-playfair-italic), var(--font-display);
+:is(h1, h2, h3, h4, blockquote, .font-display, .display) :is(em, i) {
+  font-family: var(--font-newsreader-italic), var(--font-display);
 }

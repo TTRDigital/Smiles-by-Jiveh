@@ -5,6 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 import { breadcrumbSchema } from "@/lib/schema";
 import { JsonLd, SeoSchema } from "@/components/ui/JsonLd";
 import { Button } from "@/components/ui/Button";
+import { Display } from "@/components/ui/Display";
 import { Pill } from "@/components/ui/Pill";
 import { RichText } from "@/components/ui/RichText";
 import { CheckColumns } from "@/components/sections/CheckColumns";
@@ -20,51 +21,52 @@ const fmt = (s: { value: number; decimals?: number; suffix?: string }) =>
 export default async function WhoWeArePage() {
   const page = await getAbout();
   return (
-    <div className="bg-white">
+    <div>
       <SeoSchema seo={page.seo} />
       <JsonLd data={breadcrumbSchema([{ name: "Who We Are", path: "/who-we-are/" }])} />
-      <section className="container-x grid items-center gap-10 py-10 md:grid-cols-2 md:gap-[70px] md:py-[60px]">
-        <div className="md:p-2.5">
+      <section className="container-x grid items-center gap-10 pb-16 pt-8 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-16 md:pb-24 md:pt-14 lg:gap-20">
+        <div>
           <Pill>{page.hero.eyebrow}</Pill>
-          <h1 className="mt-5 text-[28px] leading-[1.25] md:text-[45px] md:leading-[1.2]">{page.hero.heading}</h1>
-          <p className="mt-5 text-[15px] leading-[1.7] text-[#555]">{page.hero.text}</p>
+          <Display as="h1" text={page.hero.heading} className="mt-6 text-[38px] leading-[1.06] md:text-[56px] lg:text-[60px]" statementClassName="md:text-[52px]" />
+          <span aria-hidden="true" className="mt-8 block h-px w-20 bg-sand-deep/45" />
+          <p className="mt-7 text-[15px] leading-[1.8] text-body md:text-[16.5px]">{page.hero.text}</p>
           {page.hero.cta ? (
-            <div className="mt-7">
+            <div className="mt-9">
               <Button href={page.hero.cta.href} bold>
                 {page.hero.cta.label}
               </Button>
             </div>
           ) : null}
         </div>
-        <div data-reveal="right" className="relative aspect-[1440/1080] overflow-hidden rounded-[20px]">
-          <Image src={page.hero.image.src} alt={page.hero.image.alt || page.hero.heading} fill priority fetchPriority="high" sizes="(min-width: 768px) 600px, 100vw" className="object-cover" />
+        <div data-reveal="right" className="relative aspect-[1440/1080] overflow-hidden rounded-[var(--radius-panel)]">
+          <Image src={page.hero.image.src} alt={page.hero.image.alt || page.hero.heading} fill priority fetchPriority="high" sizes="(min-width: 1340px) 710px, (min-width: 768px) 55vw, 100vw" className="object-cover" />
         </div>
       </section>
 
-      <section className="container-x pb-10 md:pb-[50px]">
-        <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] md:gap-[60px] md:px-2.5">
+      <section className="container-x">
+        <div className="grid gap-8 border-t border-line pt-16 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-16 md:pt-24 lg:gap-20">
           <div>
             <Pill>{page.philosophy.eyebrow}</Pill>
-            <h2 className="mt-5 text-[26px] leading-[1.25] md:text-[38px]">{page.philosophy.heading}</h2>
+            <Display text={page.philosophy.heading} className="mt-6 text-[32px] leading-[1.12] md:text-[46px]" />
           </div>
-          <RichText value={page.philosophy.text} className="text-[15px] leading-[1.75] text-[#555]" />
+          <RichText value={page.philosophy.text} className="text-[15px] leading-[1.85] text-body md:pt-12 md:text-[16.5px]" />
         </div>
-        <div data-reveal="up" className="relative mt-10 aspect-[2000/1000] overflow-hidden rounded-[20px] md:aspect-[1296/500]">
+        <div data-reveal="up" className="relative mt-12 aspect-[4/3] overflow-hidden rounded-[var(--radius-panel)] md:mt-16 md:aspect-[1296/560]">
           <Image src={page.philosophy.image.src} alt={page.philosophy.image.alt || page.philosophy.heading} fill sizes="(min-width: 1340px) 1296px, 100vw" className="object-cover object-[50%_40%]" />
         </div>
       </section>
 
-      <section className="container-x pb-10 md:pb-[30px]">
-        <div className="rounded-[20px] bg-mint px-5 py-10 md:px-10 md:py-[40px]">
-          <h2 className="text-center text-[28px] leading-[1.2] md:text-[45px]">{page.specialties.heading}</h2>
-          <div className="mt-8">
+      <section className="on-dark mt-20 bg-spruce py-20 text-ivory md:mt-28 md:py-28">
+        <div className="container-x">
+          <Display text={page.specialties.heading} className="text-center text-[32px] leading-[1.12] text-white md:text-[50px]" statementClassName="md:text-[46px]" />
+          <div className="mt-12 md:mt-14 [&_li]:border-white/15 [&_li]:text-ivory [&_ul]:border-white/15 [&_svg]:text-sand">
             <CheckColumns items={page.specialties.items} />
           </div>
-          <ul className="mt-10 grid grid-cols-2 gap-4 md:mt-[50px] md:grid-cols-4 md:gap-5">
-            {page.specialties.stats.map((s) => (
-              <li key={s.label} className="rounded-[10px] bg-white px-4 py-7 text-center">
-                <p className="font-display text-[36px] font-bold leading-none text-teal md:text-[48px]">{fmt(s)}</p>
-                <p className="mt-3 text-[15px]">{s.label}</p>
+          <ul className="mt-14 grid grid-cols-2 border-t border-white/15 md:mt-20 md:grid-cols-4">
+            {page.specialties.stats.map((s, i) => (
+              <li key={s.label} className={`px-2 py-9 text-center md:py-12 ${i % 2 ? "border-l border-white/15" : ""} ${i > 1 ? "border-t border-white/15 md:border-t-0" : ""} ${i === 2 ? "md:border-l" : ""}`}>
+                <p className="font-display text-[48px] font-light leading-none text-sand md:text-[64px]">{fmt(s)}</p>
+                <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.2em] text-ivory/80">{s.label}</p>
               </li>
             ))}
           </ul>

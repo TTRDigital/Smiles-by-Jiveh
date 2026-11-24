@@ -3,6 +3,7 @@ import { getHome, getSiteSettings, getTestimonials } from "@/lib/content";
 import { pageMetadata } from "@/lib/seo";
 import { HomeAbout, HomeBeforeAfter, HomeContact, HomeCtaBand, HomeDoctor, HomeHero, HomeIntro, HomeServices } from "@/components/home/HomeSections";
 import { SeoSchema } from "@/components/ui/JsonLd";
+import { Display } from "@/components/ui/Display";
 import { Pill } from "@/components/ui/Pill";
 import { ReviewsWidget } from "@/components/sections/Reviews";
 
@@ -22,13 +23,13 @@ export default async function HomePage() {
       <HomeServices services={home.services} />
       <HomeDoctor doctor={home.doctor} />
       <HomeBeforeAfter data={home.beforeAfter} />
-      <section aria-label={home.testimonials.heading} className="bg-[#f8f9fb] py-[60px] md:py-[90px]">
+      <section aria-label={home.testimonials.heading} className="bg-cream py-20 md:py-[120px]">
         <div className="container-x">
-          <div className="mx-auto max-w-[620px] text-center">
-            <Pill white>{home.testimonials.eyebrow}</Pill>
-            <h2 className="mt-5 text-[25px] leading-[1.4] md:text-[40px] md:leading-[1.2]">{home.testimonials.heading}</h2>
+          <div className="mx-auto max-w-[760px] text-center">
+            <Pill centered>{home.testimonials.eyebrow}</Pill>
+            <Display text={home.testimonials.heading} className="mt-6 text-[32px] leading-[1.12] md:text-[50px]" />
           </div>
-          <div className="mt-8">
+          <div className="mt-12 md:mt-14">
             <ReviewsWidget
               widgetId={settings.reviewsWidgetId}
               reviews={reviews}

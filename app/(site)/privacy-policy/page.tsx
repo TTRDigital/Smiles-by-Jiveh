@@ -12,12 +12,13 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function PrivacyPage() {
   const page = await getPrivacy();
   return (
-    <section className="container-x py-[25px]">
+    <section className="container-x pb-24 pt-10 md:pb-32 md:pt-16">
       <SeoSchema seo={page.seo} />
-      <div className="card mx-auto max-w-[900px] px-5 py-10 md:px-[60px] md:py-[50px]">
-        <h1 className="text-[32px] leading-[1.2] md:text-[45px]">{page.heading}</h1>
-        {page.updated && !isPlaceholder(page.updated) ? <p className="mt-3 text-sm text-muted">Effective {page.updated}</p> : null}
-        <RichText value={page.body} className="mt-8 text-[15px] leading-[1.75] [&_h4]:font-display md:text-base" />
+      <div className="mx-auto max-w-[860px]">
+        <h1 className="text-[40px] leading-[1.06] md:text-[60px]">{page.heading}</h1>
+        {page.updated && !isPlaceholder(page.updated) ? <p className="pill mt-5">Effective {page.updated}</p> : null}
+        <span aria-hidden="true" className="mt-8 block h-px w-20 bg-sand-deep/45" />
+        <RichText value={page.body} className="mt-10 text-[15px] leading-[1.85] [&_h4]:font-display md:text-[16.5px]" />
       </div>
     </section>
   );

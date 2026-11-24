@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Open_Sans, Playfair_Display } from "next/font/google";
+import { Manrope, Newsreader } from "next/font/google";
 import { siteUrl } from "@/lib/site";
 
 /*
@@ -8,12 +8,12 @@ import { siteUrl } from "@/lib/site";
  * without them.
  */
 
-// Variable fonts: every weight the old site used (Open Sans 400-700, Playfair 700-800 and italic).
-// Playfair's italic is only in a few quotes, so it is its own font and not preloaded: the preloaded files are the ones
-// every page's first screen uses, and the italic no longer competes with them (and the hero photo) for the phone's bandwidth.
-const playfair = Playfair_Display({ subsets: ["latin"], display: "swap", variable: "--font-playfair" });
-const playfairItalic = Playfair_Display({ subsets: ["latin"], display: "swap", variable: "--font-playfair-italic", style: ["italic"], preload: false });
-const openSans = Open_Sans({ subsets: ["latin"], display: "swap", variable: "--font-open-sans" });
+// Two families: Newsreader (light display serif) for headings and Manrope for text. Headings use Newsreader's italic
+// for one accent phrase, often in the first screen's headline, so it is preloaded too (left to load late, it swapped
+// in and moved the headline: layout shift). Only the one italic weight the design uses (300) is downloaded.
+const newsreader = Newsreader({ subsets: ["latin"], display: "swap", variable: "--font-newsreader" });
+const newsreaderItalic = Newsreader({ subsets: ["latin"], display: "swap", variable: "--font-newsreader-italic", style: ["italic"], weight: "300" });
+const manrope = Manrope({ subsets: ["latin"], display: "swap", variable: "--font-manrope" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -25,11 +25,11 @@ export const metadata: Metadata = {
   icons: { icon: [{ url: "/images/brand/favicon-192.png", type: "image/png", sizes: "192x192" }], apple: "/images/brand/favicon-192.png" },
 };
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#ffffff" };
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#f8f5ef" };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-US" className={`${playfair.variable} ${playfairItalic.variable} ${openSans.variable}`} suppressHydrationWarning>
+    <html lang="en-US" className={`${newsreader.variable} ${newsreaderItalic.variable} ${manrope.variable}`} suppressHydrationWarning>
       <body>{children}</body>
     </html>
   );

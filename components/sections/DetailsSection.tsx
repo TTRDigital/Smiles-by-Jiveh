@@ -10,25 +10,28 @@ export function DetailsSection({ block }: { block: DetailsBlock }) {
   const items = block.items.map((it) => ({ ...it, id: slugify(it.heading) }));
   return (
     <CardSection label={block.eyebrow ?? "Details"}>
-      <div className="grid gap-5 lg:grid-cols-[299px_minmax(0,1fr)] lg:gap-[20px]">
-        <nav aria-label="On this page" className="hidden p-2.5 lg:block">
-          <ol className="sticky top-28 list-decimal rounded-[10px] bg-page py-3 pl-8 pr-4 text-sm leading-[1.65] marker:text-ink">
+      <div className="grid gap-5 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-20">
+        <nav aria-label="On this page" className="hidden lg:block">
+          <ol className="sticky top-32 border-t border-line text-[13.5px] leading-[1.5] [counter-reset:toc]">
             {items.map((it) => (
-              <li key={it.id} className="py-0.5 pl-1">
-                <a href={`#${it.id}`} className="hover:text-teal-deep">
+              <li key={it.id} className="border-b border-line [counter-increment:toc]">
+                <a
+                  href={`#${it.id}`}
+                  className="flex gap-4 py-3 text-body transition-colors before:w-6 before:shrink-0 before:font-display before:italic before:text-sand-deep before:content-[counter(toc,decimal-leading-zero)] hover:text-teal-deep"
+                >
                   {it.heading}
                 </a>
               </li>
             ))}
           </ol>
         </nav>
-        <div className="lg:p-2.5">
+        <div>
           <Pill>{block.eyebrow}</Pill>
           {items.map((it, i) => (
-            <div key={it.id} id={it.id} className={i ? "mt-10 border-t border-line pt-10 lg:mt-[50px] lg:pt-[50px]" : "mt-5"}>
+            <div key={it.id} id={it.id} className={i ? "mt-12 border-t border-line pt-12 lg:mt-16 lg:pt-16" : "mt-8"}>
               {it.image ? (
-                <div className="grid items-center gap-6 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] sm:gap-[30px]">
-                  <div className="relative overflow-hidden rounded-[10px]">
+                <div className="grid items-center gap-8 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] sm:gap-10">
+                  <div className="relative overflow-hidden rounded-[var(--radius-card)]">
                     <Image
                       src={it.image.src}
                       alt={it.image.alt || it.heading}
@@ -39,14 +42,14 @@ export function DetailsSection({ block }: { block: DetailsBlock }) {
                     />
                   </div>
                   <div>
-                    <h3 className="text-xl leading-[1.5] md:text-[1.75rem] md:leading-[1.4]">{it.heading}</h3>
-                    <RichText value={it.body} className="mt-4 text-[15px] leading-[1.65]" />
+                    <h3 className="text-[26px] font-light leading-[1.2] md:text-[32px]">{it.heading}</h3>
+                    <RichText value={it.body} className="mt-5 text-[15px] leading-[1.8]" />
                   </div>
                 </div>
               ) : (
                 <>
-                  <h2 className="text-lg leading-[1.4] md:text-[1.75rem] md:leading-[1.4]">{it.heading}</h2>
-                  <RichText value={it.body} className="mt-5 text-[15px] leading-[1.65] md:text-lg" />
+                  <h2 className="text-[28px] leading-[1.15] md:text-[38px]">{it.heading}</h2>
+                  <RichText value={it.body} className="mt-6 max-w-[760px] text-[15px] leading-[1.8] md:text-[16.5px]" />
                 </>
               )}
             </div>

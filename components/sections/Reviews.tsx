@@ -53,7 +53,7 @@ export function ReviewsWidget({
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-between gap-4 rounded-[10px] bg-white px-6 py-5 sm:flex-row">
+      <div className="flex flex-col items-center justify-between gap-4 rounded-[20px] bg-paper px-6 py-5 sm:flex-row">
         <div className="text-center sm:text-left">
           <p className="text-lg font-semibold">Google Reviews</p>
           {rating ? (
@@ -72,7 +72,7 @@ export function ReviewsWidget({
       </div>
       <ul className="no-scrollbar mt-5 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-2">
         {reviews.map((r) => (
-          <li key={r.name + r.quote.slice(0, 20)} className="w-[85%] shrink-0 snap-start rounded-[10px] bg-white p-6 sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)]">
+          <li key={r.name + r.quote.slice(0, 20)} className="w-[85%] shrink-0 snap-start rounded-[20px] bg-paper p-7 sm:w-[calc(50%-10px)] lg:w-[calc(25%-15px)]">
             <p className="font-semibold">{r.name}</p>
             <Stars n={r.rating} className="mt-2" />
             <p className="mt-3 line-clamp-4 text-[15px] leading-relaxed">{r.quote}</p>

@@ -46,27 +46,28 @@ export default async function BlogPage(props: PageProps<"/blog/[[...slug]]">) {
   }
 
   return (
-    <section className="container-x py-[25px]">
-      <div className="card px-5 py-10 md:p-[50px]">
-        <h1 className="text-[32px] leading-[1.2] md:text-[45px]">Blog</h1>
+    <section className="container-x pb-24 pt-10 md:pb-32 md:pt-16">
+      <div>
+        <h1 className="statement text-[44px] md:text-[64px]">Blog</h1>
+        <span aria-hidden="true" className="mt-8 block h-px w-20 bg-sand-deep/45" />
         {posts.length ? (
-          <ul className="mt-8 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-12 grid gap-x-8 gap-y-14 md:mt-16 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((p) => (
               <li key={p.slug}>
                 <Link href={`/blog/${p.slug}/`} className="group block">
                   {p.image ? (
-                    <span className="relative block aspect-[16/10] overflow-hidden rounded-[15px]">
+                    <span className="relative block aspect-[4/3] overflow-hidden rounded-[var(--radius-card)]">
                       <Image src={p.image.src} alt={p.image.alt || p.title} fill sizes="400px" className="object-cover transition-transform duration-500 group-hover:scale-105" />
                     </span>
                   ) : null}
-                  <span className="mt-4 block font-display text-xl font-bold group-hover:text-teal-deep">{p.title}</span>
-                  {p.excerpt ? <span className="mt-2 block text-[15px] text-muted">{p.excerpt}</span> : null}
+                  <span className="mt-6 block font-display text-[26px] leading-[1.2] text-ink transition-colors group-hover:text-teal-deep">{p.title}</span>
+                  {p.excerpt ? <span className="mt-3 block text-[15px] leading-[1.75] text-muted">{p.excerpt}</span> : null}
                 </Link>
               </li>
             ))}
           </ul>
         ) : (
-          <p className="mt-6 text-[15px]">Articles are coming soon.</p>
+          <p className="mt-8 font-display text-[24px] font-light italic text-sand-deep">Articles are coming soon.</p>
         )}
       </div>
     </section>

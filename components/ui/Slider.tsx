@@ -24,7 +24,7 @@ export function Slider({
   slide?: string;
   gap?: string;
   autoplay?: number;
-  arrows?: "teal" | "plain" | "none";
+  arrows?: "teal" | "plain" | "glass" | "none";
   arrowTop?: string;
   className?: string;
 }) {
@@ -60,8 +60,10 @@ export function Slider({
 
   const btn =
     arrows === "teal"
-      ? "flex h-[45px] w-[45px] items-center justify-center rounded-full bg-teal/90 text-white shadow-sm transition-colors hover:bg-teal-hi"
-      : "flex h-12 w-12 items-center justify-center text-white drop-shadow-[0_1px_3px_rgb(0_0_0/0.5)] hover:scale-110 transition-transform";
+      ? "flex h-12 w-12 items-center justify-center rounded-full bg-teal text-white shadow-sm transition-colors hover:bg-teal-hi"
+      : arrows === "glass"
+        ? "flex h-12 w-12 items-center justify-center rounded-full border border-white/70 bg-white/75 text-ink shadow-[0_10px_30px_-12px_rgb(23_46_48/0.5)] backdrop-blur-md transition-colors hover:bg-white"
+        : "flex h-11 w-11 items-center justify-center rounded-full border border-white/60 bg-black/20 text-white backdrop-blur-sm transition-colors hover:bg-black/35";
 
   return (
     <div
@@ -83,11 +85,11 @@ export function Slider({
       </div>
       {arrows !== "none" && items.length > 1 ? (
         <>
-          <button type="button" aria-label="Previous slide" onClick={() => step(-1)} className={`absolute left-2.5 z-10 -translate-y-1/2 ${btn}`} style={{ top: arrowTop }}>
-            <ChevronLeft className={arrows === "teal" ? "h-6 w-6" : "h-10 w-10"} strokeWidth={arrows === "teal" ? 2.25 : 3} />
+          <button type="button" aria-label="Previous slide" onClick={() => step(-1)} className={`absolute left-3 z-10 -translate-y-1/2 ${btn}`} style={{ top: arrowTop }}>
+            <ChevronLeft className="h-5 w-5" strokeWidth={1.5} />
           </button>
-          <button type="button" aria-label="Next slide" onClick={() => step(1)} className={`absolute right-2.5 z-10 -translate-y-1/2 ${btn}`} style={{ top: arrowTop }}>
-            <ChevronRight className={arrows === "teal" ? "h-6 w-6" : "h-10 w-10"} strokeWidth={arrows === "teal" ? 2.25 : 3} />
+          <button type="button" aria-label="Next slide" onClick={() => step(1)} className={`absolute right-3 z-10 -translate-y-1/2 ${btn}`} style={{ top: arrowTop }}>
+            <ChevronRight className="h-5 w-5" strokeWidth={1.5} />
           </button>
         </>
       ) : null}

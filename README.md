@@ -1,10 +1,19 @@
 # Smiles By Jiveh website
 
-Next.js 16 (App Router, static export) + Sanity Studio embedded at `/cms`, Tailwind CSS v4, hosted on **SiteGround** as plain files. Rebuilt from the WordPress/Elementor site at smilesbyjiveh.com by TTR Digital Marketing: same pages, same URLs, same text and photos, same look.
+Next.js 16 (App Router, static export) + Sanity Studio embedded at `/cms`, Tailwind CSS v4, hosted on **SiteGround** as plain files. Rebuilt from the WordPress/Elementor site at smilesbyjiveh.com by TTR Digital Marketing: same pages, same URLs, same text and photos, with an editorial redesign (see Design).
 
 - **Content:** everything is editable in `/cms`. Until Sanity has content (or a field is left empty), the site shows the built-in content from `lib/data`, so it never breaks.
 - **Forms:** `/appointment/` and the home page "Contact Us" section embed the practice's GoHighLevel form ("Smiles by Jiveh Main Form", `o5N2Cg1KTnReA0wS8Jh2`), so every request goes straight into GoHighLevel; nothing else to set up. Typing `off` as the form ID in `/cms` shows the website's own form instead, which posts to `/api/lead.php` (PHP on SiteGround) and on to a GoHighLevel inbound webhook (`GHL_WEBHOOK_URL`); without that webhook it asks the visitor to call (it never shows a false "thank you").
 - **Reviews:** the same Elfsight Google reviews widget as the old site (ID in Site settings). Clear the ID to show the reviews stored in `/cms` instead.
+
+## Design
+
+Quiet, editorial luxury: ivory and cream pages, one deep spruce band colour, large rounded photo panels with frosted-glass cards, pill buttons.
+
+- **Tokens** are in `app/globals.css` (`@theme`): `ivory` page, `cream` panels, `spruce` dark band, `teal` (the brand teal `#81a5ac` deepened to `#3c6770` for buttons and links; `teal-soft` is the brand colour itself, for lines only), `sand` and `sand-deep` (`#d2c7aa` deepened to `#76643c` for small labels and italic accents). Every text pairing passes WCAG AA.
+- **Fonts** (`app/layout.tsx`): Newsreader (light display serif, its italic for accent phrases) and Manrope for text.
+- **Headings** go through `components/ui/Display.tsx`: one-sentence headings of four words or fewer become uppercase statements ("CONTACT US"); longer ones get an italic accent on their last phrase. The words are never changed, so headings typed in `/cms` just work.
+- **Eyebrows** (`Pill`) are tiny tracked capitals after a hairline.
 
 ## Pages (URLs unchanged from WordPress)
 
