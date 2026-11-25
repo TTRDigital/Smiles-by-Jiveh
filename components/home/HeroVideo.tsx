@@ -40,7 +40,10 @@ export function HeroVideo({ url }: { url?: string }) {
         tabIndex={-1}
         allow="autoplay; encrypted-media; picture-in-picture"
         onLoad={() => window.setTimeout(() => setReady(true), 600)}
-        className={`absolute left-1/2 top-1/2 h-[max(100cqh,56.25cqw)] w-[max(100cqw,177.78cqh)] -translate-x-1/2 -translate-y-1/2 border-0 transition-opacity duration-1000 ${ready ? "opacity-100" : "opacity-0"}`}
+        // The video is a widescreen film (about 2.39:1) with black bars baked into its 16:9 frame (92 of 720 rows at the
+        // top and bottom). Sizing the player so its 2.4:1 picture area covers the hero pushes those bars outside the
+        // clipped box; the 16:9 player is 9/16 of that width tall. A true 16:9 video would only be cropped a little more.
+        className={`absolute left-1/2 top-1/2 h-[max(56.25cqw,135cqh)] w-[max(100cqw,240cqh)] -translate-x-1/2 -translate-y-1/2 border-0 transition-opacity duration-1000 ${ready ? "opacity-100" : "opacity-0"}`}
       />
     </div>
   );
