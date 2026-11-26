@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/Button";
 import { Display } from "@/components/ui/Display";
 import { Pill } from "@/components/ui/Pill";
 import { RichText } from "@/components/ui/RichText";
+import { ReadMore } from "@/components/ui/ReadMore";
+import { richLength } from "@/lib/rich";
 import { CheckColumns } from "@/components/sections/CheckColumns";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -50,7 +52,9 @@ export default async function MeetDrJivehPage() {
           <div>
             <Pill>{page.story.eyebrow}</Pill>
             <Display text={page.story.heading} className="mt-6 text-[32px] leading-[1.12] md:text-[46px]" />
-            <RichText value={page.story.text} className="mt-8 text-[15px] leading-[1.85] text-body md:text-[16.5px]" />
+            <ReadMore fold={richLength(page.story.text) > 520} height={240} className="mt-8">
+              <RichText value={page.story.text} className="text-[15px] leading-[1.85] text-body md:text-[16.5px]" />
+            </ReadMore>
           </div>
         </div>
       </section>

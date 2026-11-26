@@ -23,7 +23,7 @@ export default async function HomePage() {
       <HomeServices services={home.services} />
       <HomeDoctor doctor={home.doctor} />
       <HomeBeforeAfter data={home.beforeAfter} />
-      <section aria-label={home.testimonials.heading} className="bg-cream py-20 md:py-[120px]">
+      <section aria-label={home.testimonials.heading} className="bg-white py-20 md:py-28">
         <div className="container-x">
           <div className="mx-auto max-w-[760px] text-center">
             <Pill centered>{home.testimonials.eyebrow}</Pill>

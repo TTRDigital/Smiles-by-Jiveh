@@ -6,6 +6,8 @@ import { rich } from "@/lib/rich";
 import { JsonLd, SeoSchema } from "@/components/ui/JsonLd";
 import { Display } from "@/components/ui/Display";
 import { RichText } from "@/components/ui/RichText";
+import { ReadMore } from "@/components/ui/ReadMore";
+import { richLength } from "@/lib/rich";
 import { PageHero } from "@/components/sections/PageHero";
 import { CardSection } from "@/components/sections/Card";
 import { IconCards } from "@/components/sections/IconCards";
@@ -27,7 +29,9 @@ export default async function InsurancePage() {
       <CardSection label={page.philosophy.heading}>
         <div className="grid gap-8 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-16 lg:gap-20">
           <Display text={page.philosophy.heading} className="text-[30px] leading-[1.15] md:text-[46px]" statementClassName="md:text-[42px]" />
-          <RichText value={page.philosophy.text} className="text-[15px] leading-[1.85] md:pt-3 md:text-[16.5px] [&_p]:mb-4" />
+          <ReadMore fold={richLength(page.philosophy.text) > 520} height={200} className="md:pt-3">
+            <RichText value={page.philosophy.text} className="text-[15px] leading-[1.85] md:text-[16.5px] [&_p]:mb-4" />
+          </ReadMore>
         </div>
       </CardSection>
       <CardSection label={p.heading}>

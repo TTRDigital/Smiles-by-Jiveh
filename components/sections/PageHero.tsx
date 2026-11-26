@@ -1,9 +1,11 @@
 import Image from "next/image";
 import type { PageHeroContent } from "@/lib/types";
+import { richLength } from "@/lib/rich";
 import { Button } from "@/components/ui/Button";
 import { Display } from "@/components/ui/Display";
 import { Pill } from "@/components/ui/Pill";
 import { RichText } from "@/components/ui/RichText";
+import { ReadMore } from "@/components/ui/ReadMore";
 import { Slider } from "@/components/ui/Slider";
 
 /**
@@ -59,7 +61,9 @@ export function PageHero({ hero }: { hero: PageHeroContent }) {
           <Pill>{hero.eyebrow}</Pill>
           <Display as="h1" text={hero.heading} className="mt-6 text-[38px] leading-[1.06] md:text-[56px] lg:text-[60px] lg:leading-[1.04]" statementClassName="md:text-[52px]" />
           <span aria-hidden="true" className="mt-8 block h-px w-20 bg-sand-deep/45" />
-          <RichText value={hero.text} className="mt-7 text-[15px] leading-[1.8] md:text-[16.5px] [&_p]:mb-4" />
+          <ReadMore fold={richLength(hero.text) > 420} height={175} className="mt-7">
+            <RichText value={hero.text} className="text-[15px] leading-[1.8] md:text-[16.5px] [&_p]:mb-4" />
+          </ReadMore>
           {hero.cta ? (
             <div className="mt-9">
               <Button href={hero.cta.href}>{hero.cta.label}</Button>

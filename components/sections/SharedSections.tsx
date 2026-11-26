@@ -33,9 +33,13 @@ export function Process({ data, showCtas = true }: { data: SharedSections["proce
           </div>
           {data.text ? <p className="text-[15px] leading-[1.8] text-ivory/80 md:pb-2 md:text-base">{data.text}</p> : null}
         </div>
-        <ol className="mt-12 grid border-t border-white/15 md:mt-16 md:grid-cols-3">
+        {/* On phones the steps swipe sideways. */}
+        <ol className="no-scrollbar -mx-5 mt-10 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 md:mx-0 md:mt-16 md:grid md:grid-cols-3 md:gap-0 md:overflow-visible md:border-t md:border-white/15 md:px-0 md:pb-0">
           {data.steps.map((s, i) => (
-            <li key={s.title} className={`py-9 md:px-8 md:py-12 md:first:pl-0 ${i ? "border-t border-white/15 md:border-l md:border-t-0" : ""}`}>
+            <li
+              key={s.title}
+              className={`w-[82%] shrink-0 snap-center rounded-[22px] bg-white/[0.06] p-7 md:w-auto md:rounded-none md:bg-transparent md:px-8 md:py-12 md:first:pl-0 ${i ? "md:border-l md:border-white/15" : ""}`}
+            >
               <span className="block font-display text-[56px] font-light leading-none text-sand md:text-[64px]">
                 {String(i + 1).padStart(2, "0")}
               </span>
@@ -44,7 +48,7 @@ export function Process({ data, showCtas = true }: { data: SharedSections["proce
             </li>
           ))}
         </ol>
-        {showCtas && data.ctas.length ? <CtaPair ctas={data.ctas} dark className="mt-4 md:mt-6" /> : null}
+        {showCtas && data.ctas.length ? <CtaPair ctas={data.ctas} dark className="mt-8 md:mt-6" /> : null}
       </div>
     </section>
   );
@@ -52,8 +56,8 @@ export function Process({ data, showCtas = true }: { data: SharedSections["proce
 
 export function ReviewsCard({ data, settings, reviews }: { data: SharedSections["testimonials"]; settings: SiteSettings; reviews: Testimonial[] }) {
   return (
-    <section aria-label={data.heading} className="container-x py-10 md:py-16">
-      <div className="rounded-[var(--radius-panel)] bg-cream px-4 py-14 md:px-12 md:py-20">
+    <section aria-label={data.heading} className="container-x">
+      <div className="border-t border-line py-16 md:py-24">
         <div className="mx-auto max-w-[760px] text-center">
           <Pill centered>{data.eyebrow}</Pill>
           <Display text={data.heading} className="mt-6 text-[30px] leading-[1.15] md:text-[46px]" statementClassName="md:text-[42px]" />

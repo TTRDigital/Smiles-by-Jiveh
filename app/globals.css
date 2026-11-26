@@ -2,8 +2,8 @@
 
 /* ==========================================================================
    Smiles By Jiveh design tokens: an editorial, quiet-luxury look.
-   Ivory and cream pages, one deep spruce band colour (the practice's teal
-   taken dark), the brand's muted teal #81a5ac and sand #d2c7aa deepened
+   White pages with ivory, cream and teal-mist bands, one deep spruce band
+   colour (the practice's teal taken dark), the brand's muted teal #81a5ac and sand #d2c7aa deepened
    where they carry text so every pairing passes WCAG AA. Newsreader (light
    display serif with true italics) for headings, Manrope for text.
    ========================================================================== */
@@ -35,8 +35,11 @@
   --color-blue: #3c6770;
   --color-navy: #2c4f56;
 
-  /* Surfaces (names kept from the first design so every component keeps working). */
-  --color-page: #f8f5ef;
+  --color-mist: #eaf1f0;
+
+  /* Surfaces (names kept from the first design so every component keeps working). White pages; ivory, cream
+     and the teal mist are accent bands. */
+  --color-page: #ffffff;
   --color-pill: #efe9dd;
   --color-mint: #efe9dd;
   --color-icon: #efe9dd;

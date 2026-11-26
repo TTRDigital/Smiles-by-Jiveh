@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/Button";
 import { Display } from "@/components/ui/Display";
 import { Pill } from "@/components/ui/Pill";
 import { RichText } from "@/components/ui/RichText";
+import { ReadMore } from "@/components/ui/ReadMore";
+import { richLength } from "@/lib/rich";
 import { CheckColumns } from "@/components/sections/CheckColumns";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -49,7 +51,9 @@ export default async function WhoWeArePage() {
             <Pill>{page.philosophy.eyebrow}</Pill>
             <Display text={page.philosophy.heading} className="mt-6 text-[32px] leading-[1.12] md:text-[46px]" />
           </div>
-          <RichText value={page.philosophy.text} className="text-[15px] leading-[1.85] text-body md:pt-12 md:text-[16.5px]" />
+          <ReadMore fold={richLength(page.philosophy.text) > 520} height={200} className="md:pt-12">
+            <RichText value={page.philosophy.text} className="text-[15px] leading-[1.85] text-body md:text-[16.5px]" />
+          </ReadMore>
         </div>
         <div data-reveal="up" className="relative mt-12 aspect-[4/3] overflow-hidden rounded-[var(--radius-panel)] md:mt-16 md:aspect-[1296/560]">
           <Image src={page.philosophy.image.src} alt={page.philosophy.image.alt || page.philosophy.heading} fill sizes="(min-width: 1340px) 1296px, 100vw" className="object-cover object-[50%_40%]" />

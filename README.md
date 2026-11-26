@@ -8,12 +8,15 @@ Next.js 16 (App Router, static export) + Sanity Studio embedded at `/cms`, Tailw
 
 ## Design
 
-Quiet, editorial luxury: ivory and cream pages, one deep spruce band colour, large rounded photo panels with frosted-glass cards, pill buttons.
+Quiet, editorial luxury: white pages with ivory, cream and soft teal (`mist`) bands, one deep spruce band colour, large rounded photo panels, pill buttons.
 
 - **Tokens** are in `app/globals.css` (`@theme`): `ivory` page, `cream` panels, `spruce` dark band, `teal` (the brand teal `#81a5ac` deepened to `#3c6770` for buttons and links; `teal-soft` is the brand colour itself, for lines only), `sand` and `sand-deep` (`#d2c7aa` deepened to `#76643c` for small labels and italic accents). Every text pairing passes WCAG AA.
 - **Fonts** (`app/layout.tsx`): Newsreader (light display serif, its italic for accent phrases) and Manrope for text.
 - **Headings** go through `components/ui/Display.tsx`: one-sentence headings of four words or fewer become uppercase statements ("CONTACT US"); longer ones get an italic accent on their last phrase. The words are never changed, so headings typed in `/cms` just work.
 - **Eyebrows** (`Pill`) are tiny tracked capitals after a hairline.
+- **No text on photos**: headings, captions and cards sit beside or under photos, never over faces.
+- **Less to read, nothing removed**: long paragraphs show their first lines and a "Read more" button (`components/ui/ReadMore.tsx`; whether to fold is decided on the server from the text length, so nothing moves after load). All text stays in the HTML for search engines.
+- **Phones first**: card rows (intro cards, Why Choose Us, Our Process, before/after photos) swipe sideways on phones instead of stacking; footer link columns fold open and closed.
 
 ## Pages (URLs unchanged from WordPress)
 

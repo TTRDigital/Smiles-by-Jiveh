@@ -1,7 +1,9 @@
 import type { CardsBlock } from "@/lib/types";
+import { richLength } from "@/lib/rich";
 import { Display } from "@/components/ui/Display";
 import { Icon } from "@/components/ui/Icon";
 import { RichText } from "@/components/ui/RichText";
+import { ReadMore } from "@/components/ui/ReadMore";
 import { CardSection } from "@/components/sections/Card";
 import { IconCards } from "@/components/sections/IconCards";
 
@@ -11,7 +13,9 @@ export function CardsSection({ block }: { block: CardsBlock }) {
     <CardSection label={block.heading}>
       <div className="mx-auto max-w-[900px] text-center">
         <Display text={block.heading} className="text-[30px] leading-[1.15] md:text-[46px]" statementClassName="md:text-[42px]" />
-        <RichText value={block.text} className="mx-auto mt-6 max-w-[760px] text-[15px] leading-[1.8] [&_h4]:font-display [&_h4]:text-2xl md:text-base [&_ul]:text-left" />
+        <ReadMore fold={richLength(block.text) > 480} height={165} className="mx-auto mt-6 max-w-[760px]">
+          <RichText value={block.text} className="text-[15px] leading-[1.8] [&_h4]:font-display [&_h4]:text-2xl md:text-base [&_ul]:text-left" />
+        </ReadMore>
         {block.subheading ? <h3 className="mt-8 text-[24px] italic text-sand-deep md:text-[28px]">{block.subheading}</h3> : null}
       </div>
       {block.cards.length ? (

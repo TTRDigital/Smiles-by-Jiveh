@@ -64,3 +64,8 @@ export function plain(value: Rich | string | undefined): string {
     .replace(/\s+/g, " ")
     .trim();
 }
+
+/** Characters of plain text in Portable Text: decides on the server whether a block is long enough to fold (components/ui/ReadMore.tsx). */
+export function richLength(value?: Rich): number {
+  return (value ?? []).reduce((n, b) => n + ((b as { children?: { text?: string }[] }).children ?? []).reduce((m, c) => m + (c.text?.length ?? 0), 0), 0);
+}

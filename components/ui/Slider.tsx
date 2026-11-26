@@ -24,14 +24,29 @@ export function Slider({
   slide?: string;
   gap?: string;
   autoplay?: number;
-  arrows?: "teal" | "plain" | "glass" | "none";
+  /** "below": arrows and a progress line under the slides, so nothing sits on the photos. */
+  arrows?: "teal" | "plain" | "glass" | "below" | "none";
   arrowTop?: string;
   className?: string;
 }) {
   const track = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
   const items = Children.toArray(children);
+
+  // Progress line for arrows="below": how far the track has scrolled.
+  useEffect(() => {
+    const el = track.current;
+    if (!el || arrows !== "below") return;
+    const onScroll = () => {
+      const max = el.scrollWidth - el.clientWidth;
+      setProgress(max > 0 ? el.scrollLeft / max : 0);
+    };
+    onScroll();
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [arrows]);
 
   const step = useCallback((dir: 1 | -1) => {
     const el = track.current;
@@ -83,7 +98,21 @@ export function Slider({
           </div>
         ))}
       </div>
-      {arrows !== "none" && items.length > 1 ? (
+      {arrows === "below" && items.length > 1 ? (
+        <div className="mt-8 flex items-center gap-6">
+          <div aria-hidden="true" className="relative h-px flex-1 bg-ink/15">
+            <span className="absolute inset-y-[-1px] left-0 bg-teal transition-[width] duration-300" style={{ width: `${Math.max(12, progress * 100)}%` }} />
+          </div>
+          <div className="flex gap-2.5">
+            <button type="button" aria-label="Previous slide" onClick={() => step(-1)} className="flex h-12 w-12 items-center justify-center rounded-full border border-ink/20 text-ink transition-colors hover:border-teal hover:bg-teal hover:text-white">
+              <ChevronLeft className="h-5 w-5" strokeWidth={1.5} />
+            </button>
+            <button type="button" aria-label="Next slide" onClick={() => step(1)} className="flex h-12 w-12 items-center justify-center rounded-full border border-ink/20 text-ink transition-colors hover:border-teal hover:bg-teal hover:text-white">
+              <ChevronRight className="h-5 w-5" strokeWidth={1.5} />
+            </button>
+          </div>
+        </div>
+      ) : arrows !== "none" && items.length > 1 ? (
         <>
           <button type="button" aria-label="Previous slide" onClick={() => step(-1)} className={`absolute left-3 z-10 -translate-y-1/2 ${btn}`} style={{ top: arrowTop }}>
             <ChevronLeft className="h-5 w-5" strokeWidth={1.5} />

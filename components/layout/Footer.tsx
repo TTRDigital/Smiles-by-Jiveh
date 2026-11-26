@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import type { SiteSettings } from "@/lib/types";
+import { FooterColumn } from "@/components/layout/FooterColumn";
 
 function Contact({ href, icon, children }: { href?: string; icon: React.ReactNode; children: React.ReactNode }) {
   const inner = (
@@ -42,20 +43,11 @@ export function Footer({ settings }: { settings: SiteSettings }) {
             </Contact>
           </div>
         </div>
-        {settings.footerColumns.map((col) => (
-          <div key={col.title}>
-            <p className="text-[11px] font-bold uppercase leading-none tracking-[0.24em] text-sand">{col.title}</p>
-            <ul className="mt-7 grid gap-2">
-              {col.links.map((l) => (
-                <li key={l.href + l.label}>
-                  <Link href={l.href} className="text-[15px] leading-[1.65] text-ivory/80 transition-colors hover:text-white">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+        <div className="grid border-t border-white/12 md:contents">
+          {settings.footerColumns.map((col) => (
+            <FooterColumn key={col.title} title={col.title} links={col.links} />
+          ))}
+        </div>
       </div>
       <div className="container-x border-t border-white/12">
         <div className="flex flex-col items-center gap-2 py-6 text-center text-[13px] text-ivory/70 md:flex-row md:justify-between">
