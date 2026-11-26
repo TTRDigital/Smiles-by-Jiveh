@@ -91,7 +91,8 @@ export function Slider({
       onFocusCapture={() => setPaused(true)}
       onBlurCapture={() => setPaused(false)}
     >
-      <div ref={track} className={`no-scrollbar flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-smooth ${gap}`}>
+      {/* Focusable so keyboard users can scroll it, also when the slides hold only photos. */}
+      <div ref={track} tabIndex={0} className={`no-scrollbar flex snap-x snap-mandatory overflow-x-auto overscroll-x-contain scroll-smooth ${gap}`}>
         {items.map((child, i) => (
           <div key={i} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${items.length}`} className={`shrink-0 snap-start ${slide}`}>
             {child}

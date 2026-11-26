@@ -29,7 +29,7 @@ export default async function WhoWeArePage() {
       <section className="container-x grid items-center gap-10 pb-16 pt-8 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-16 md:pb-24 md:pt-14 lg:gap-20">
         <div>
           <Pill>{page.hero.eyebrow}</Pill>
-          <Display as="h1" text={page.hero.heading} className="mt-6 text-[38px] leading-[1.06] md:text-[56px] lg:text-[60px]" statementClassName="md:text-[52px]" />
+          <Display as="h1" text={page.hero.heading} className="mt-6 text-[38px] leading-[1.06] md:text-[56px] lg:text-[60px]" statementClassName="md:text-[52px]!" />
           <span aria-hidden="true" className="mt-8 block h-px w-20 bg-sand-deep/45" />
           <p className="mt-7 text-[15px] leading-[1.8] text-body md:text-[16.5px]">{page.hero.text}</p>
           {page.hero.cta ? (
@@ -49,7 +49,7 @@ export default async function WhoWeArePage() {
         <div className="grid gap-8 border-t border-line pt-16 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-16 md:pt-24 lg:gap-20">
           <div>
             <Pill>{page.philosophy.eyebrow}</Pill>
-            <Display text={page.philosophy.heading} className="mt-6 text-[32px] leading-[1.12] md:text-[46px]" />
+            <Display text={page.philosophy.heading} className="mt-6 text-[32px] leading-[1.12] md:text-[46px]" statementClassName="md:text-[32px]! lg:text-[42px]!" />
           </div>
           <ReadMore fold={richLength(page.philosophy.text) > 520} height={200} className="md:pt-12">
             <RichText value={page.philosophy.text} className="text-[15px] leading-[1.85] text-body md:text-[16.5px]" />
@@ -60,17 +60,18 @@ export default async function WhoWeArePage() {
         </div>
       </section>
 
-      <section className="on-dark mt-20 bg-spruce py-20 text-ivory md:mt-28 md:py-28">
+      {/* Soft teal, not the dark band: the dark footer follows right after. */}
+      <section className="mt-20 bg-mist py-20 md:mt-28 md:py-28">
         <div className="container-x">
-          <Display text={page.specialties.heading} className="text-center text-[32px] leading-[1.12] text-white md:text-[50px]" statementClassName="md:text-[46px]" />
-          <div className="mt-12 md:mt-14 [&_li]:border-white/15 [&_li]:text-ivory [&_ul]:border-white/15 [&_svg]:text-sand">
+          <Display text={page.specialties.heading} className="text-center text-[32px] leading-[1.12] md:text-[50px]" statementClassName="md:text-[46px]!" />
+          <div className="mt-12 md:mt-14 [&_li]:border-ink/10 [&_ul]:border-ink/10">
             <CheckColumns items={page.specialties.items} />
           </div>
-          <ul className="mt-14 grid grid-cols-2 border-t border-white/15 md:mt-20 md:grid-cols-4">
-            {page.specialties.stats.map((s, i) => (
-              <li key={s.label} className={`px-2 py-9 text-center md:py-12 ${i % 2 ? "border-l border-white/15" : ""} ${i > 1 ? "border-t border-white/15 md:border-t-0" : ""} ${i === 2 ? "md:border-l" : ""}`}>
-                <p className="font-display text-[48px] font-light leading-none text-sand md:text-[64px]">{fmt(s)}</p>
-                <p className="mt-4 text-[11px] font-bold uppercase tracking-[0.2em] text-ivory/80">{s.label}</p>
+          <ul className="mt-14 grid grid-cols-2 gap-3 md:mt-20 md:gap-5 lg:grid-cols-4">
+            {page.specialties.stats.map((s) => (
+              <li key={s.label} className="rounded-[var(--radius-card)] bg-white px-3 py-9 text-center shadow-[0_24px_50px_-40px_rgb(23_46_48/0.5)] md:py-12">
+                <p className="font-display text-[36px] font-light leading-none text-teal sm:text-[44px] md:text-[52px]">{fmt(s)}</p>
+                <p className="mt-4 text-[12px] font-bold uppercase tracking-[0.16em] text-muted">{s.label}</p>
               </li>
             ))}
           </ul>

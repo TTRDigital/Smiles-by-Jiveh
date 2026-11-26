@@ -12,8 +12,8 @@ export function CardsSection({ block }: { block: CardsBlock }) {
   return (
     <CardSection label={block.heading}>
       <div className="mx-auto max-w-[900px] text-center">
-        <Display text={block.heading} className="text-[30px] leading-[1.15] md:text-[46px]" statementClassName="md:text-[42px]" />
-        <ReadMore fold={richLength(block.text) > 480} height={165} className="mx-auto mt-6 max-w-[760px]">
+        <Display text={block.heading} className="text-[30px] leading-[1.15] md:text-[46px]" statementClassName="md:text-[42px]!" />
+        <ReadMore fold={richLength(block.text) > 360} height={165} className="mx-auto mt-6 max-w-[760px] text-left md:text-center">
           <RichText value={block.text} className="text-[15px] leading-[1.8] [&_h4]:font-display [&_h4]:text-2xl md:text-base [&_ul]:text-left" />
         </ReadMore>
         {block.subheading ? <h3 className="mt-8 text-[24px] italic text-sand-deep md:text-[28px]">{block.subheading}</h3> : null}
@@ -30,7 +30,7 @@ export function CardsSection({ block }: { block: CardsBlock }) {
           </ul>
         ) : (
           <div className="mt-12 md:mt-14">
-            <IconCards cards={block.cards} columns={block.columns ?? 3} />
+            <IconCards cards={block.cards} columns={block.columns ?? 3} label={block.heading} />
           </div>
         )
       ) : null}

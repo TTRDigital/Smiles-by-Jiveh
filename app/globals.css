@@ -133,10 +133,10 @@
     align-items: center;
     gap: 0.9rem;
     font-family: var(--font-sans);
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     font-weight: 700;
     line-height: 1.5;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--color-sand-deep);
   }
@@ -148,7 +148,17 @@
     opacity: 0.55;
     flex: none;
   }
-  /* Centered eyebrows get a hairline on both sides. */
+  /* Centered eyebrows get a hairline on both sides; shorter on phones so the label keeps to one line. */
+  @media (max-width: 639px) {
+    .pill.centered {
+      gap: 0.6rem;
+      letter-spacing: 0.16em;
+    }
+    .pill.centered::before,
+    .pill.centered::after {
+      width: 1.25rem !important;
+    }
+  }
   .pill.centered::after {
     content: "";
     width: 2.5rem;

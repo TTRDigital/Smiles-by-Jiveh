@@ -18,9 +18,10 @@ export function PageHero({ hero }: { hero: PageHeroContent }) {
   const mobile = hero.mobileImages?.length ? hero.mobileImages : null;
   const media = (imgs: PageHeroContent["images"], cls: string) =>
     hero.stacked && imgs.length > 1 ? (
-      <div className={`grid h-full gap-3 ${cls}`}>
+      <div className={`grid gap-3 ${cls}`}>
         {imgs.map((img, i) => (
-          <div key={img.src} className="relative min-h-[220px] overflow-hidden rounded-[var(--radius-card)]">
+          // Each photo keeps its own shape: these are before/after photos with labels printed on them.
+          <div key={img.src} className="relative overflow-hidden rounded-[var(--radius-card)]" style={{ aspectRatio: img.width && img.height ? `${img.width} / ${img.height}` : "3 / 2" }}>
             <Image src={img.src} alt={img.alt || hero.heading} fill priority={i === 0} fetchPriority={i === 0 ? "high" : undefined} sizes="(min-width: 1340px) 720px, (min-width: 1024px) 55vw, 100vw" className="object-cover" />
           </div>
         ))}
@@ -59,7 +60,7 @@ export function PageHero({ hero }: { hero: PageHeroContent }) {
         </div>
         <div className="lg:order-1">
           <Pill>{hero.eyebrow}</Pill>
-          <Display as="h1" text={hero.heading} className="mt-6 text-[38px] leading-[1.06] md:text-[56px] lg:text-[60px] lg:leading-[1.04]" statementClassName="md:text-[52px]" />
+          <Display as="h1" text={hero.heading} className="mt-6 text-[38px] leading-[1.06] md:text-[56px] lg:text-[60px] lg:leading-[1.04]" statementClassName="md:text-[44px]! lg:text-[40px]! xl:text-[48px]!" />
           <span aria-hidden="true" className="mt-8 block h-px w-20 bg-sand-deep/45" />
           <ReadMore fold={richLength(hero.text) > 420} height={175} className="mt-7">
             <RichText value={hero.text} className="text-[15px] leading-[1.8] md:text-[16.5px] [&_p]:mb-4" />

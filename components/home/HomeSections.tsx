@@ -72,7 +72,12 @@ export function HomeIntro({ intro }: { intro: HomeContent["intro"] }) {
             <Display text={intro.heading} className="mt-6 text-[30px] leading-[1.15] md:text-[48px] md:leading-[1.1]" />
           </div>
         </div>
-        <ul className="no-scrollbar -mx-5 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-1 md:mx-0 md:mt-16 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:px-0">
+        {/* tabIndex: on phones and tablets the row scrolls sideways, so keyboard users can focus it and use the arrow keys. */}
+        <ul
+          tabIndex={0}
+          aria-label={intro.eyebrow || intro.heading}
+          className="no-scrollbar -mx-5 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-1 md:mt-16 lg:mx-0 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0"
+        >
           {intro.cards.map((c, i) => {
             const t = introTones[i % introTones.length];
             return (
@@ -80,11 +85,14 @@ export function HomeIntro({ intro }: { intro: HomeContent["intro"] }) {
                 key={c.title}
                 data-reveal="up"
                 style={{ "--reveal-delay": `${i * 120}ms` } as React.CSSProperties}
-                className={`relative w-[80%] shrink-0 snap-center overflow-hidden rounded-[var(--radius-card)] p-8 transition-transform duration-500 hover:-translate-y-1 md:w-auto md:p-10 ${t.card}`}
+                className={`relative w-[80%] shrink-0 snap-center overflow-hidden rounded-[var(--radius-card)] p-8 transition-transform duration-500 hover:-translate-y-1 md:w-[44%] md:p-10 lg:w-auto ${t.card}`}
               >
-                <span aria-hidden="true" className={`pointer-events-none absolute right-6 top-5 font-display text-[64px] font-light leading-none md:right-8 md:top-7 ${t.num}`}>
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+                {/* Decorative numeral, drawn by CSS so it is not text. */}
+                <span
+                  aria-hidden="true"
+                  data-num={String(i + 1).padStart(2, "0")}
+                  className={`pointer-events-none absolute right-6 top-5 font-display text-[64px] font-light leading-none before:content-[attr(data-num)] md:right-8 md:top-7 ${t.num}`}
+                />
                 <span className={`relative flex h-14 w-14 items-center justify-center rounded-full shadow-[0_10px_24px_-14px_rgb(23_46_48/0.5)] ${t.icon}`}>
                   <Icon name={c.icon} className="h-6 w-6" strokeWidth={1.5} />
                 </span>
@@ -115,7 +123,7 @@ export function HomeAbout({ about }: { about: HomeContent["about"] }) {
             </div>
           ) : null}
         </div>
-        <div data-reveal="right" className="relative mb-4 ml-4 lg:order-1 lg:mb-6 lg:ml-6">
+        <div data-reveal="right" className="relative mb-4 ml-4 w-[calc(100%-1rem)] max-w-[560px] justify-self-center lg:order-1 lg:mb-6 lg:ml-6 lg:w-auto lg:max-w-none lg:justify-self-stretch">
           <span aria-hidden="true" className="absolute -bottom-4 -left-4 h-3/4 w-3/4 rounded-[var(--radius-panel)] bg-mist lg:-bottom-6 lg:-left-6" />
           <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-panel)] lg:aspect-[6/7]">
             <Image src={about.image.src} alt={about.image.alt || about.heading} fill sizes="(min-width: 1340px) 680px, (min-width: 1024px) 52vw, 100vw" className="object-cover" />
@@ -200,8 +208,8 @@ export function HomeDoctor({ doctor }: { doctor: HomeContent["doctor"] }) {
             </div>
           ) : null}
         </div>
-        <div data-reveal="right" className="relative lg:mr-6 lg:mt-6">
-          <span aria-hidden="true" className="absolute -right-6 -top-6 hidden h-full w-full rounded-[var(--radius-panel)] border border-sand lg:block" />
+        <div data-reveal="right" className="relative w-full max-w-[480px] justify-self-center lg:max-w-none lg:justify-self-stretch xl:mr-6 xl:mt-6">
+          <span aria-hidden="true" className="absolute -right-6 -top-6 hidden h-full w-full rounded-[var(--radius-panel)] border border-sand xl:block" />
           <div className="relative aspect-[588/736] overflow-hidden rounded-[var(--radius-panel)] bg-white ring-1 ring-line">
             <Image src={doctor.image.src} alt={doctor.image.alt || doctor.heading} fill sizes="(min-width: 1340px) 560px, (min-width: 1024px) 44vw, 100vw" className="object-cover" />
           </div>
@@ -218,9 +226,14 @@ export function HomeBeforeAfter({ data }: { data: HomeContent["beforeAfter"] }) 
       <div className="container-x">
         <div className="text-center">
           <Pill centered>{data.eyebrow}</Pill>
-          <Display text={data.heading} className="mt-6 text-[34px] leading-[1.1] text-white md:text-[56px]" statementClassName="md:text-[50px]" />
+          <Display text={data.heading} className="mt-6 text-[34px] leading-[1.1] text-white md:text-[56px]" statementClassName="md:text-[50px]!" />
         </div>
-        <ul data-reveal="up" className="no-scrollbar -mx-5 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 md:mt-16 lg:grid-cols-4 lg:gap-6">
+        <ul
+          data-reveal="up"
+          tabIndex={0}
+          aria-label={data.heading}
+          className="no-scrollbar -mx-5 mt-12 flex snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-1 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 md:mt-16 lg:grid-cols-4 lg:gap-6"
+        >
           {data.images.map((img) => (
             <li key={img.src} className="relative aspect-[1080/1350] w-[72%] shrink-0 snap-center overflow-hidden rounded-[var(--radius-card)] sm:w-auto">
               <Image src={img.src} alt={img.alt || data.heading} fill sizes="(min-width: 1340px) 310px, (min-width: 1024px) 24vw, (min-width: 640px) 50vw, 75vw" className="object-cover" />
@@ -232,24 +245,27 @@ export function HomeBeforeAfter({ data }: { data: HomeContent["beforeAfter"] }) 
   );
 }
 
-/** Closing call to action: a rounded photo panel, the photo above the text on phones. */
+/**
+ * Closing call to action: text on the dark panel beside the photo (framed on
+ * the smile), so nothing sits on the patient's face. On phones the photo strip
+ * comes first.
+ */
 export function HomeCtaBand({ band }: { band: HomeContent["ctaBand"] }) {
   return (
     <section className="py-6 md:py-10">
       <div className="container-x">
-        <div className="on-dark relative isolate overflow-hidden rounded-[var(--radius-panel)] bg-spruce text-ivory">
+        <div className="on-dark grid overflow-hidden rounded-[var(--radius-panel)] bg-spruce text-ivory md:grid-cols-2">
           {band.image ? (
-            <div className="relative aspect-[1935/812] md:absolute md:inset-0 md:aspect-auto">
-              <Image src={band.image.src} alt={band.image.alt || images.ctaBand.alt} fill sizes="(min-width: 1340px) 1296px, 100vw" className="-z-10 object-cover" />
-              <div aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(to_top,#172e30_0%,rgb(23_46_48/0)_55%)] md:bg-[rgb(16_33_34/0.62)]" />
+            <div className="relative aspect-[16/10] sm:aspect-[2/1] md:order-2 md:aspect-auto md:min-h-[460px]">
+              <Image src={band.image.src} alt={band.image.alt || images.ctaBand.alt} fill sizes="(min-width: 1340px) 650px, (min-width: 768px) 50vw, 100vw" className="object-cover object-[50%_12%]" />
             </div>
           ) : null}
-          <div className="relative flex flex-col items-center px-6 py-12 text-center md:min-h-[480px] md:justify-center md:px-12 md:py-20">
-            <Display text={band.heading} className="max-w-[900px] text-[30px] leading-[1.12] text-white md:text-[54px] md:leading-[1.06]" />
-            {band.text ? <p className="mt-5 max-w-[700px] text-[15px] leading-[1.8] text-ivory/85 md:mt-6 md:text-[17px]">{band.text}</p> : null}
-            <div className="mt-8 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row sm:gap-4">
+          <div className="flex flex-col items-start justify-center px-6 py-12 md:order-1 md:px-12 md:py-16 lg:px-16">
+            <Display text={band.heading} className="text-[30px] leading-[1.12] text-white md:text-[40px] lg:text-[48px] lg:leading-[1.08]" />
+            {band.text ? <p className="mt-5 max-w-[540px] text-[15px] leading-[1.8] text-ivory/85 md:mt-6 md:text-[16px]">{band.text}</p> : null}
+            <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4">
               {band.ctas.map((c, i) => (
-                <Button key={c.label} href={c.href} variant={i ? "light" : "white"} arrow={!i} bold className="w-full sm:w-auto sm:min-w-[240px]">
+                <Button key={c.label} href={c.href} variant={i ? "light" : "white"} arrow={!i} bold className="w-full sm:w-auto">
                   {c.label}
                 </Button>
               ))}
@@ -269,7 +285,7 @@ export function HomeContact({ contact, settings }: { contact: HomeContent["conta
       <div className="container-x grid items-start gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-24">
         <div className="lg:sticky lg:top-32">
           <Pill>{contact.eyebrow}</Pill>
-          <Display text={contact.heading} className="mt-6 text-[40px] leading-[1.05] text-white md:text-[64px]" statementClassName="md:text-[56px]" />
+          <Display text={contact.heading} className="mt-6 text-[40px] leading-[1.05] text-white" statementClassName="md:text-[56px]! lg:text-[44px]! xl:text-[56px]!" />
           <span aria-hidden="true" className="mt-7 block h-px w-20 bg-sand/60" />
           {contact.lead ? <p className="mt-7 font-display text-[24px] font-light italic leading-[1.35] text-sand md:text-[28px]">{contact.lead}</p> : null}
           {contact.text ? <p className="mt-4 max-w-[480px] text-[15px] leading-[1.8] text-ivory/80 md:text-base">{contact.text}</p> : null}

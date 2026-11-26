@@ -26,7 +26,7 @@ export default async function MeetDrJivehPage() {
       <section className="container-x grid items-center gap-10 pb-16 pt-8 md:grid-cols-[minmax(0,6fr)_minmax(0,5fr)] md:gap-16 md:pb-24 md:pt-14 lg:gap-24">
         <div>
           <Pill>{page.hero.eyebrow}</Pill>
-          <Display as="h1" text={page.hero.heading} className="mt-6 text-[38px] leading-[1.06] md:text-[56px] lg:text-[60px]" statementClassName="md:text-[52px]" />
+          <Display as="h1" text={page.hero.heading} className="mt-6 text-[38px] leading-[1.06] md:text-[56px] lg:text-[60px]" statementClassName="md:text-[52px]!" />
           <span aria-hidden="true" className="mt-8 block h-px w-20 bg-sand-deep/45" />
           <p className="mt-7 text-[15px] leading-[1.8] text-body md:text-[16.5px]">{page.hero.text}</p>
           {page.hero.cta ? (
@@ -38,7 +38,7 @@ export default async function MeetDrJivehPage() {
           ) : null}
         </div>
         <div className="flex justify-center md:justify-end">
-          <div className="relative aspect-[1121/1403] w-full max-w-[480px] overflow-hidden rounded-[var(--radius-panel)] bg-cream">
+          <div className="relative aspect-[1121/1403] w-full max-w-[480px] overflow-hidden rounded-[var(--radius-panel)] bg-white ring-1 ring-line">
             <Image src={page.hero.image.src} alt={page.hero.image.alt || page.hero.heading} fill priority fetchPriority="high" sizes="(min-width: 768px) 480px, 100vw" className="object-cover" />
           </div>
         </div>
@@ -61,7 +61,7 @@ export default async function MeetDrJivehPage() {
 
       <section className="container-x pt-20 md:pt-28">
         <div className="rounded-[var(--radius-panel)] bg-cream px-5 py-14 md:px-14 md:py-20">
-          <Display text={page.highlights.heading} className="text-center text-[32px] leading-[1.12] md:text-[46px]" statementClassName="md:text-[42px]" />
+          <Display text={page.highlights.heading} className="text-center text-[32px] leading-[1.12] md:text-[46px]" statementClassName="md:text-[42px]!" />
           <div className="mt-10 md:mt-12">
             <CheckColumns items={page.highlights.items} />
           </div>

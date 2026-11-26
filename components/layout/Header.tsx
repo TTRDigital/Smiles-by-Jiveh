@@ -38,19 +38,19 @@ export function Header({ nav, cta, phone, phoneHref, address, mapsUrl, logo }: P
   return (
     <>
       <div className="hidden bg-spruce lg:block">
-        <div className="container-x flex h-[38px] items-center justify-end gap-7 text-[11px] font-semibold uppercase tracking-[0.18em] text-ivory/85">
+        <div className="container-x flex h-[38px] items-center justify-end gap-7 text-[12px] font-semibold uppercase tracking-[0.14em] text-ivory/85">
           <a
             href={mapsUrl || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
             target="_blank"
             rel="noopener"
-            className="group flex items-center gap-2.5 transition-colors hover:text-sand"
+            className="group flex min-h-[30px] items-center gap-2.5 transition-colors hover:text-sand"
           >
             <IconDot>
               <MapPin className="h-2.5 w-2.5" strokeWidth={2} />
             </IconDot>
             {address}
           </a>
-          <a href={phoneHref} data-track="click_to_call" className="flex items-center gap-2.5 transition-colors hover:text-sand">
+          <a href={phoneHref} data-track="click_to_call" className="flex min-h-[30px] items-center gap-2.5 transition-colors hover:text-sand">
             <IconDot>
               <Phone className="h-2.5 w-2.5" strokeWidth={2} />
             </IconDot>
@@ -77,7 +77,7 @@ export function Header({ nav, cta, phone, phoneHref, address, mapsUrl, logo }: P
             </ul>
             <Link
               href={cta.href}
-              className="ml-3 inline-flex h-[44px] items-center whitespace-nowrap rounded-full bg-teal px-5 text-[10px] font-bold uppercase tracking-[0.12em] xl:h-[46px] xl:px-6 xl:text-[11px] xl:tracking-[0.16em] text-white shadow-[0_14px_30px_-14px_rgb(44_79_86/0.7)] transition-colors hover:bg-teal-hi xl:ml-6"
+              className="ml-3 inline-flex h-[44px] items-center whitespace-nowrap rounded-full bg-teal px-5 text-[10px] font-bold uppercase tracking-[0.12em] xl:h-[46px] xl:px-5 xl:text-[12px] xl:tracking-[0.08em] 2xl:px-6 2xl:tracking-[0.14em] text-white shadow-[0_14px_30px_-14px_rgb(44_79_86/0.7)] transition-colors hover:bg-teal-hi xl:ml-6"
             >
               {cta.label}
             </Link>
@@ -129,7 +129,7 @@ function DesktopItem({ item, active, path }: { item: NavItem; active: boolean; p
     <Link
       href={item.href}
       aria-current={item.href === path ? "page" : undefined}
-      className={`relative flex h-full items-center whitespace-nowrap px-[2px] text-[10px] font-bold uppercase tracking-[0.1em] text-nav transition-colors hover:text-teal-deep xl:px-[3px] xl:text-[11px] xl:tracking-[0.18em] ${active ? "text-teal-deep" : ""}`}
+      className={`relative flex h-full items-center whitespace-nowrap px-[2px] text-[10px] font-bold uppercase tracking-[0.07em] text-nav transition-colors hover:text-teal-deep xl:px-[2px] xl:text-[12px] xl:tracking-[0.06em] 2xl:px-[3px] 2xl:tracking-[0.14em] ${active ? "text-teal-deep" : ""}`}
     >
       {item.label}
       {active ? <span aria-hidden="true" className="absolute inset-x-0 bottom-[24px] h-px bg-teal-soft" /> : null}
@@ -139,7 +139,7 @@ function DesktopItem({ item, active, path }: { item: NavItem; active: boolean; p
   if (!hasChildren) return <li className="flex h-full items-center px-1">{link}</li>;
 
   return (
-    <li ref={ref} className="relative flex h-full items-center px-0.5 xl:px-1" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
+    <li ref={ref} className="relative flex h-full items-center px-0 xl:px-1" onMouseEnter={() => setOpen(true)} onMouseLeave={() => setOpen(false)}>
       {link}
       <button
         type="button"
@@ -147,7 +147,7 @@ function DesktopItem({ item, active, path }: { item: NavItem; active: boolean; p
         aria-controls={id}
         aria-label={`${item.label} submenu`}
         onClick={() => setOpen((o) => !o)}
-        className="flex h-8 w-4 items-center justify-center text-nav xl:w-5"
+        className="flex h-8 w-6 items-center justify-center text-nav"
       >
         <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${open ? "rotate-180" : ""}`} strokeWidth={2.25} />
       </button>

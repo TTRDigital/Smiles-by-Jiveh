@@ -45,7 +45,7 @@ export function Display({
   as?: "h1" | "h2" | "h3" | "p";
   text: string;
   className?: string;
-  /** Extra classes for short (uppercase) headings, usually a smaller size. */
+  /** Extra classes for short (uppercase) headings, usually a smaller size. Mark sizes important (`md:text-[42px]!`) so they win over className's. */
   statementClassName?: string;
   id?: string;
 }) {

@@ -28,7 +28,7 @@ export default async function InsurancePage() {
       <PageHero hero={page.hero} />
       <CardSection label={page.philosophy.heading}>
         <div className="grid gap-8 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] md:gap-16 lg:gap-20">
-          <Display text={page.philosophy.heading} className="text-[30px] leading-[1.15] md:text-[46px]" statementClassName="md:text-[42px]" />
+          <Display text={page.philosophy.heading} className="text-[30px] leading-[1.15] md:text-[46px]" statementClassName="md:text-[32px]! lg:text-[42px]!" />
           <ReadMore fold={richLength(page.philosophy.text) > 520} height={200} className="md:pt-3">
             <RichText value={page.philosophy.text} className="text-[15px] leading-[1.85] md:text-[16.5px] [&_p]:mb-4" />
           </ReadMore>
@@ -36,7 +36,7 @@ export default async function InsurancePage() {
       </CardSection>
       <CardSection label={p.heading}>
         <div className="mx-auto max-w-[860px] text-center">
-          <Display text={p.heading} className="text-[30px] leading-[1.15] md:text-[46px]" statementClassName="md:text-[42px]" />
+          <Display text={p.heading} className="text-[30px] leading-[1.15] md:text-[46px]" statementClassName="md:text-[42px]!" />
           {p.text ? <p className="mt-5 text-[15px] leading-[1.8] md:text-base">{p.text}</p> : null}
           <h3 className="mt-12 text-[26px] italic text-sand-deep md:text-[30px]">{p.directHeading}</h3>
           {p.directText ? <p className="mt-3 text-[15px] leading-[1.8]">{p.directText}</p> : null}
@@ -47,7 +47,7 @@ export default async function InsurancePage() {
                   {m.emoji}
                 </span>
                 <span className="mt-4 text-[14px] font-semibold text-ink">{m.label}</span>
-                {m.note ? <span className="mt-1 max-w-[130px] text-[11.5px] leading-snug text-muted">{m.note}</span> : null}
+                {m.note ? <span className="mt-1 max-w-[140px] text-[12px] leading-snug text-muted">{m.note}</span> : null}
               </li>
             ))}
           </ul>
@@ -56,7 +56,7 @@ export default async function InsurancePage() {
           {p.financingText ? <p className="mt-3 text-[15px] leading-[1.8]">{p.financingText}</p> : null}
         </div>
         <div className="mt-10 md:mt-12">
-          <IconCards cards={p.options} columns={3} />
+          <IconCards cards={p.options} columns={3} label={p.financingHeading} />
         </div>
       </CardSection>
       <SplitSection block={{ _type: "splitBlock", heading: page.cta.heading, text: page.cta.text ?? rich(), ctas: page.cta.cta ? [page.cta.cta] : [], image: page.cta.image }} />

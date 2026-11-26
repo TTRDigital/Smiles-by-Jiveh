@@ -7,9 +7,12 @@ const cols = { 2: "md:grid-cols-2", 3: "md:grid-cols-2 lg:grid-cols-3", 4: "md:g
  * Icon cards (Why Choose Us, Our Comprehensive Approach, financing options): a hairline grid on desktop; on phones
  * the cards swipe sideways instead of stacking into a long column.
  */
-export function IconCards({ cards, columns = 3 }: { cards: Card[]; columns?: 2 | 3 | 4 }) {
+export function IconCards({ cards, columns = 3, label }: { cards: Card[]; columns?: 2 | 3 | 4; label?: string }) {
   return (
     <ul
+      // On phones the row scrolls sideways: focusable so keyboard users can scroll it too.
+      tabIndex={0}
+      aria-label={label}
       className={`no-scrollbar -mx-5 flex snap-x snap-mandatory gap-3 overflow-x-auto px-5 pb-1 md:mx-0 md:grid md:gap-px md:overflow-hidden md:rounded-[var(--radius-card)] md:border md:border-line md:bg-line md:px-0 md:pb-0 ${cols[columns]}`}
     >
       {cards.map((c) => (

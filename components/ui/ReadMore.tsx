@@ -15,6 +15,7 @@ export function ReadMore({
   fold,
   height = 210,
   dark = false,
+  fromMd = false,
   className = "",
 }: {
   children: ReactNode;
@@ -22,6 +23,8 @@ export function ReadMore({
   /** Visible height in px while folded. */
   height?: number;
   dark?: boolean;
+  /** Fold only from 768px (on phones the text sits in a tap-to-open list already). */
+  fromMd?: boolean;
   className?: string;
 }) {
   const [open, setOpen] = useState(false);
@@ -32,8 +35,10 @@ export function ReadMore({
       <div
         id={id}
         onFocusCapture={() => setOpen(true)}
-        style={open ? undefined : { maxHeight: height }}
-        className={`overflow-hidden transition-[max-height] duration-500 ${open ? "" : "[mask-image:linear-gradient(to_bottom,#000_55%,transparent)]"}`}
+        style={open ? undefined : fromMd ? ({ "--fold-h": `${height}px` } as React.CSSProperties) : { maxHeight: height }}
+        className={`overflow-hidden transition-[max-height] duration-500 ${
+          open ? "" : fromMd ? "md:max-h-[var(--fold-h)] md:[mask-image:linear-gradient(to_bottom,#000_55%,transparent)]" : "[mask-image:linear-gradient(to_bottom,#000_55%,transparent)]"
+        }`}
       >
         {children}
       </div>
@@ -42,7 +47,7 @@ export function ReadMore({
         aria-expanded={open}
         aria-controls={id}
         onClick={() => setOpen((o) => !o)}
-        className={`mt-4 inline-flex min-h-11 items-center gap-2.5 text-[11.5px] font-bold uppercase tracking-[0.18em] transition-colors ${
+        className={`mt-4 min-h-11 items-center gap-2.5 ${fromMd ? "hidden md:inline-flex" : "inline-flex"} text-[12px] font-bold uppercase tracking-[0.16em] transition-colors ${
           dark ? "text-sand hover:text-white" : "text-teal hover:text-teal-deep"
         }`}
       >

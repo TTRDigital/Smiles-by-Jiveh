@@ -14,7 +14,7 @@ export function FaqSection({ block }: { block: FaqBlock }) {
       <div className="grid gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-20">
         <div>
           <Pill>{block.eyebrow}</Pill>
-          <Display text={block.heading} className="mt-6 text-[30px] leading-[1.15] md:text-[46px]" statementClassName="md:text-[42px]" />
+          <Display text={block.heading} className="mt-6 text-[30px] leading-[1.15] md:text-[46px]" statementClassName="md:text-[42px]!" />
         </div>
         <div>
         <FaqAccordion items={block.items} />

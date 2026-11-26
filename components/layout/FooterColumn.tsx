@@ -22,14 +22,14 @@ export function FooterColumn({ title, links }: { title: string; links: NavLink[]
         onClick={() => setOpen((o) => !o)}
         className="flex min-h-12 w-full items-center justify-between py-3 text-left md:hidden"
       >
-        <span className="text-[11px] font-bold uppercase leading-none tracking-[0.24em] text-sand">{title}</span>
+        <span className="text-[12px] font-bold uppercase leading-none tracking-[0.2em] text-sand">{title}</span>
         <ChevronDown className={`h-4 w-4 text-sand transition-transform duration-300 ${open ? "rotate-180" : ""}`} strokeWidth={1.5} aria-hidden="true" />
       </button>
-      <p className="hidden text-[11px] font-bold uppercase leading-none tracking-[0.24em] text-sand md:block">{title}</p>
+      <p className="hidden text-[12px] font-bold uppercase leading-none tracking-[0.2em] text-sand md:block">{title}</p>
       <ul id={id} className={`gap-2 pb-5 md:mt-7 md:grid md:pb-0 ${open ? "grid" : "hidden"}`}>
         {links.map((l) => (
           <li key={l.href + l.label}>
-            <Link href={l.href} className="text-[15px] leading-[1.65] text-ivory/80 transition-colors hover:text-white">
+            <Link href={l.href} className="inline-block py-0.5 text-[15px] leading-[1.65] text-ivory/80 transition-colors hover:text-white">
               {l.label}
             </Link>
           </li>

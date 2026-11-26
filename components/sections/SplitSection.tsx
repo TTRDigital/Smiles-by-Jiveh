@@ -32,7 +32,7 @@ export function SplitSection({ block }: { block: SplitBlock }) {
           />
         </div>
         <div className="flex flex-col justify-center px-6 py-10 md:px-12 md:py-14">
-          <Display text={block.heading} className="text-[28px] leading-[1.15] md:text-[38px]" statementClassName="md:text-[34px]" />
+          <Display text={block.heading} className="text-[28px] leading-[1.15] md:text-[38px]" statementClassName="md:text-[34px]!" />
           <ReadMore fold={richLength(block.text) > 360} height={165} className="mt-5">
             <RichText value={block.text} className="text-[15px] leading-[1.8]" />
           </ReadMore>
