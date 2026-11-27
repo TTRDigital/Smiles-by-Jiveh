@@ -64,7 +64,7 @@ export function Header({ nav, cta, phone, phoneHref, address, mapsUrl, logo }: P
           scrolled ? "bg-ivory/90 shadow-[0_1px_0_0_rgb(27_42_44/0.08),0_18px_40px_-28px_rgb(23_46_48/0.35)] backdrop-blur-xl" : "bg-ivory shadow-[var(--shadow-header)]"
         }`}
       >
-        <div className="container-x flex h-[68px] items-center justify-between gap-6 lg:h-[84px]">
+        <div className="container-x flex h-[68px] items-center justify-between gap-3 sm:gap-6 lg:h-[84px]">
           <Link href="/" className="shrink-0" aria-label={`${logo.alt || "Smiles By Jiveh"} home`}>
             <Image src={logo.src} alt={logo.alt || "Smiles By Jiveh"} width={482} height={213} priority sizes="136px" className="h-[42px] w-auto lg:h-[50px]" />
           </Link>
@@ -83,13 +83,23 @@ export function Header({ nav, cta, phone, phoneHref, address, mapsUrl, logo }: P
             </Link>
           </nav>
 
+          {/* Phones and tablets: the phone number stays in the header (the top bar with it is desktop only). */}
+          <a
+            href={phoneHref}
+            data-track="click_to_call"
+            aria-label={`Call ${phone}`}
+            className="ml-auto inline-flex h-11 items-center gap-2 rounded-full bg-teal px-4 text-[13px] font-bold tracking-[0.02em] text-white shadow-[0_10px_24px_-12px_rgb(44_79_86/0.7)] lg:hidden"
+          >
+            <Phone className="h-4 w-4 shrink-0" strokeWidth={2} aria-hidden="true" />
+            <span className="max-[359px]:hidden">{phone}</span>
+          </a>
           <button
             type="button"
             onClick={() => setOpen(true)}
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label="Open menu"
-            className="-mr-2 flex h-11 w-11 flex-col items-end justify-center gap-[7px] p-2 lg:hidden"
+            className="-mr-2 flex h-11 w-11 shrink-0 flex-col items-end justify-center gap-[7px] p-2 lg:hidden"
           >
             <span className="block h-px w-[24px] bg-ink" />
             <span className="block h-px w-[16px] bg-ink" />

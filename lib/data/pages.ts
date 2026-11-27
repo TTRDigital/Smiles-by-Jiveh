@@ -12,7 +12,7 @@ export const fallbackHome: HomeContent = {
     image: images.heroVideoPoster,
     ctas: [
       { label: "Book Online Appointment", href: "/appointment/" },
-      { label: "Learn More", href: "/appointment/" },
+      { label: "Learn More", href: "/who-we-are/" },
     ],
   },
   intro: {

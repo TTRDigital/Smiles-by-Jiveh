@@ -38,7 +38,7 @@ export default async function MeetDrJivehPage() {
           ) : null}
         </div>
         <div className="flex justify-center md:justify-end">
-          <div className="relative aspect-[1121/1403] w-full max-w-[480px] overflow-hidden rounded-[var(--radius-panel)] bg-white ring-1 ring-line">
+          <div className="relative aspect-[1121/1403] w-full max-w-[480px] overflow-hidden rounded-[var(--radius-panel)] bg-[radial-gradient(120%_90%_at_50%_30%,#ffffff_0%,#eaf1f0_70%)] [&_img]:mix-blend-multiply">
             <Image src={page.hero.image.src} alt={page.hero.image.alt || page.hero.heading} fill priority fetchPriority="high" sizes="(min-width: 768px) 480px, 100vw" className="object-cover" />
           </div>
         </div>

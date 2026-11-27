@@ -32,7 +32,7 @@ export function Button({
   className?: string;
   track?: string;
 }) {
-  const cls = `group/btn inline-flex min-h-[52px] items-center justify-center gap-3 rounded-full px-7 py-4 text-center text-[0.75rem] uppercase leading-tight tracking-[0.16em] transition-[background-color,color,border-color,box-shadow] duration-300 ${
+  const cls = `group/btn inline-flex min-h-[52px] items-center justify-center gap-3 rounded-full px-7 py-4 text-center text-[0.75rem] uppercase leading-tight tracking-[0.1em] sm:tracking-[0.16em] transition-[background-color,color,border-color,box-shadow] duration-300 ${
     bold ? "font-extrabold" : "font-bold"
   } ${styles[variant]} ${className}`;
   const inner = (

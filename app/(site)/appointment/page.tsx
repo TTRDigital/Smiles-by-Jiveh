@@ -41,7 +41,7 @@ export default async function AppointmentPage() {
             // GoHighLevel's script takes the iframe out of the layout while the form loads, which used to collapse this card and
             // push everything below it back down (layout shift 0.57). 859px is the height it sizes this form to at every width.
             // GoHighLevel draws its own white card around the form, so it gets no second card here.
-            <div className="mx-auto min-h-[859px] max-w-[560px] lg:mx-0">
+            <div className="mx-auto min-h-[859px] max-w-[500px] lg:mx-0">
               <GhlFormEmbed formId={ghl} height={859} eager />
             </div>
           ) : (

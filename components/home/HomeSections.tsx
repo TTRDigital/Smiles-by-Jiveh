@@ -21,6 +21,10 @@ import { HeroVideo } from "@/components/home/HeroVideo";
  * sits so it stays readable. On phones the video never loads; the photo sits
  * above the text so nothing covers anyone's face.
  */
+/** A second banner button that repeats the first one's link ("Learn More" -> /appointment/ in the old content) goes to Who We Are instead. */
+const heroHref = (ctas: HomeContent["hero"]["ctas"], i: number) =>
+  i > 0 && ctas.slice(0, i).some((c) => c.href === ctas[i].href) ? "/who-we-are/" : ctas[i].href;
+
 export function HomeHero({ hero }: { hero: HomeContent["hero"] }) {
   return (
     <section className="on-dark relative isolate overflow-hidden bg-spruce text-ivory">
@@ -41,7 +45,7 @@ export function HomeHero({ hero }: { hero: HomeContent["hero"] }) {
           <p className="mt-6 max-w-[520px] text-[15px] leading-[1.75] text-ivory/90 lg:text-[17px]">{hero.text}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 lg:mt-10">
             {hero.ctas.map((c, i) => (
-              <Button key={c.label} href={c.href} variant={i ? "light" : "white"} bold arrow={!i} className="w-full sm:w-auto sm:min-w-[210px]">
+              <Button key={c.label} href={heroHref(hero.ctas, i)} variant={i ? "light" : "white"} bold arrow={!i} className="w-full sm:w-auto sm:min-w-[210px]">
                 {c.label}
               </Button>
             ))}
@@ -120,8 +124,7 @@ export function HomeAbout({ about }: { about: HomeContent["about"] }) {
             </div>
           ) : null}
         </div>
-        <div data-reveal="right" className="relative mb-4 ml-4 w-[calc(100%-1rem)] max-w-[560px] justify-self-center lg:order-1 lg:mb-6 lg:ml-6 lg:w-auto lg:max-w-none lg:justify-self-stretch">
-          <span aria-hidden="true" className="absolute -bottom-4 -left-4 h-3/4 w-3/4 rounded-[var(--radius-panel)] bg-mist lg:-bottom-6 lg:-left-6" />
+        <div data-reveal="right" className="relative w-full max-w-[560px] justify-self-center lg:order-1 lg:max-w-none lg:justify-self-stretch">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-panel)] lg:aspect-[6/7]">
             <Image src={about.image.src} alt={about.image.alt || about.heading} fill sizes="(min-width: 1340px) 680px, (min-width: 1024px) 52vw, 100vw" className="object-cover" />
           </div>
@@ -205,9 +208,9 @@ export function HomeDoctor({ doctor }: { doctor: HomeContent["doctor"] }) {
             </div>
           ) : null}
         </div>
-        <div data-reveal="right" className="relative w-full max-w-[480px] justify-self-center lg:max-w-none lg:justify-self-stretch xl:mr-6 xl:mt-6">
-          <span aria-hidden="true" className="absolute -right-6 -top-6 hidden h-full w-full rounded-[var(--radius-panel)] border border-sand xl:block" />
-          <div className="relative aspect-[588/736] overflow-hidden rounded-[var(--radius-panel)] bg-white ring-1 ring-line">
+        <div data-reveal="right" className="relative w-full max-w-[480px] justify-self-center lg:max-w-none lg:justify-self-stretch">
+          {/* The portrait is a cut-out on white: a soft teal panel behind it instead of a white box. */}
+          <div className="relative aspect-[588/736] overflow-hidden rounded-[var(--radius-panel)] bg-[radial-gradient(120%_90%_at_50%_30%,#ffffff_0%,#eaf1f0_70%)] [&_img]:mix-blend-multiply">
             <Image src={doctor.image.src} alt={doctor.image.alt || doctor.heading} fill sizes="(min-width: 1340px) 560px, (min-width: 1024px) 44vw, 100vw" className="object-cover" />
           </div>
         </div>
@@ -243,24 +246,22 @@ export function HomeBeforeAfter({ data }: { data: HomeContent["beforeAfter"] }) 
 }
 
 /**
- * Closing call to action: text on the dark panel beside the photo (framed on
- * the smile), so nothing sits on the patient's face. On phones the photo strip
- * comes first.
+ * Closing call to action on the dark band. The band's photo is a pale, teal-tinted overlay graphic, so it is used as
+ * a faint texture behind the text rather than shown as a photo.
  */
 export function HomeCtaBand({ band }: { band: HomeContent["ctaBand"] }) {
   return (
     <section className="py-6 md:py-10">
       <div className="container-x">
-        <div className="on-dark grid overflow-hidden rounded-[var(--radius-panel)] bg-spruce text-ivory md:grid-cols-2">
+        <div className="on-dark relative isolate overflow-hidden rounded-[var(--radius-panel)] bg-spruce text-ivory">
           {band.image ? (
-            <div className="relative aspect-[16/10] sm:aspect-[2/1] md:order-2 md:aspect-auto md:min-h-[460px]">
-              <Image src={band.image.src} alt={band.image.alt || images.ctaBand.alt} fill sizes="(min-width: 1340px) 650px, (min-width: 768px) 50vw, 100vw" className="object-cover object-[50%_12%]" />
-            </div>
+            <Image src={band.image.src} alt={band.image.alt || images.ctaBand.alt} fill sizes="(min-width: 1340px) 1296px, 100vw" className="-z-10 object-cover opacity-[0.16] mix-blend-luminosity" />
           ) : null}
-          <div className="flex flex-col items-start justify-center px-6 py-12 md:order-1 md:px-12 md:py-16 lg:px-16">
-            <Display text={band.heading} className="text-[30px] leading-[1.12] text-white md:text-[40px] lg:text-[48px] lg:leading-[1.08]" />
-            {band.text ? <p className="mt-5 max-w-[540px] text-[15px] leading-[1.8] text-ivory/85 md:mt-6 md:text-[16px]">{band.text}</p> : null}
-            <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4">
+          <div aria-hidden="true" className="absolute inset-0 -z-10 bg-[radial-gradient(70%_90%_at_50%_100%,rgb(129_165_172/0.25),transparent_70%)]" />
+          <div className="flex flex-col items-center px-6 py-14 text-center md:px-12 md:py-20">
+            <Display text={band.heading} className="max-w-[820px] text-[30px] leading-[1.12] text-white md:text-[44px] lg:text-[52px] lg:leading-[1.06]" />
+            {band.text ? <p className="mt-5 max-w-[640px] text-[15px] leading-[1.8] text-ivory/85 md:mt-6 md:text-[16px]">{band.text}</p> : null}
+            <div className="mt-8 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center sm:gap-4">
               {band.ctas.map((c, i) => (
                 <Button key={c.label} href={c.href} variant={i ? "light" : "white"} arrow={!i} bold className="w-full sm:w-auto">
                   {c.label}
@@ -302,7 +303,8 @@ export function HomeContact({ contact, settings }: { contact: HomeContent["conta
           </div>
         </div>
         <div>
-          <div className="rounded-[var(--radius-card)] bg-white p-3 text-ink shadow-[0_40px_80px_-40px_rgb(0_0_0/0.6)] sm:p-5 md:p-7">
+          {/* GoHighLevel draws its own white card; ours only rounds and clips it. */}
+          <div className="overflow-hidden rounded-[var(--radius-card)] bg-white text-ink shadow-[0_40px_80px_-40px_rgb(0_0_0/0.6)]">
             {ghl ? (
               // GoHighLevel's script takes the iframe out of the layout while the form loads; reserving the height it
               // sizes this form to keeps everything below from jumping.

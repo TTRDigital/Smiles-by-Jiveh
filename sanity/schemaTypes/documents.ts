@@ -168,7 +168,13 @@ export const homePage = defineType({
     section("hero", "Hero", [
       s("heading"),
       t("text", "Text under the heading"),
-      defineField({ name: "videoUrl", title: "Background video (YouTube link)", type: "url", description: "Plays muted behind the hero. Leave empty to show the photo only." }),
+      defineField({
+        name: "videoUrl",
+        title: "Background video (YouTube link or video file)",
+        type: "url",
+        description: "Plays muted behind the hero. A YouTube link, or a link to an .mp4 file (plays on every phone and computer). Leave empty to show the photo only.",
+        validation: (r) => r.uri({ allowRelative: true, scheme: ["https", "http"] }),
+      }),
       img("image", "Photo (shown before the video starts, and instead of it)"),
       ctas(),
     ]),
