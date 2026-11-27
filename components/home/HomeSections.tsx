@@ -16,32 +16,29 @@ import { Slider } from "@/components/ui/Slider";
 import { HeroVideo } from "@/components/home/HeroVideo";
 
 /**
- * Dark band: headline and buttons on the left, the photo (and the muted video
- * on desktop) in a large rounded panel on the right, so no text ever sits on
- * anyone's face. On phones the photo panel comes first, then the text.
+ * Full-bleed banner: the muted video (desktop) or the photo fills the whole
+ * section behind the headline, with a dark fade on the left where the text
+ * sits so it stays readable. On phones the video never loads; the photo sits
+ * above the text so nothing covers anyone's face.
  */
 export function HomeHero({ hero }: { hero: HomeContent["hero"] }) {
   return (
-    <section className="on-dark relative overflow-hidden bg-spruce text-ivory">
-      <div className="container-x grid gap-8 pb-12 pt-4 sm:pt-6 lg:min-h-[clamp(600px,calc(100svh-122px),760px)] lg:grid-cols-2 lg:items-stretch lg:gap-14 lg:py-10">
-        <div className="relative isolate aspect-[4/3] overflow-hidden rounded-[var(--radius-panel)] sm:aspect-[16/9] lg:order-2 lg:aspect-auto lg:min-h-[540px]">
-          <Image
-            src={hero.image.src}
-            alt={hero.image.alt ?? ""}
-            fill
-            priority
-            fetchPriority="high"
-            sizes="(min-width: 1340px) 640px, (min-width: 1024px) 50vw, 100vw"
-            className="-z-20 object-cover"
-          />
-          <HeroVideo url={hero.videoUrl} />
-        </div>
-        <div className="flex flex-col justify-center lg:order-1 lg:py-8">
-          <h1 className="text-[40px] font-light leading-[1.05] tracking-[-0.015em] text-white sm:text-[54px] lg:text-[58px] xl:text-[66px]">
+    <section className="on-dark relative isolate overflow-hidden bg-spruce text-ivory">
+      <div className="relative aspect-[4/3] sm:aspect-[16/9] lg:absolute lg:inset-0 lg:aspect-auto">
+        <Image src={hero.image.src} alt={hero.image.alt ?? ""} fill priority fetchPriority="high" sizes="100vw" className="-z-20 object-cover" />
+        <HeroVideo url={hero.videoUrl} />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-[linear-gradient(to_top,#172e30_0%,rgb(23_46_48/0)_45%)] lg:bg-[linear-gradient(to_right,rgb(16_33_34/0.95)_0%,rgb(16_33_34/0.88)_40%,rgb(16_33_34/0.45)_60%,rgb(16_33_34/0)_80%)] xl:bg-[linear-gradient(to_right,rgb(16_33_34/0.94)_0%,rgb(16_33_34/0.84)_36%,rgb(16_33_34/0.38)_56%,rgb(16_33_34/0)_76%)"
+        />
+      </div>
+      <div className="container-x relative pb-12 pt-6 md:pb-16 md:pt-10 lg:flex lg:min-h-[clamp(600px,calc(100svh-122px),780px)] lg:flex-col lg:justify-end lg:pb-20 lg:pt-32">
+        <div className="max-w-[620px] lg:max-w-[480px] xl:max-w-[620px]">
+          <h1 className="text-[40px] font-light leading-[1.05] tracking-[-0.015em] text-white sm:text-[54px] lg:text-[54px] xl:text-[70px]">
             <Accent text={hero.heading} />
           </h1>
           <span aria-hidden="true" className="mt-7 block h-px w-20 bg-sand/70 lg:mt-9" />
-          <p className="mt-6 max-w-[520px] text-[15px] leading-[1.75] text-ivory/85 lg:text-[17px]">{hero.text}</p>
+          <p className="mt-6 max-w-[520px] text-[15px] leading-[1.75] text-ivory/90 lg:text-[17px]">{hero.text}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4 lg:mt-10">
             {hero.ctas.map((c, i) => (
               <Button key={c.label} href={c.href} variant={i ? "light" : "white"} bold arrow={!i} className="w-full sm:w-auto sm:min-w-[210px]">
